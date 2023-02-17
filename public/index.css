@@ -1,9 +1,10 @@
 body {
     --left_con--background: #000;
-    --topBar--background: rgb(15, 15, 15);
-    --container--background: rgb(30, 30, 30);
+    --topBar--background: rgb(16, 16, 16);
+    --container--background: rgb(18, 18, 18);
     --text-color: rgb(255, 255, 255);
     --p-color: rgb(178, 178, 178);
+    background-color: var(--container--background)
 }
 
 .left_con {
@@ -12,9 +13,11 @@ body {
     z-index: 4;
     top: 0;
     left: 0;
-    width: 240px;
+    width: 13%;
     height: 100%;
-    color: var(--p-color)
+    color: var(--p-color);
+    display: block;
+
 }
 
 .left_con:hover {
@@ -22,13 +25,12 @@ body {
 }
 
 .right_con {
-    position: fixed;
     left: 0%;
-    background-color: blue;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin-left: 23%;
     top: 0;
+    margin-left: 13%;
+    margin-right: 90%;
 }
 
 .topBar {
@@ -48,10 +50,39 @@ body {
     color: var(--text-color);
 }
 
-.container {
-    /* background-color: var(--container--background); */
-    background-color: whitesmoke;
-    position: fixed;
-    right: 0;
-    height: 100%;
+.carousel-item img {
+    height: 918.53px;
+    width: 1749.59px;
+}
+
+.menu {
+    margin-right: 5%;
+    margin-left: 1%;
+}
+
+.topic {}
+
+.caterlog {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.describe {
+    color: white;
+    font-size: 24px;
+}
+
+.context {
+    text-decoration: none;
+    color: var(--p-color);
+    font-size: 14px;
+}
+
+.recommand {
+    color: white;
 }
