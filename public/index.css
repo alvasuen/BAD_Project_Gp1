@@ -5,9 +5,8 @@
 
 .menu {
   margin-right: 5%;
-  margin-left: 1%;
+  margin-left: 8%;
 }
-
 
 .caterlog {
   display: flex;
@@ -35,7 +34,6 @@
 .recommand {
   color: white;
   margin-right: 10px;
-
 }
 
 .recommand img {
@@ -43,4 +41,5 @@
   height: 200px;
 }
 
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+}
