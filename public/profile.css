@@ -37,10 +37,11 @@ body{
     bottom: 270px;
     left: 400px;
     font-size: 20px;
+    width:200px;
 }
 
 .seperator{
-    height: 450px;
+    height: 350px;
 }
 
 .mainContainer{
