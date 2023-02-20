@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trial</title>
+</head>
+<style>
+    #id1 {
+        background: red;
+    }
+</style>
+
+<body>
+    <canvas id="id1"></canvas>
+</body>
+<script>
+    /* Function Way */
+
+    // return a value between start and end as l goes from 0 to 1
+    /*     function lerp(start, end, l) {
+            return start + (end - start) * l;
+        }
+    
+        function animateAttribute(element, attribute, startValue, endValue, duration) {
+            const startTime = performance.now();
+    
+            function animate(now) {
+                const timeSinceStart = (now - startTime) * 0.001;
+    
+                // l goes from 0 to 1 over durationInSeconds;
+                const l = Math.min(timeSinceStart / duration, 1);
+    
+                element.setAttribute(attribute, lerp(startValue, endValue, l));
+    
+                // if we haven't finished request another animation frame
+                if (l < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+    
+        const element = document.getElementById('id1');
+        const attribute = 'width';
+        const start = 0;
+        const end = 600;
+        const duration = 1;
+    
+        animateAttribute(element, attribute, start, end, duration); */
+
+    /* Normal Way */
+
+    const startValue = 0;
+    const endValue = 600;
+
+    // return a value between start and end as l goes from 0 to 1
+    function lerp(start, end, l) {
+        return start + (end - start) * l;
+    }
+
+    const startTime = performance.now();
+    const durationInSeconds = 1;
+    const element = document.getElementById('id1');
+
+    function animateWidth(now) {
+        const timeSinceStartInSeconds = (now - startTime) * 0.001;
+
+        // l goes from 0 to 1 over durationInSeconds;
+        const l = Math.min(timeSinceStartInSeconds / durationInSeconds, 1);
+
+        element.setAttribute('width', lerp(startValue, endValue, l));
+
+        // if we haven't finished request another animation frame
+        if (l < 1) {
+            requestAnimationFrame(animateWidth);
+        }
+    }
+    requestAnimationFrame(animateWidth);
+
+</script>
+
+</html>

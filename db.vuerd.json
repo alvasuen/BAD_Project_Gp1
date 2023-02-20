@@ -19,7 +19,7 @@
     },
     "database": "MySQL",
     "databaseName": "",
-    "canvasType": "@vuerd/builtin-generator-code",
+    "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -143,7 +143,7 @@
           "active": false,
           "left": 491.5053,
           "top": 340.8595,
-          "zIndex": 315,
+          "zIndex": 2,
           "widthName": 60,
           "widthComment": 60
         },
@@ -274,7 +274,7 @@
           "active": false,
           "left": 1075.2361,
           "top": 361.4256,
-          "zIndex": 402,
+          "zIndex": 8,
           "widthName": 60,
           "widthComment": 60
         },
@@ -359,7 +359,7 @@
           "active": false,
           "left": 1033.3476,
           "top": 78.1222,
-          "zIndex": 319,
+          "zIndex": 3,
           "widthName": 60,
           "widthComment": 60
         },
@@ -421,7 +421,7 @@
           "active": false,
           "left": 503.4299,
           "top": 127.5632,
-          "zIndex": 327,
+          "zIndex": 4,
           "widthName": 60,
           "widthComment": 60
         },
@@ -552,7 +552,7 @@
           "active": false,
           "left": 562.5712,
           "top": 715.1835,
-          "zIndex": 305,
+          "zIndex": 1,
           "widthName": 60,
           "widthComment": 60
         },
@@ -637,7 +637,7 @@
           "active": false,
           "left": 1158.6359,
           "top": 702.5624,
-          "zIndex": 380,
+          "zIndex": 5,
           "widthName": 90.15625,
           "widthComment": 60
         },
@@ -699,7 +699,7 @@
           "active": false,
           "left": 1541.52,
           "top": 367.7567,
-          "zIndex": 390,
+          "zIndex": 6,
           "widthName": 66.30810546875,
           "widthComment": 60
         },
@@ -784,7 +784,7 @@
           "active": false,
           "left": 1567.7613,
           "top": 608.192,
-          "zIndex": 391,
+          "zIndex": 7,
           "widthName": 108.22802734375,
           "widthComment": 60
         },
