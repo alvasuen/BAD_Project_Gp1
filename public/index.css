@@ -8,8 +8,7 @@
   margin-left: 1%;
 }
 
-.topic {
-}
+.topic {}
 
 .caterlog {
   display: flex;
@@ -34,4 +33,9 @@
 
 .recommand {
   color: white;
+}
+
+.recommand img {
+  width: 200px;
+  height: 200px;
 }
