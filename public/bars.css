@@ -14,10 +14,12 @@ body {
   background-color: var(--left_con--background);
   position: fixed;
   z-index: 4;
-  width: 13%;
+  width: 14%;
   height: 100%;
   color: var(--p-color);
   display: block;
+  left:0px;
+  top:0px;
 }
 
 .karaoke-img {
