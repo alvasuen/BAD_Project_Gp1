@@ -1,34 +1,33 @@
-body{
-    background-color: black;
+body {
+  background-color: black;
 }
 
-.coverContainer{
-    height:220px;
-    width: 100%;
-    
+.coverContainer {
+  height: 220px;
+  width: 100%;
 }
 
-.cover{
-    object-fit: cover;
-    width:100%;
-    margin:0px;
-    background-color: aliceblue;
+.cover {
+  object-fit: cover;
+  width: 100%;
+  margin: 0px;
+  background-color: aliceblue;
 }
 
-.icon{
-    width:300px;
-    height:300px;
-    border-radius: 50%;
-    background-color: aliceblue;
-    position: relative;
-    bottom: 160px;
-    left: 50px;
-    overflow: hidden;
+.icon {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: aliceblue;
+  position: relative;
+  bottom: 160px;
+  left: 50px;
+  overflow: hidden;
 }
 
-.icon img{
-    object-fit: cover;
-    width:300px;
+.icon img {
+  object-fit: cover;
+  width: 300px;
 }
 
 .username{
@@ -50,86 +49,86 @@ flex-direction: column;
 
 }
 
-.profilePlaylist{
-    display: flex;
-    flex-wrap: wrap;
-    margin:20px;
+.profilePlaylist {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
-.playlistBlock{
-    height:300px;
-    width:280px;
-    overflow: hidden;
-    margin:10px;
-    background-color: black;
+.playlistBlock {
+  height: 300px;
+  width: 280px;
+  overflow: hidden;
+  margin: 10px;
+  background-color: black;
 }
 
 /* .playlistBlock img{
     height:250px;
 } */
 
-.profileHistory{
-    display: flex;
-    flex-wrap: wrap;
-    margin:20px;
+.profileHistory {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
-.historyBlock{
-    height:300px;
-    width:280px;
-    overflow: hidden;
-    margin:10px;
-    background-color: black;
+.historyBlock {
+  height: 300px;
+  width: 280px;
+  overflow: hidden;
+  margin: 10px;
+  background-color: black;
 }
 
 /* .historyBlock img{
     height:250px;
 } */
 
-.title{
-    color:white;
-    width:100%;
-    margin-left:10px;
-    font-size: 20px;
+.title {
+  color: white;
+  width: 100%;
+  margin-left: 10px;
+  font-size: 20px;
 }
 
-.songText{
-    color:white;
+.songText {
+  color: white;
 }
 
-.playlistText{
-    color:white;
+.playlistText {
+  color: white;
 }
 
 /* slicker-slideshow */
 /*------ slider width ------*/
-.slider{
-    width:90%;
-    margin:0 auto;
-  }
-  
-  /*------ slider image ------*/
-  .slider img{
-      width:250px;
-  }
-  
-  /*-------- height ----------*/
-  .slider .slick-slide{
-      height:auto!important;
-  }
-  
-  /*--------- arrows ---------*/
-  .slider .slick-next{
-      right:0!important;
-  }
-  .slider .slick-prev{
-      left:0!important;
-  }
-  .slider .slick-arrow{
-      width: initial!important;
-      height: initial!important;
-      z-index:2!important;
-  }
-  .slider .slick-arrow:before{
-      font-size: 30px!important;
-  }
+.slider {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/*------ slider image ------*/
+.slider img {
+  width: 250px;
+}
+
+/*-------- height ----------*/
+.slider .slick-slide {
+  height: auto !important;
+}
+
+/*--------- arrows ---------*/
+.slider .slick-next {
+  right: 0 !important;
+}
+.slider .slick-prev {
+  left: 0 !important;
+}
+.slider .slick-arrow {
+  width: initial !important;
+  height: initial !important;
+  z-index: 2 !important;
+}
+.slider .slick-arrow:before {
+  font-size: 30px !important;
+}
