@@ -42,11 +42,18 @@ body {
   height: 450px;
 }
 
+<<<<<<< HEAD
 .mainContainer {
   /* margin-left:14%; */
   margin-top: ;
   display: flex;
   flex-direction: column;
+=======
+.mainContainer{
+display: flex;
+flex-direction: column;
+
+>>>>>>> refs/remotes/origin/main
 }
 
 .profilePlaylist {
