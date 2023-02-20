@@ -52,5 +52,5 @@ const config: { [key: string]: Knex.Config } = {
     },
   },
 };
-
+console.log(config);
 module.exports = config;

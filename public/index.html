@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="./bars.css">
     <link rel="stylesheet" href="index.css">
     <title>Karaoke</title>
 </head>
@@ -16,28 +17,11 @@
 <body>
     <div class="all">
         <div class="left_con">
-            <div class="title">Karaoke</div>
-            <div class="options">
-                <div class="page">fdgs</div>
-                <div class="page">fdgs</div>
-                <div class="page">fdgs</div>
-            </div>
-
-            <div class="play">
-                <div class="playlist">playlist</div>
-                <div class="likedSong">liked song</div>
-            </div>
-            <div class="language">中文</div>
+        <script src="./leftbar.js"></script>
         </div>
         <div class="right_con">
+        <script src="./topbar.js"></script>
 
-            <div class="topBar">
-                <a class="backPage" href="#">&lt;</a>
-                <a class="nextPage" href="#">&gt;</a>
-                <div class="register">Sign up</div>
-                <div class="logIn">Log in</div>
-                <div class="help">Help</div>
-            </div>
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="2000">
@@ -190,9 +174,12 @@
                     </div>
                 </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-                crossorigin="anonymous"></script>
+            <footer class="footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,30 @@
+body {
+  --left_con--background: #000;
+  --topBar--background: rgb(16, 16, 16);
+  --container--background: rgb(18, 18, 18);
+  --text-color: rgb(255, 255, 255);
+  --p-color: rgb(178, 178, 178);
+  background-color: var(--container--background);
+  box-sizing: border-box;
+}
+
+#instructions {
+  max-width: 840px;
+  max-height: 600px;
+  text-align: left;
+  margin: 30px auto;
+}
+
+/* Show the controls (hidden at the start by default) */
+.video-js .vjs-control-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+a,
+a:hover,
+a:visited {
+  color: #76daff;
+}
