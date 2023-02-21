@@ -18,6 +18,8 @@ body {
   height: 100%;
   color: var(--p-color);
   display: block;
+  left: 0px;
+  top: 0px;
 }
 
 .karaoke-img {
@@ -65,13 +67,18 @@ body {
 
 .turn-page-btn {
   font-size: 40px;
-  margin: 10px;
+  margin: 10px 20px;
+  /* margin-right: 85px; */
   color: rgb(66, 65, 65);
 }
 
 .turn-page-btn:hover {
   color: #fff;
   cursor: pointer;
+}
+
+.btn-left {
+  margin-left: 130px;
 }
 
 /* Search bar */
