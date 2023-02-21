@@ -15,8 +15,8 @@ body {
 }
 
 .icon {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   background-color: aliceblue;
   position: relative;
@@ -27,16 +27,18 @@ body {
 
 .icon img {
   object-fit: cover;
-  width: 300px;
+  width: 250px;
 }
 
 .username{
     color:white;
     position: relative;
-    bottom: 270px;
+    bottom: 275px;
     left: 400px;
-    font-size: 20px;
+    font-size: 30px;
     width:200px;
+    font-family: 'Phudu', cursive;
+    font-weight: bold;
 }
 
 .seperator{
@@ -46,7 +48,7 @@ body {
 .mainContainer{
 display: flex;
 flex-direction: column;
-
+margin-left:100px;
 }
 
 .profilePlaylist {
@@ -56,7 +58,7 @@ flex-direction: column;
 }
 
 .playlistBlock {
-  height: 300px;
+  height: 250px;
   width: 280px;
   overflow: hidden;
   margin: 10px;
@@ -70,11 +72,11 @@ flex-direction: column;
 .profileHistory {
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 10px;
 }
 
 .historyBlock {
-  height: 300px;
+  height: 250px;
   width: 280px;
   overflow: hidden;
   margin: 10px;
@@ -132,3 +134,9 @@ flex-direction: column;
 .slider .slick-arrow:before {
   font-size: 30px !important;
 }
+
+/* @media only screen and (min-width: 10000px) {
+  .seperator{
+    height: ;
+}
+} */
