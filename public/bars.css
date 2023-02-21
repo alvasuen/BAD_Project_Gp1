@@ -14,7 +14,7 @@ body {
   background-color: var(--left_con--background);
   position: fixed;
   z-index: 4;
-  width: 13%;
+  width: 240px;
   height: 100%;
   color: var(--p-color);
   display: block;
@@ -43,7 +43,7 @@ body {
   width: 90%;
   height: 100%;
   top: 0;
-  margin-left: 13%;
+  margin-left: 240px;
   margin-right: 90%;
 }
 
