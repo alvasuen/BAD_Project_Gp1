@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from "express";
 import { print } from 'listening-on';
 import path from 'path';
-import {userRoutes} from './user'
+import {userRoutes} from './restful/route/route'
 import { env } from './env'
 
 let app = express()

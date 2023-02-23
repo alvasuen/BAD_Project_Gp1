@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bars.css">
-    <link rel="stylesheet" href="signup.css">
-    <title>Sign Up | Karaoke</title>
+    <link rel="stylesheet" href="login.css">
+    <title>Log In - Karaoke | </title>
 </head>
 
 <body>
@@ -22,10 +22,10 @@
             <script src="./topbar.js"></script>
             <!-- Form -->
             <div class="form">
-                <form id="signup-form">
+                <form id="login-form" method="post" action="/login">
                     <div class="login">
-                        <h2>Sign Up</h2>
-                        <a href="./login.html">Already have account? Login</a>
+                        <h2>Login</h2>
+                        <a href="./signup.html">sign up ?</a>
                     </div>
                     <div class="input-group">
                         <label for="username">Username:</label>
@@ -35,18 +35,14 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" />
                     </div>
-                    <div class="input-group">
-                        <label for="password">Confirm Password:</label>
-                        <input type="password" id="password" name="confirmPassword" />
-                    </div>
                     <div>
-                        <input type="submit" value="Signup">
+                        <input type="submit" value="Login">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="signup.js"></script>
+    <script src="login.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

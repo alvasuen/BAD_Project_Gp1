@@ -1,10 +1,10 @@
-function setupSignupPage() {
+function setupLoginPage() {
 
-    let signupForm = document.querySelector('#signup-form')
-    signupForm.addEventListener('submit', async e => {
+    let loginForm = document.querySelector('#login-form')
+    loginForm.addEventListener('submit', async e => {
         e.preventDefault()
-        let formData = new FormData(signupForm)
-        let res = await fetch(signupForm.action, {
+        let formData = new FormData(loginForm)
+        let res = await fetch(loginForm.action, {
             method: "POST",
             body: formData,
         })
@@ -12,7 +12,7 @@ function setupSignupPage() {
             let text = await res.text()
             Swal.fire({
                 icon: 'error',
-                title: 'Failed to signup',
+                title: 'Failed to Login',
                 text,
             })
             return
@@ -20,9 +20,9 @@ function setupSignupPage() {
         let text = await res.text()
         Swal.fire({
             icon: 'success',
-            title: 'Signup successfully',
+            title: 'Login successfully',
             text,
         })
     })
 }
-setupSignupPage()
+setupLoginPage()
