@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import { HTTPError } from './http-error'
 import { UserService } from './user-service'
-
+/* Route handling */
 export class UserController{
     constructor(private userService: UserService){}
 
@@ -36,6 +36,26 @@ export class UserController{
         } catch (error) {
             console.log('');
             
+        }
+    }
+
+    login = (req:express.Request, res: express.Response)=>{
+        try {
+            let {username , password} = req.body
+            if (!username) throw new HTTPError(400, 'Missing username')
+            if (!password) throw new HTTPError(400, 'Missing Password')
+            let user = await this.login({username, password})
+            req.session.user = {
+                id: user.id,
+                username,
+            }
+            req.session.save()
+            res.redirect('/')
+        } catch (error) {
+            if (error && typeof error == 'object' && 'status' in error){
+                res.status(500)
+            }
+            res.json({error: String(error)})
         }
     }
 }
