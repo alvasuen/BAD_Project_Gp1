@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const ytdl = require("ytdl-core");
+const { createWriteStream } = require("fs");
 const app = express();
 
-// npm init -y
-// npm install express cors ytdl-core
 
 app.use(cors());
 
@@ -19,5 +18,8 @@ app.get("/download", (req, res) => {
   res.header("Content-Disposition", 'attachment; filename="video.mp4"');
   ytdl(URL, {
     format: "mp4",
-  }).pipe(res);
+  })
+  // .pipe(res);
+  .pipe(createWriteStream('../upload/video.mp4'));
+ 
 });

@@ -42,7 +42,7 @@ body {
 }
 
 .seperator{
-    height: 350px;
+    height: 320px;
 }
 
 .mainContainer{
@@ -65,9 +65,6 @@ margin-left:100px;
   background-color: black;
 }
 
-/* .playlistBlock img{
-    height:250px;
-} */
 
 .profileHistory {
   display: flex;
@@ -83,9 +80,7 @@ margin-left:100px;
   background-color: black;
 }
 
-/* .historyBlock img{
-    height:250px;
-} */
+
 
 .title {
   color: white;
@@ -96,6 +91,7 @@ margin-left:100px;
 
 .songText {
   color: white;
+  width:250px;
 }
 
 .playlistText {

@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/alvasuen/BAD_Project_Gp1#readme",
   "dependencies": {
+<<<<<<< HEAD
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+=======
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
     "bcryptjs": "^2.4.3",
@@ -26,10 +31,12 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+>>>>>>> 4f18afae47743f605dd613d2d211860ff99fbe4a
     "knex": "^2.4.2",
     "listening-on": "^2.0.9",
     "pg": "^8.9.0",
-    "populate-env": "^2.0.0"
+    "populate-env": "^2.0.0",
+    "ytdl-core": "^4.11.2"
   },
   "devDependencies": {
     "@types/express-session": "^1.17.6",
