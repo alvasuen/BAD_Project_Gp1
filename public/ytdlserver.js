@@ -15,12 +15,9 @@ app.get("/download", (req, res) => {
   var URL = req.query.URL;
   //   res.json({ url: URL });
 
-  
-  res.header("Content-Disposition", 'attachment; filename="video.mp4"');
-  ytdl(URL, {
-    format: "mp4",
-  })
-  // .pipe(res);
-  .pipe(createWriteStream('../upload/video.mp4'));
- 
+ ytdl.getInfo(URL,{downloadURL: true}).then((data)=>{
+  console.log(data);
+  ytdl(URL, { filter: "audioonly", quality: "highestaudio" }).pipe(createWriteStream(`../media_hub/audio/${data.videoDetails.videoId}.mp3`));
+  ytdl(URL, { filter: "videoonly", quality: "highestvideo" }).pipe(createWriteStream(`../media_hub/video/${data.videoDetails.videoId}.mp4`));
+})
 });
