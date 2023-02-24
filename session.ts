@@ -11,10 +11,8 @@ export let sessionMiddleware = expressSession({
 
 declare module 'express-session' {
     interface SessionData{
-        counter: number
-        user?: {
-            id: number
-            username: string
-        }
+        userId?: number
+        username?: string
+        isLogin?:boolean
     }
 }

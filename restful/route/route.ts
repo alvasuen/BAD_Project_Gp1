@@ -1,6 +1,6 @@
 import express from 'express';
-import { Client } from 'pg';
-import { knex } from '../../db'
+
+import { isLoggedInAPI } from '../../guard';
 import '../../session'
 import {UserController} from '../controller/userController';
 
@@ -17,5 +17,5 @@ let userController = new UserController()
 
 userRoutes.post('/signup', userController.signup)
 userRoutes.post('/login', userController.login)
-userRoutes.post('/logout', userController.logout)
-userRoutes.post('/getUser', userController.getUser)
+userRoutes.post('/logout', isLoggedInAPI,userController.logout)
+userRoutes.get('/getUser', isLoggedInAPI,userController.getUser)

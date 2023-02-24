@@ -4,7 +4,7 @@ function setupSignupPage() {
     signupForm.addEventListener('submit', async e => {
         e.preventDefault()
         let formData = new FormData(signupForm)
-        let res = await fetch(signupForm.action, {
+        let res = await fetch('/user/signup', {
             method: "POST",
             body: formData,
         })
@@ -17,12 +17,12 @@ function setupSignupPage() {
             })
             return
         }
-        let text = await res.text()
+
         Swal.fire({
             icon: 'success',
             title: 'Signup successfully',
-            text,
         })
+        window.location.href = '/index.html'
     })
 }
 setupSignupPage()

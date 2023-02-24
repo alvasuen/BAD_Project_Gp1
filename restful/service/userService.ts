@@ -6,40 +6,46 @@ class UserService{
     constructor(){}
 
     async signup(
-        username:string, 
+        input:{
+        username:string 
         password:string
-    ):Promise<{id:number}>{
-     return await knex
+        email:string
+    }
+    ):Promise<{users_id:number}>{
+     let [users_id] = await knex
        .insert({
-         username: username,
-         password_hash: await hashPassword(password),
+          email: input.email,
+          username: input.username,
+          password: await hashPassword(input.password),
        })
        .into('users')
-       .returning('id')
+       .returning('users_id')
+
+       return users_id
     }
     async login(input:{
         username:string 
         password:string
-    }){
-        let result = await knex.raw(
-        /* sql */ `select id, password_hash from users where username = ?`,
-        [input.username],
-        )
-    let user = result.rows[0]
-    if (!user) {
-      throw new HTTPError(404, 'this username is not registered')
+    }):Promise<number>{
+      let [result] = await knex('users').select("users_id","password").where("username",input.username)
+      
+    if (!result) {
+      throw new Error('Not exist this user')
     }
-    if (
-      !(await comparePassword({
+    let checked = await comparePassword({
         password: input.password,
-        password_hash: user.password_hash,
-      }))
-    ) {
-      throw new HTTPError(401, 'wrong username or password')
+        password_hash: result.password,
+    })
+    if (!checked) {
+      throw new Error('wrong username or password')
     }
-    return {
-      id: user.id,
+    return result.users_id
     }
+
+    async getUser(userId:number):Promise<{username:string,email:string}>{
+      let [result] = await knex('users').select("username","email").where("users_id",userId)
+      
+      return result
     }
 }
 export let userService = new UserService();

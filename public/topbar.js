@@ -14,6 +14,15 @@ document.querySelector(".right_con").innerHTML = /*html*/ `<div class="topBar">
 </div>
 
 <div class="user-status">
-<div class="user-name"><p>User</p></div>
+<div class="user-name"></div>
 </div>
 </div>`;
+
+// document.querySelector("#userLogin").addEventListener("click", (e) => {
+//     e.preventDefault();
+//     window.location = "/login.html";
+// })
+
+
+
+

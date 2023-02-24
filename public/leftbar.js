@@ -1,5 +1,5 @@
 document.querySelector(
-  ".left_con"
+    ".left_con"
 ).innerHTML = /* html */ ` <div class="karaoke-img">
 <p>KARAOKE</p>
 <!-- <img src=""> -->
@@ -27,3 +27,18 @@ document.querySelector(
 </div>
 </div>
 <!-- <div class="language">中文</div> -->`;
+
+/* 回主頁 */
+// let right_con = document.querySelector('.right_con');
+// async function homePage(url) {
+//     console.log('function homePage is called')
+//     let res = await fetch(url)
+//     let html = await res.text()
+//     console.log(html)
+//     right_con.innerHTML = html
+// }
+
+document.querySelector(".karaoke-img").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location = "/index.html";
+})

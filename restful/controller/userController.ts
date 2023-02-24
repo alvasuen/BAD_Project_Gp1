@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import { errorHandler } from '../../error'
 import { formidable_promise } from '../../helper'
 import { HTTPError } from '../../http-error'
 import { userService } from '../service/userService'
@@ -8,6 +9,7 @@ type User = {
     username: string
     password: string
     confirmPassword: string
+    email: string
 }
 export class UserController{
     constructor(){}
@@ -34,60 +36,71 @@ export class UserController{
                 )
             }
             if(obj.password !== obj.confirmPassword) throw new HTTPError(400, 'Password and confirm Password not matched')
-            let user = await userService.signup(obj.username, obj.password)
-            req.session.user ={
-                id: user.id,
-                username:obj.username,
+            let user = await userService.signup(obj)
+            
+            req.session.userId = user.users_id
+            req.session.username = obj.username
+            req.session.isLogin = true
+                
+            if(!obj.email) throw new HTTPError(400, 'Missing email')
+            if(typeof obj.email !== 'string' || !obj.email.includes('@')){
+                throw new HTTPError(
+                    400, 
+                    'Invalid email, should provide a regular email'
+                )
             }
-            req.session.save()
+            
             res.redirect('/')
-        } catch (error) {
-                  console.log('failed to signup:', error)
-      if (error && typeof error == 'object' && 'status' in error) {
-        res.status((error as HTTPError).status)
-      } else {
-        res.status(500)
-      }
-      res.json({ error: String(error) })
+        } catch (err) {
+             errorHandler(err,req,res)
         }
         
     }
 
     login = async(req:express.Request, res: express.Response)=>{
         try {
-            let {username , password} = req.body
+            let {username , password} = await formidable_promise(req) as User
             if (!username) throw new HTTPError(400, 'Missing username')
             if (!password) throw new HTTPError(400, 'Missing Password')
-            let user = await userService.login({username, password})
-            req.session.user = {
-                id: user.id,
-                username,
-            }
-            req.session.save()
-            res.redirect('/')
-        } catch (error) {
-            if (error && typeof error == 'object' && 'status' in error){
-                res.status(500)
-            }
-            res.json({error: String(error)})
+            let userId = await userService.login({username, password})
+            
+            req.session.userId = userId
+            req.session.username = username
+            req.session.isLogin = true
+
+            res.json({
+                ok:true,
+            })
+        } catch (err) {
+             errorHandler(err,req,res)
         }
     }
-    logout = (req:express.Request, res: express.Response)=>{
-        req.session.destroy(err =>{
-            if (err){
-                res.status(502)
-                res.end('Failed to destroy session')
-            }else{
-                res.redirect('/')
-            }
-        })
+    logout = async (req:express.Request, res: express.Response)=>{
+        try {
+            delete req.session.userId
+            delete req.session.username
+            delete req.session.isLogin
+            res.json({
+                isLogin:false,
+                isErr:false
+            })    
+        } catch (err) {
+            errorHandler(err,req,res)
+        }
+        
+        
     }
 
-    getUser = (req:express.Request, res: express.Response)=>{
-        if (req.session.user){
-            res.sendFile(path.resolve(path.join('public', 'admin.css')))
-        }else{
-            res.sendFile(path.resolve(path.join('public', 'guest.css')))
+    getUser = async (req:express.Request, res: express.Response)=>{
+        try {
+        let userId = req.session.userId!
+        let user = await userService.getUser(userId)
+        console.log(user)
+        let result = {...user,isLogin:req.session.isLogin,isErr:false}
+        res.json(result)
+        } catch (err) {
+            errorHandler(err,req,res)
         }
+        
 }
 }

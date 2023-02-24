@@ -4,7 +4,7 @@ function setupLoginPage() {
     loginForm.addEventListener('submit', async e => {
         e.preventDefault()
         let formData = new FormData(loginForm)
-        let res = await fetch(loginForm.action, {
+        let res = await fetch('/user/login', {
             method: "POST",
             body: formData,
         })
@@ -17,12 +17,13 @@ function setupLoginPage() {
             })
             return
         }
-        let text = await res.text()
-        Swal.fire({
-            icon: 'success',
-            title: 'Login successfully',
-            text,
-        })
+
+        // Swal.fire({
+        //     icon: 'success',
+        //     title: 'Login successfully',
+        // })
+        window.location.href = '/'
+
     })
 }
 setupLoginPage()
