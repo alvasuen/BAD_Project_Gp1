@@ -12,4 +12,8 @@ document.querySelector(".right_con").innerHTML = /*html*/ `<div class="topBar">
 <div class="search">
     <input class="search-bar" type="text" name="search" id="search" placeholder="Search...">
 </div>
+
+<div class="user-status">
+<div class="user-name"><p>User</p></div>
+</div>
 </div>`;
