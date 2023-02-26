@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { playlistsService } from '../service/playListService'
+import { PlaylistsService } from '../service/playListService'
 import { form } from '../../helper'
 
-export class playlistsController {
-    constructor(private playlistsService: playlistsService) { }
+export class PlaylistsController {
+    constructor(private playlistsService: PlaylistsService) { }
     loadPlaylist = async (req: Request, res: Response) => {
         try {
             const playlists_id = Number(req.query.id)
