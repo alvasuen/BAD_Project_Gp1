@@ -25,3 +25,4 @@ userRoutes.post('/logout', isLoggedInAPI, userController.logout)
 userRoutes.get('/getUser', isLoggedInAPI, userController.getUser)
 
 playlistRoutes.get('/', playListController.loadPlaylist)
+playlistRoutes.get('/user', playListController.getPlayListByUser)

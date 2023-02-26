@@ -17,9 +17,9 @@ document.querySelector(
     <ion-icon name="duplicate"></ion-icon>
     <span>create playlist</span>
 </div>
-<div class="page">
+<div class="page my-song">
     <ion-icon name="diamond"></ion-icon>
-    <a href="./playlist.html">my songs</a>
+    <span>my songs</span>
 </div>
 <div class="page">
     <ion-icon name="heart-circle"></ion-icon>
@@ -41,4 +41,13 @@ document.querySelector(
 document.querySelector(".karaoke-img").addEventListener("click", (e) => {
     e.preventDefault();
     window.location = "/index.html";
+})
+
+document.querySelector(".my-song").addEventListener("click", async (e) => {
+    e.preventDefault();
+    console.log("hi");
+    const res = await fetch("http://localhost:8000/playlists/user", { method: "GET" })
+    const json = await res.json();
+    console.log(json);
+    window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
 })
