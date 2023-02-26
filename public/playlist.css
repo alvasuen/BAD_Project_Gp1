@@ -1,3 +1,7 @@
+body {
+  color: white;
+}
+
 .playlist-page-container {
   margin-left: 240px;
 }
@@ -102,5 +106,4 @@
   width: 40px;
 }
 
-.tracklist-container {
-} 
+.tracklist-container {}

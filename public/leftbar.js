@@ -19,7 +19,7 @@ document.querySelector(
 </div>
 <div class="page">
     <ion-icon name="diamond"></ion-icon>
-    <span>my songs</span>
+    <a href="./playlist.html">my songs</a>
 </div>
 <div class="page">
     <ion-icon name="heart-circle"></ion-icon>
