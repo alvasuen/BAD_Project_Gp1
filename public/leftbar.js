@@ -48,6 +48,6 @@ document.querySelector(".my-song").addEventListener("click", async (e) => {
     console.log("hi");
     const res = await fetch("http://localhost:8000/playlists/user", { method: "GET" })
     const json = await res.json();
-    console.log(json);
+    // console.log(json);
     window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
 })

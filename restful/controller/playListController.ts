@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { PlaylistsService } from '../service/playListService'
 import { form } from '../../helper'
+import { errorHandler } from "../../error"
 
 export class PlaylistsController {
     constructor(private playlistsService: PlaylistsService) { }
@@ -14,8 +15,9 @@ export class PlaylistsController {
 
             res.json({ playlists })
         } catch (err) {
-            console.log(err);
-            res.json({ success: false })
+            // console.log(err);
+            // res.json({ success: false })
+            errorHandler(err, req, res)
         }
 
 
@@ -24,16 +26,16 @@ export class PlaylistsController {
     getPlayListByUser = async (req: Request, res: Response) => {
         try {
             let userId = req.session.userId!
-            console.log(userId);
+            // console.log(userId);
 
             const playlists = await this.playlistsService.getPlayListByUserId(userId)
-            console.log(playlists);
+            // console.log(playlists);
 
             res.json({ playlists })
             return;
 
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             res.json({ success: false })
         }
     }

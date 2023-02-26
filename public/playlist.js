@@ -11,7 +11,7 @@ async function getPlaylist(id) {
         method: 'GET',
     })
     const json = await res.json();
-    console.log(json);
+    // console.log(json);
     if (json.playlists) {
         loadPlaylist(json.playlists);
     }
@@ -21,7 +21,7 @@ function loadPlaylist(playlists) {
     const playlistsContainer = document.querySelector('.playlist-body');
     playlistsContainer.innerHTML = "";
     for (let playlist of playlists) {
-        console.log(playlist);
+        // console.log(playlist);
         playlistsContainer.innerHTML +=
         /* html */`
     <div class="playlist">
