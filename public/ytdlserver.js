@@ -16,8 +16,8 @@ app.get("/download", (req, res) => {
   //   res.json({ url: URL });
 
  ytdl.getInfo(URL,{downloadURL: true}).then((data)=>{
-  console.log(data);
-  ytdl(URL, { filter: "audioonly", quality: "highestaudio" }).pipe(createWriteStream(`../media_hub/audio/${data.videoDetails.videoId}.mp3`));
+  console.log(data.videoDetails.thumbnails.at(-1));
+  ytdl(URL, { filter: "audioonly", quality: "highestaudio" }).pipe(createWriteStream(`../separation/spleeter/spleeter/script/${data.videoDetails.videoId}.mp3`));
   ytdl(URL, { filter: "videoonly", quality: "highestvideo" }).pipe(createWriteStream(`../media_hub/video/${data.videoDetails.videoId}.mp4`));
 })
 });
