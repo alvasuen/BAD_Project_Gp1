@@ -4,25 +4,33 @@ function setupLoginPage() {
     loginForm.addEventListener('submit', async e => {
         e.preventDefault()
         let formData = new FormData(loginForm)
-        let res = await fetch('/user/login', {
+        let res_json = await fetch('/user/login', {
             method: "POST",
             body: formData,
         })
+        let res = await res_json.json()
+        console.log(res, "123")
         if (!res.ok) {
-            let text = await res.text()
+
+            // let text = await res.text()
             Swal.fire({
                 icon: 'error',
                 title: 'Failed to Login',
-                text,
+                text: 'Something went wrong!'
             })
             return
-        }
+        } else {
+            let swaObj = await Swal.fire({
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: true,
+            })
 
-        // Swal.fire({
-        //     icon: 'success',
-        //     title: 'Login successfully',
-        // })
-        window.location.href = '/'
+            if (swaObj.isConfirmed) {
+                window.location.href = '/'
+            }
+
+        }
 
     })
 }
@@ -40,3 +48,4 @@ document.querySelector(".eye").addEventListener('click', e => {
     }
     showPassword = !showPassword
 })
+

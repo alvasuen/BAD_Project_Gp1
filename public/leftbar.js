@@ -9,7 +9,7 @@ document.querySelector(
     <ion-icon name="home"></ion-icon>
     <span>home</span>
 </div>
-<div class="page">
+<div class="page home">
     <ion-icon name="search-outline"></ion-icon>
     <span>search</span>
 </div>
@@ -50,4 +50,9 @@ document.querySelector(".my-song").addEventListener("click", async (e) => {
     const json = await res.json();
     // console.log(json);
     window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
+})
+
+document.querySelector(".home").addEventListener("click", async (e) => {
+    e.preventDefault();
+    window.location = "/index.html";
 })
