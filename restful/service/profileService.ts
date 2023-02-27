@@ -7,7 +7,7 @@ export class ProfileService {
 
   getProfileNameByUserId = async (userId: number) => {
     return await this.knex
-      .select("users_name")
+      .select("username")
       .from("users")
       .where("users_id", userId);
   };

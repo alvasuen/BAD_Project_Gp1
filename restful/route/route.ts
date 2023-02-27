@@ -1,28 +1,36 @@
-import express from 'express';
-import { isLoggedInAPI } from '../../guard';
-import '../../session'
-import { UserController } from '../controller/userController';
-import { PlaylistsController } from '../controller/playListController';
-import { knex } from '../../db';
-import { PlaylistsService } from '../service/playListService';
-
+import express from "express";
+import { isLoggedInAPI } from "../../guard";
+import "../../session";
+import { UserController } from "../controller/userController";
+import { PlaylistsController } from "../controller/playListController";
+import { knex } from "../../db";
+import { PlaylistsService } from "../service/playListService";
+import { ProfileService } from "../service/profileService";
+import { ProfileController } from "../controller/profileController";
 
 export let userRoutes = express.Router();
 export let playlistRoutes = express.Router();
+export let profileRoutes = express.Router();
 
 export type User = {
-    username: string
-    password: string
-}
+  username: string;
+  password: string;
+};
 
-let playListServices = new PlaylistsService(knex)
-let userController = new UserController()
-let playListController = new PlaylistsController(playListServices)
+let userController = new UserController();
 
-userRoutes.post('/signup', userController.signup)
-userRoutes.post('/login', userController.login)
-userRoutes.post('/logout', isLoggedInAPI, userController.logout)
-userRoutes.get('/getUser', isLoggedInAPI, userController.getUser)
+let playListServices = new PlaylistsService(knex);
+let playListController = new PlaylistsController(playListServices);
 
-playlistRoutes.get('/', playListController.loadPlaylist)
-playlistRoutes.get('/user', playListController.getPlayListByUser)
+let profileService = new ProfileService(knex);
+let profileController = new ProfileController(profileService);
+
+userRoutes.post("/signup", userController.signup);
+userRoutes.post("/login", userController.login);
+userRoutes.post("/logout", isLoggedInAPI, userController.logout);
+userRoutes.get("/getUser", isLoggedInAPI, userController.getUser);
+
+playlistRoutes.get("/", playListController.loadPlaylist);
+playlistRoutes.get("/user", playListController.getPlayListByUser);
+
+profileRoutes.get("/profile", profileController.loadProfile);
