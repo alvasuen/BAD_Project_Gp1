@@ -1,10 +1,9 @@
-window.onload = async () => {
-    let params = new URL(document.location).searchParams
-    let id = params.get('id')
+window.onload = async function () {
+    let params = new URL(document.location).searchParams;
+    let id = params.get("id");
 
-    await getPlaylist(id)
-}
-
+    await getPlaylist(id);
+};
 
 async function getPlaylist(id) {
     const res = await fetch("http://localhost:8000/playlists?id=" + id, {
@@ -30,7 +29,6 @@ function loadPlaylist(playlists) {
     <div class="playlist-title">${playlist['playlists_name']}</div>
         <div class="playlist-duration">${playlist['created_at']}</div>
     </div>
-        `
-
+        `;
     }
 }

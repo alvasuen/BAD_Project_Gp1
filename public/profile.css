@@ -30,25 +30,25 @@ body {
   width: 250px;
 }
 
-.username{
-    color:white;
-    position: relative;
-    bottom: 275px;
-    left: 400px;
-    font-size: 30px;
-    width:200px;
-    font-family: 'Phudu', cursive;
-    font-weight: bold;
+.username {
+  color: white;
+  position: relative;
+  bottom: 275px;
+  left: 400px;
+  font-size: 30px;
+  width: 200px;
+  font-family: "Phudu", cursive;
+  font-weight: bold;
 }
 
-.seperator{
-    height: 320px;
+.seperator {
+  height: 320px;
 }
 
-.mainContainer{
-display: flex;
-flex-direction: column;
-margin-left:100px;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
 }
 
 .profilePlaylist {
@@ -65,7 +65,6 @@ margin-left:100px;
   background-color: black;
 }
 
-
 .profileHistory {
   display: flex;
   flex-wrap: wrap;
@@ -80,8 +79,6 @@ margin-left:100px;
   background-color: black;
 }
 
-
-
 .title {
   color: white;
   width: 100%;
@@ -91,7 +88,7 @@ margin-left:100px;
 
 .songText {
   color: white;
-  width:250px;
+  width: 250px;
 }
 
 .playlistText {
