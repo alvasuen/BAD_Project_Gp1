@@ -52,7 +52,7 @@ const config: { [key: string]: Knex.Config } = {
     },
   },
 };
-console.log(config);
-console.log("from knexfile.ts");
+// console.log(config);
+// console.log('from knexfile.ts');
 
 module.exports = config;

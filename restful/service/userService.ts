@@ -41,8 +41,9 @@ class UserService {
       console.log('wrong password');
 
       throw new Error('wrong username or password')
+
     }
-    console.log(result);
+
 
     return result.users_id
 
