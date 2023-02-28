@@ -1,19 +1,27 @@
-import express from 'express';
-const cors = require("cors");
-const ytdl = require("ytdl-core");
-const { createWriteStream } = require("fs");
+import {Request, Response} from 'express';
+import ytdl from "ytdl-core";
+import { createWriteStream } from "fs";
+import { errorHandler } from "../../error";
 
-let app = express();
-export class ytdlController{
 
-}
+export class YtdlController{
 
-app.get("/download", (req, res) => {
-    var URL = req.query.URL;
-  
-   ytdl.getInfo(URL,{downloadURL: true}).then((data)=>{
-    console.log(data);
-    ytdl(URL, { filter: "audioonly", quality: "highestaudio" }).pipe(createWriteStream(`../media_hub/audio/${data.videoDetails.videoId}.mp3`));
-    ytdl(URL, { filter: "videoonly", quality: "highestvideo" }).pipe(createWriteStream(`../media_hub/video/${data.videoDetails.videoId}.mp4`));
+  constructor(){}
+
+  downloadVideo = async (req:Request, res:Response) => {
+    try{
+      let URL = req.query.URL;
+      ytdl.getInfo(URL as string).then((data)=>{
+      // console.log(data);
+      // console.log(data.videoDetails.thumbnails.at(-1));
+      ytdl(URL as string , { filter: "audioonly", quality: "highestaudio" }).pipe(createWriteStream(`./media_hub/video/${data.videoDetails.videoId}.mp3`));
+      ytdl(URL as string, { filter: "videoonly", quality: "highestvideo" }).pipe(createWriteStream(`./media_hub/video/${data.videoDetails.videoId}.mp4`));
   })
-  });
+    }catch (err){
+      console.log(err)
+      errorHandler(err, req, res);
+    }
+  
+  }
+  
+}
