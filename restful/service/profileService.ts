@@ -21,12 +21,16 @@ export class ProfileService {
 
   getProfilePlaylistSongId = async (playlistId: number) => {
     return await this.knex
-      .select("*")
+      .select("playlists_id", "songs_id")
       .from("playlists_songs")
       .where("playlists_id", playlistId);
+    //select * from
   };
 
   getProfilePlaylistSong = async (songsId: number) => {
-    return await this.knex.select("*").from("songs").where("songs_id", songsId);
+    return await this.knex
+      .select("songs_id", "songs_name", "image")
+      .from("songs")
+      .where("songs_id", songsId);
   };
 }

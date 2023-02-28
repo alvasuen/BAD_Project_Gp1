@@ -34,14 +34,14 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
 
   await knex("artists").insert([
-    { artists_id: 1, artist_name: "Green Day" },
+    { artists_id: 1, artist_name: "Singer" },
     { artists_id: 2, artist_name: "Coldplay" },
   ]);
 
   await knex("songs").insert([
     {
       songs_id: 1,
-      songs_name: "Yellow",
+      songs_name: "Default Song",
       artists_id: 1,
       lyrics_id: 1,
       bookmark_count: 0,
