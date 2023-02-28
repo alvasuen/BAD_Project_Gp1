@@ -9,7 +9,7 @@ export class ProfileController {
   loadProfile = async (req: Request, res: Response) => {
     try {
       const userId = Number(req.query.id);
-      console.log("User id: ", userId);
+      // console.log("User id: ", userId);
 
       const profileUsername = await this.profileService.getProfileNameByUserId(
         userId
@@ -19,25 +19,39 @@ export class ProfileController {
         userId
       );
 
-      const profilePlaylistSongId =
-        await this.profileService.getProfilePlaylistSongId(
-          profilePlaylist[0].playlists_id
-        );
+      let profilePlaylistSongIdArr = [];
+      for (let index = 0; index < profilePlaylist.length; index++) {
+        let profilePlaylistSongId =
+          await this.profileService.getProfilePlaylistSongId(
+            profilePlaylist[index].playlists_id
+          );
+        profilePlaylistSongIdArr.push(profilePlaylistSongId);
+      }
+      // console.log(profilePlaylistSongIdArr);
 
-      const profilePlaylistSong =
-        await this.profileService.getProfilePlaylistSong(
-          profilePlaylistSongId[0].songs_id
-        );
+      let songsArr = [];
+      for (let index = 0; index < profilePlaylistSongIdArr.length; index++) {
+        for (let num = 0; num < profilePlaylistSongIdArr[index].length; num++) {
+          let profilePlaylistSong =
+            await this.profileService.getProfilePlaylistSong(
+              profilePlaylistSongIdArr[index][num].songs_id
+            );
+          songsArr.push(profilePlaylistSong);
+        }
+      }
 
       res.json({
-        success: true,
-        profileUsername,
+        profilePlaylistSongIdArr,
         profilePlaylist,
-        // profilePlaylistSongId,
-        profilePlaylistSong,
+        songsArr,
       });
     } catch (err) {
       errorHandler(err, req, res);
     }
   };
 }
+// success: true,
+// profileUsername,
+// profilePlaylist,
+// // profilePlaylistSongId,
+// profilePlaylistSong,
