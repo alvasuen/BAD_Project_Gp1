@@ -1,16 +1,19 @@
 import { Request, Response } from "express";
 import ytdl from "ytdl-core";
+import { YtdlService } from "../service/ytdlService";
 import { createWriteStream } from "fs";
 import { errorHandler } from "../../error";
 import fetch from "cross-fetch";
 
 export class YtdlController {
-  constructor() {}
+  constructor(private ytdlService: YtdlService) {
+    this.ytdlService = ytdlService
+  }
 
   downloadVideo = (req: Request, res: Response) => {
     try {
       let URL = req.query.url;
-      ytdl.getInfo(URL as string).then((data) => {
+      ytdl.getInfo(URL as string).then(async (data) => {
         console.log(data);
 
         // console.log(data.videoDetails.thumbnails.at(-1));
@@ -34,8 +37,9 @@ export class YtdlController {
             `./media_hub/video/${data.videoDetails.videoId}.mp4`
           )
         );
-        
 
+        await this.ytdlService.newSong(data.videoDetails.videoId, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
+        
         // pass video data to sanic server
         fetch("http://127.0.0.1:8080/sanicytdl", {
           method: "POST",
