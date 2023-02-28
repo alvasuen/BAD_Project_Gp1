@@ -80,16 +80,32 @@ def test(request):
          return srtFilename
    
 
-      generate_sentence_srt()
-      generate_word_srt ()
+      with generate_sentence_srt():
+         print("Generated sentence-level subtitles")
+      
+      with generate_word_srt ():
+         print("Generated word-level subtitles")
 
       #save the srt files in S3
 
+
+      #MERGE THE AUDIO WITH VIDEO
+      input_video = ffmpeg.input("../media_hub/video/{data.videoDetails.videoId}.mp4")
+      input_audio = ffmpeg.input("../media_hub/spleeter/{data.videoDetails.videoId}_accompaniment.wav")
+      ffmpeg.concat(input_video, input_audio, v=1, a=1).output("../media_hub/combined/{data.videoDetails.videoId}_finished.mp4")
+
+      #MERGE THE VIDEO WITH SRT
+      srtFile = "../media_hub/SrtFile/{data.data.videoDetails.videoId}.srt"
+      input_video1 = "../media_hub/combined/{data.data.videoDetails.videoId}.mp4"
+
+
+      #save the finished video to S3
 
       return json({"success":"true"})
    
    except:
       print("Attempt fail!")
+      return json({"success":"false"})
 
 
 
