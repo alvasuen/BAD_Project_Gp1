@@ -87,7 +87,3 @@ document.querySelector(".karaoke-img").addEventListener("click", (e) => {
 // })
 
 /* Search Page */
-document.querySelector(".home").addEventListener("click", async (e) => {
-    e.preventDefault();
-    window.location = "/";
-})
