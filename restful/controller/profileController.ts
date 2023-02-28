@@ -30,9 +30,10 @@ export class ProfileController {
         );
 
       res.json({
+        success: true,
         profileUsername,
         profilePlaylist,
-        profilePlaylistSongId,
+        // profilePlaylistSongId,
         profilePlaylistSong,
       });
     } catch (err) {
