@@ -45,13 +45,13 @@ function createSongBox(json) {
 async function loadProfile(id) {
   const res = await fetch("/profile?id=" + id);
   const json = await res.json();
-  console.log(json);
-  console.log(json.profilePlaylist.length);
-  if (json.success) {
-    let userName = document.querySelector(".username");
-    userName.textContent = json.profileUsername[0].username;
-    createSongBox(json);
-  }
+  console.log("songID", json);
+  // console.log(json.profilePlaylist.length);
+  // if (json.success) {
+  //   let userName = document.querySelector(".username");
+  //   userName.textContent = json.profileUsername[0].username;
+  //   createSongBox(json);
+  // }
 }
 
 window.onload = async function () {
