@@ -1,14 +1,15 @@
-import cors from "cors";
+// import cors from "cors";
 import express from "express";
-import { print } from "listening-on";
+// import { print } from "listening-on";
 import path from "path";
 import {
   playlistRoutes,
   profileRoutes,
   userRoutes,
+  ytdlRoutes,
 } from "./restful/route/route";
 import { env } from "./env";
-import { UserController } from "./restful/controller/userController";
+// import { UserController } from "./restful/controller/userController";
 import { sessionMiddleware } from "./session";
 
 let app = express();
@@ -24,6 +25,7 @@ app.use(sessionMiddleware);
 app.use("/user", userRoutes);
 app.use("/playlists", playlistRoutes);
 app.use("/", profileRoutes);
+app.use("/videos", ytdlRoutes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(publicPath, "error.html"));
@@ -31,5 +33,5 @@ app.get("*", async (req: express.Request, res: express.Response) => {
 
 let port = env.PORT;
 app.listen(port, () => {
-  console.log(`http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });
