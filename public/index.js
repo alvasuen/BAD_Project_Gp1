@@ -7,9 +7,13 @@ async function main() {
     console.log(json, '6')
 
     render_topBar()
+    render_rightContainer()
 
 }
-
+function render_rightContainer() {
+    document.querySelector('.right_con.home').classList.add('show')
+    document.querySelector('.right_con.playlist').classList.remove('show')
+}
 
 
 function render_topBar() {

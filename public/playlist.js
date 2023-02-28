@@ -1,23 +1,24 @@
-window.onload = async function () {
-    let params = new URL(document.location).searchParams;
-    let id = params.get("id");
-
-    await getPlaylist(id);
-};
+// window.onload = async function () {
+//     let params = new URL(document.location).searchParams;
+//     let id = params.get("id");
+//     console.log(id);
+//     await getPlaylist(id);
+//     document.querySelector('.myPlayListBox').classList.remove('hide');
+// };
 
 async function getPlaylist(id) {
-    const res = await fetch("http://localhost:8000/playlists?id=" + id, {
+    const res = await fetch(`http://localhost:8000/playlists/all/${id}`, {
         method: 'GET',
     })
     const json = await res.json();
-
+    // console.log(json);
     if (json.playlists) {
         loadPlaylist(json.playlists);
     }
 
 }
 function loadPlaylist(playlists) {
-    console.log(playlists);
+    // console.log(playlists);
     const playlistsContainer = document.querySelector('.playlist-body');
     playlistsContainer.innerHTML = "";
     for (let playlist of playlists) {
