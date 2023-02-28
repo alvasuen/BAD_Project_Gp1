@@ -141,3 +141,8 @@ button {
   border: none;
   border-radius: 20px;
 }
+
+
+.myPlayListBox.hide {
+  display: none;
+}

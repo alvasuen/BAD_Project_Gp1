@@ -34,8 +34,8 @@ userRoutes.post("/login", userController.login);
 userRoutes.post("/logout", isLoggedInAPI, userController.logout);
 userRoutes.get("/getUser", isLoggedInAPI, userController.getUser);
 
-playlistRoutes.get("/", playListController.loadPlaylist);
-playlistRoutes.get("/user", playListController.getPlayListByUser);
+playlistRoutes.get("/all/:id", isLoggedInAPI, playListController.loadPlaylist);
+playlistRoutes.get("/user", isLoggedInAPI, playListController.getPlayListByUser);
 
 profileRoutes.get("/profile", profileController.loadProfile);
 

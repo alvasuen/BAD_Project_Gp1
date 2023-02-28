@@ -1,4 +1,4 @@
-document.querySelector(".right_con").innerHTML = /*html*/ `<div class="topBar">
+document.querySelector(".topBarContainer").innerHTML = /*html*/ `<div class="topBar">
 <div class="turn-page-btn btn-left">
 
     <ion-icon name="chevron-back-circle-outline"></ion-icon>

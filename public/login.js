@@ -16,13 +16,13 @@ function setupLoginPage() {
             Swal.fire({
                 icon: 'error',
                 title: 'Failed to Login',
-                text: 'Something went wrong!'
+                text: 'Wrong username or password'
             })
             return
         } else {
             let swaObj = await Swal.fire({
                 icon: 'success',
-                title: 'Your work has been saved',
+                title: 'Login Success',
                 showConfirmButton: true,
             })
 
