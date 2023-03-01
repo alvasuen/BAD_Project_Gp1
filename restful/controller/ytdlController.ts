@@ -3,7 +3,7 @@ import ytdl from "ytdl-core";
 import { YtdlService } from "../service/ytdlService";
 import { createWriteStream } from "fs";
 import { errorHandler } from "../../error";
-import fetch from "cross-fetch";
+// import fetch from "cross-fetch";
 
 export class YtdlController {
   constructor(private ytdlService: YtdlService) {
