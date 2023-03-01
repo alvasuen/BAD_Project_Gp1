@@ -39,4 +39,4 @@ playlistRoutes.get("/user", isLoggedInAPI, playListController.getPlayListByUser)
 
 profileRoutes.get("/profile", profileController.loadProfile);
 
-ytdlRoutes.get("/download", ytdlController.downloadVideo);
+ytdlRoutes.post("/download", ytdlController.downloadVideo);

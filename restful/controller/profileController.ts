@@ -19,31 +19,19 @@ export class ProfileController {
         userId
       );
 
-      let profilePlaylistSongIdArr = [];
+      let profilePlaylistSongs = [];
       for (let index = 0; index < profilePlaylist.length; index++) {
         let profilePlaylistSongId =
           await this.profileService.getProfilePlaylistSongId(
             profilePlaylist[index].playlists_id
           );
-        profilePlaylistSongIdArr.push(profilePlaylistSongId);
-      }
-      // console.log(profilePlaylistSongIdArr);
-
-      let songsArr = [];
-      for (let index = 0; index < profilePlaylistSongIdArr.length; index++) {
-        for (let num = 0; num < profilePlaylistSongIdArr[index].length; num++) {
-          let profilePlaylistSong =
-            await this.profileService.getProfilePlaylistSong(
-              profilePlaylistSongIdArr[index][num].songs_id
-            );
-          songsArr.push(profilePlaylistSong);
-        }
+        profilePlaylistSongs.push(profilePlaylistSongId);
       }
 
       res.json({
-        profilePlaylistSongIdArr,
-        profilePlaylist,
-        songsArr,
+        success: true,
+        profileUsername,
+        profilePlaylistSongs,
       });
     } catch (err) {
       errorHandler(err, req, res);

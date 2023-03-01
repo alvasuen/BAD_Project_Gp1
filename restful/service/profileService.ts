@@ -20,17 +20,16 @@ export class ProfileService {
   };
 
   getProfilePlaylistSongId = async (playlistId: number) => {
-    return await this.knex
-      .select("playlists_id", "songs_id")
-      .from("playlists_songs")
-      .where("playlists_id", playlistId);
-    //select * from
+    return await this.knex("playlists_songs")
+      .select("*")
+      .innerJoin(
+        "playlists",
+        "playlists_songs.playlists_id",
+        "playlists.playlists_id"
+      )
+      .innerJoin("songs", "playlists_songs.songs_id", "songs.songs_id")
+      .where("playlists_songs.playlists_id", playlistId);
   };
-
-  getProfilePlaylistSong = async (songsId: number) => {
-    return await this.knex
-      .select("songs_id", "songs_name", "image")
-      .from("songs")
-      .where("songs_id", songsId);
-  };
+  //SQL:
+  //select * from playlists_songs inner join playlists on playlists_songs.playlists_id = playlists.playlists_id inner join songs on playlists_songs.songs_id = songs.songs_id;
 }

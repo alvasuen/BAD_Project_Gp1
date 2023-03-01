@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
 import ytdl from "ytdl-core";
-import { YtdlService } from "../service/ytdlService";
+// import { YtdlService } from "../service/ytdlService";
 import { createWriteStream } from "fs";
 import { errorHandler } from "../../error";
 import fetch from "cross-fetch";
 
 export class YtdlController {
-  constructor(private ytdlService: YtdlService) {
-    this.ytdlService = ytdlService
-  }
+  // constructor(private ytdlService: YtdlService) {
+  //   this.ytdlService = ytdlService
+  // }
 
   downloadVideo = (req: Request, res: Response) => {
     try {
-      let URL = req.query.url;
+      let URL = req.body.url;
+      let language = req.body.language
+      console.log(req.body)
       ytdl.getInfo(URL as string).then(async (data) => {
         console.log(data);
 
@@ -38,27 +40,28 @@ export class YtdlController {
           )
         );
 
-        await this.ytdlService.newSong(data.videoDetails.videoId, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
+        // await this.ytdlService.newSong(data.videoDetails.videoId, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
         
         // pass video data to sanic server
-        fetch("http://127.0.0.1:8080/sanicytdl", {
-          method: "POST",
-          headers: {
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            thumbnail: data.videoDetails.thumbnails.at(-1),
-            ytId: data.videoDetails.videoId,
-            name: data.videoDetails.title,
-          })
-        }).then(()=>{
+        // fetch("http://127.0.0.1:8080/sanicytdl", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type":"application/json"
+        //   },
+        //   body:JSON.stringify({
+        //     thumbnail: data.videoDetails.thumbnails.at(-1),
+        //     ytId: data.videoDetails.videoId,
+        //     name: data.videoDetails.title,
+        //     language: language,
+        //   })
+        // }).then(()=>{
           res.status(200).json({success:true});
-        })
+        // })
 
       });
     } catch (err) {
-      console.log(err);
-      errorHandler(err, req, res);
+       console.log(err);
+       errorHandler(err, req, res);
     }
   };
 }
