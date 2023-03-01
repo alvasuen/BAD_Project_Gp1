@@ -21,12 +21,21 @@
         </section>
         <section class="right_con home">
             <div class="seperator"></div>
-            <div class="container">
+            <form class="container">
+                <h3>Please enter the url here: </h3>
                 <div class="barContainer">
                     <a class="ytIcon" href="https://www.youtube.com"><i class="fa-brands fa-youtube"></i></a>
-                    <input class="linkInput" type="text" size="50" />
-                    <a class="sendBtn"><i class="fa-solid fa-circle-arrow-up"></i></a>
+                    <input class="linkInput" type="text" size="50" required/>
+                    <button class="sendBtn" type="submit"><i class="fa-solid fa-circle-arrow-up"></i></button>
                 </div>
+                <div class="languageSelect">
+                <label class="text">Language</label>
+                <select name="languageContainer" class="languageContainer" required>
+                    <option disabled selected value>--select--</option>
+                    <option class="languageOp" id="english" value="English">English</option>    
+                    <option class="languageOp" id="mandarin" value="Mandarin">Mandarin</option>    
+                </select>
+            </form>
             </div>
 
         </section>

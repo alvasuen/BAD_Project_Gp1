@@ -59,8 +59,9 @@ def generate_word_srt ():
 
     return srtFilename
 
-generate_sentence_srt()
-print('9')
-generate_word_srt ()
-print("10")
+if __name__ == '__main__':
+    generate_sentence_srt()
+    print('9')
+    generate_word_srt ()
+    print("10")
 
