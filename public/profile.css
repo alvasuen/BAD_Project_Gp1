@@ -1,11 +1,14 @@
 body {
   background-color: black;
   color: aliceblue;
+  /* position: fixed; */
+  /* overflow: auto; */
 }
 
 .coverContainer {
   height: 220px;
   width: 100%;
+  position: fixed;
 }
 
 .cover {
@@ -13,6 +16,7 @@ body {
   width: 100%;
   margin: 0px;
   background-color: aliceblue;
+  /* position: fixed; */
 }
 
 .icon {
@@ -23,12 +27,14 @@ body {
   position: relative;
   bottom: 160px;
   left: 50px;
-  overflow: hidden;
+  /* position: fixed; */
+  /* overflow: hidden; */
 }
 
 .icon img {
   object-fit: cover;
   width: 250px;
+  /* position: fixed; */
 }
 
 .username {
@@ -40,6 +46,7 @@ body {
   width: 200px;
   font-family: "Phudu", cursive;
   font-weight: bold;
+  /* position: fixed; */
 }
 
 .seperator {
@@ -49,33 +56,23 @@ body {
 .mainContainer {
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+  /* position: fixed; */
+  /* margin-left: 100px; */
 }
 
-.profilePlaylist {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-}
-
-.playlistBlock {
-  height: 250px;
-  width: 280px;
-  overflow: hidden;
-  margin: 10px;
-  background-color: black;
-}
-
+.profilePlaylist,
 .profileHistory {
   display: flex;
-  flex-wrap: wrap;
-  margin: 10px;
+  flex-direction: column;
+  margin: 20px;
+  overflow-y: auto;
 }
 
+.playlistBlock,
 .historyBlock {
   height: 250px;
   width: 280px;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 10px;
   background-color: black;
 }
@@ -96,25 +93,57 @@ body {
   color: white;
 }
 
+.responsive {
+  display: flex;
+}
+
+.song-cover {
+  width: 274px;
+}
+
+.song-box {
+  width: 274px;
+  margin-right: 20px;
+}
+
+.readmore {
+  text-transform: uppercase;
+  font-size: 10px;
+  color: #14c6c6;
+  margin-top: 10px;
+  margin-left: 90%;
+}
+
+.readmore:hover {
+  cursor: pointer;
+  color: #16dfdf;
+}
+
+.readmore:active {
+  cursor: pointer;
+  color: #14c6c6;
+}
+
+/*
 /* slicker-slideshow */
 /*------ slider width ------*/
-.slider {
+/* .slider {
   width: 90%;
   margin: 0 auto;
-}
+} */
 
 /*------ slider image ------*/
-.slider img {
+/* .slider img {
   width: 250px;
-}
+} */
 
 /*-------- height ----------*/
-.slider .slick-slide {
+/* .slider .slick-slide {
   height: auto !important;
-}
+} */
 
 /*--------- arrows ---------*/
-.slider .slick-next {
+/* .slider .slick-next {
   right: 0 !important;
 }
 .slider .slick-prev {
@@ -127,7 +156,7 @@ body {
 }
 .slider .slick-arrow:before {
   font-size: 30px !important;
-}
+} */
 
 /* @media only screen and (min-width: 10000px) {
   .seperator{

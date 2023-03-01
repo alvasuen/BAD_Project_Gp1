@@ -23,9 +23,3 @@ export class PlaylistsService {
       .where("users_id", userId);
   };
 }
-// getProfilePlaylistSongId = async (playlistId: number) => {
-//   return await this.knex("playlists_songs")
-//     .select("playlists_id", "songs_id", "songs_name", "image")
-//     .where("playlists_id", playlistId)
-//     .innerJoin("songs", "songs.songs_id", "playlists_songs.songs_id");
-// };
