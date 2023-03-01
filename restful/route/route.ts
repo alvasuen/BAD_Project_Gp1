@@ -8,6 +8,7 @@ import { PlaylistsService } from "../service/playListService";
 import { ProfileService } from "../service/profileService";
 import { ProfileController } from "../controller/profileController";
 import { YtdlController } from "../controller/ytdlController";
+import { YtdlService } from "../service/ytdlService";
 
 export let userRoutes = express.Router();
 export let playlistRoutes = express.Router();
@@ -27,7 +28,8 @@ let playListController = new PlaylistsController(playListServices);
 let profileService = new ProfileService(knex);
 let profileController = new ProfileController(profileService);
 
-let ytdlController = new YtdlController();
+let ytdlService = new YtdlService(knex)
+let ytdlController = new YtdlController(ytdlService);
 
 userRoutes.post("/signup", userController.signup);
 userRoutes.post("/login", userController.login);

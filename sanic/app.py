@@ -84,10 +84,19 @@ def test(request):
         # Gen whisper lyrics subtitle
         device = "cpu"
 
+        if (data.language == "English"):
+            video_language = "English"
+            video_language_code = "en"
+            model=models[0]
+        elif (data.languae == "mandarin"):
+            video_language = "Chinese"
+            video_language_code = "zh"
+            model=models[1]
+
         result = model.transcribe(
-            "../media_hub/spleeter/{data.ytId}_vocals.wav", fp16=False, language='English')
+            "../media_hub/spleeter/{data.ytId}_vocals.wav", fp16=False, language=video_language)
         model_a, metadata = whisperx.load_align_model(
-            language_code="en", device=device)
+            language_code=video_language_code, device=device)
         result_aligned = whisperx.align(
             result["segments"], model_a, metadata, "../media_hub/spleeter/{data.ytId}_vocals.wav", device)
         aligned_segments = result_aligned["segments"]
@@ -105,10 +114,10 @@ def test(request):
         # TO-BE-DONE
 
         # MERGE THE AUDIO WITH VIDEO
-        input_video = ffmpeg.input("../media_hub/video/{ytId}.mp4")
+        input_video = ffmpeg.input("../media_hub/video/{data.ytId}.mp4")
         input_audio = ffmpeg.input(
-            "../media_hub/spleeter/{ytId}_accompaniment.wav")
-        with ffmpeg.concat(input_video, input_audio, v=1, a=1).output("../media_hub/combined/{ytId}_finished.mp4"):
+            "../media_hub/spleeter/{data.ytId}_accompaniment.wav")
+        with ffmpeg.concat(input_video, input_audio, v=1, a=1).output("../media_hub/combined/{data.ytId}_finished.mp4"):
             print("Merged the audio with video")
 
         # MERGE THE VIDEO WITH SRT

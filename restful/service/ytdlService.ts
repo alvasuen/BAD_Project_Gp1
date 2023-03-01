@@ -10,7 +10,7 @@ export class YtdlService {
         .insert({
             songs_name: title,
             yt_id:ytId,
-            image:thumbnail})
+            image:thumbnail.url})
         .into("songs")
 
         return {success:true};
