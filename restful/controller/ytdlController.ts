@@ -3,7 +3,7 @@ import ytdl from "ytdl-core";
 // import { YtdlService } from "../service/ytdlService";
 import { createWriteStream } from "fs";
 import { errorHandler } from "../../error";
-import fetch from "cross-fetch";
+// import fetch from "cross-fetch";
 
 export class YtdlController {
   // constructor(private ytdlService: YtdlService) {
@@ -19,7 +19,7 @@ export class YtdlController {
         console.log(data);
 
         // console.log(data.videoDetails.thumbnails.at(-1));
-        
+
         //download audio only
         ytdl(URL as string, {
           filter: "audioonly",
@@ -41,7 +41,7 @@ export class YtdlController {
         );
 
         // await this.ytdlService.newSong(data.videoDetails.videoId, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-        
+
         // pass video data to sanic server
         // fetch("http://127.0.0.1:8080/sanicytdl", {
         //   method: "POST",
@@ -55,13 +55,13 @@ export class YtdlController {
         //     language: language,
         //   })
         // }).then(()=>{
-          res.status(200).json({success:true});
+        res.status(200).json({ success: true });
         // })
 
       });
     } catch (err) {
-       console.log(err);
-       errorHandler(err, req, res);
+      console.log(err);
+      errorHandler(err, req, res);
     }
   };
 }
