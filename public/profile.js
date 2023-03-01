@@ -21,11 +21,11 @@ function createSongBox(json) {
     sliderRes.classList.add("slider");
     sliderRes.classList.add("responsive");
 
-    let readMore = document.createElement("div");
-    readMore.classList.add("readmore");
-    let textRead = "read more";
-    let read = document.createTextNode(textRead);
-    readMore.appendChild(read);
+    // let readMore = document.createElement("div");
+    // readMore.classList.add("readmore");
+    // let textRead = "read more";
+    // let read = document.createTextNode(textRead);
+    // readMore.appendChild(read);
 
     console.log(
       "profilePlaylistSongs.length",
@@ -54,7 +54,7 @@ function createSongBox(json) {
     }
     profilePlaylist.appendChild(playlistTitle);
     profilePlaylist.appendChild(sliderRes);
-    profilePlaylist.appendChild(readMore);
+    // profilePlaylist.appendChild(readMore);
     mainContainer.appendChild(profilePlaylist);
   }
 }
