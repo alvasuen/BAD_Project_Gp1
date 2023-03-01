@@ -6,7 +6,17 @@ sendBtn.addEventListener("click", async () => {
   console.log(URLinput.value);
   console.log(languageSelect.value);
   // sendURL(URLinput.value);
-
+  if(URLinput.value ==null||
+    URLinput.value ==undefined ||
+    URLinput.value == NaN|| 
+    languageSelect.value ==null||
+    languageSelect.value ==undefined||
+    languageSelect.value ==NaN||
+    languageSelect.value =="notChosen"
+    ){
+    alert("Please make sure you have fill in the link and select the language!")
+    return;
+  }else{
   try{
     const res = await fetch("/videos/download", {
         method: 'POST',
@@ -26,4 +36,7 @@ sendBtn.addEventListener("click", async () => {
   }catch (err){
     console.log(err)
   }
+}
 });
+
+
