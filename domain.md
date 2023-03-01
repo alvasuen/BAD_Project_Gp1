@@ -1,4 +1,7 @@
+# 請注意‼️ 段片僅供參考 本人並未完全跟足  一切後果本人並不負責
 # Macbook 
+# (Create database) i= write,  Esc = quit,  :w= save,  :q=quit
+# 切記份project唔好係ssh入面
 條key name唔好有空格
 下載ssh key 後，copy
 open terminal 
@@ -38,3 +41,42 @@ Title 自己改名 (我改aws)
 Paste 串碼入key
 按 add
 輸入Github密碼
+成功後去返自己Github主頁
+去返自己連左EC2度Git clone (要明白而家要做既係自己係EC2開左個新電腦，所以由頭裝一次自己要安裝既野)
+嘗試npm install
+會話裝唔到
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+成功後
+sudo apt-get install -y nodejs
+成功後
+node -v  睇下自己有冇裝node
+npm install
+裝後 開一份新既.env
+touch .env
+裝 postgresql
+sudo apt-get install build-essential nginx htop git curl postgresql-contrib
+sudo su postgres
+輸入後要留意段字，如果前頭顯示 Postgres，代表成功入到Postgres
+psql  入去Postgres
+User 名跟返你返EC2 個名
+CREATE USER ubuntu WITH PASSWORD 'ubuntu';
+幫user 轉做 SuperUser
+ALTER ROLE ubuntu with SUPERUSER;
+\du  留意自己起左user未
+睇下自己而家係咩User
+SELECT current_user;
+唔岩就轉返ubuntu user
+set role ubuntu;
+set左穩陣啲睇多次
+SELECT current_user;
+先開一個 database叫 ubuntu
+# 如果你份project有人要跟返.env既名，咁你就要跟返原本名，佢地啱洗就冇問題，我開一個為組員
+create database 名
+create USER User名 with PASSWORD '密碼';
+ALTER ROLE USER名 WITH SUPERUSER;
+select current_user;
+set role USER名;
+select current_user;
+轉哂成功後
+出返去將所有野轉入去EC2
+裝yarn
