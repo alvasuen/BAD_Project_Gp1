@@ -23,11 +23,12 @@ function render_topBar(userName, userId) {
     let userContent = document.createTextNode(userName);
     let user_name = document.querySelector(".username");
     user_name.appendChild(userContent);
+
+
+    reg_logout_event();
     user_name.addEventListener("click", async () => {
       location.href = `./profile.html?id=${userId}`;
     });
-
-    reg_logout_event();
   } else {
     topBarNtn.innerHTML = `<button id="user">Login</button>`;
     reg_user_event();
@@ -40,11 +41,14 @@ function reg_logout_event() {
       body: "",
     });
     let json = await res.json();
+    console.log(json)
     if (json.isErr) {
       // to do something
+
     } else {
       isLogin = json.isLogin;
-      render_topBar();
+      window.location.href = "/";
+      // render_topBar();
     }
   });
 }

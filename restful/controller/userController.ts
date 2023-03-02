@@ -85,6 +85,7 @@ export class UserController {
                 isLogin: false,
                 isErr: false
             })
+
         } catch (err) {
             errorHandler(err, req, res)
         }

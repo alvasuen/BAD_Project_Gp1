@@ -9,6 +9,7 @@ async function main() {
 
   render_topBar(json.username, json.users_id);
   render_rightContainer();
+  reg_logout_event();
 }
 function render_rightContainer() {
   document.querySelector(".right_con.home").classList.add("show");
