@@ -6,6 +6,7 @@ import datetime
 import os
 import whisperx
 import ffmpeg
+import asyncio
 
 
 print("1")
@@ -178,8 +179,6 @@ def generate_ass (ytId):
 
 
 
-import asyncio
-
 job_status = {}
 
 async def background_runner(request, job_id):
@@ -274,6 +273,7 @@ async def background_runner(request, job_id):
 
 import time
 
+
 @app.post("/add_job")
 def add_job(request):
     ts = time.time()
@@ -296,97 +296,6 @@ def get_job(request):
 
     return json({ "job_done" : task.done(), "job_status" : job_status[job_id] })
 
-# @app.post("/sanicytdl")
-# def test(request):
-#     try:
-#         data = request.json
-#         ytId = data["ytId"]
-#         print(ytId)
-#         print(data["language"])
-
-#         # Step1: vocal and accompaniment separation
-#         subprocess.Popen(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
-#         print("separation done!")
-
-
-#         # old_name2 = r'../media_hub/spleeter/accompaniment.wav'
-#         # new_name2 = r'../media_hub/spleeter/{ytId}_accompaniment.wav'
-#         # os.rename(old_name2, new_name2)
-#         # print('Amended name of the accompaniment file')
-
-#         # open a folder in S3 (name: the video ID)
-#         # save the video file in S3
-#         # save the vocal file in S3
-
-        
-        
-
-#         # Gen whisper lyrics subtitle
-#         device = "cpu"
-        
-#         if (data["language"] == "English"):
-#             video_language = "English"
-#             video_language_code = "en"
-#             # model=models[0]
-#             print("English123")
-#         elif (data["language"] == "Mandarin"):
-#             video_language = "Chinese"
-#             video_language_code = "zh"
-#             # model=models[1]
-#             print("Mandarin123")
-
-#         print("got video language")
-
-#         result = model.transcribe(
-#             f"../media_hub/spleeter/{ytId}/vocals.wav", fp16=False, language=video_language)
-        
-#         print("result run")
-
-#         model_a, metadata = whisperx.load_align_model(
-#             language_code=video_language_code, device=device)
-        
-#         print("model_a, metadata ran")
-
-#         result_aligned = whisperx.align(
-#             result["segments"], model_a, metadata, f"../media_hub/spleeter/{ytId}/vocals.wav", device)
-        
-#         print("result_aligned ran")
-
-#         aligned_segments = result_aligned["segments"]
-#         aligned_word_segments = result_aligned["word_segments"]
-
-#         # generate sentence-level srt
-#         generate_sentence_srt(data, aligned_segments)
-
-#         print("generated sentence level srt")
-
-#         # generate word-level srt
-#         generate_word_srt(data, aligned_word_segments)
-#         print("generated word-level subtitles")
-
-#         # save the srt files in S3
-#         # TO-BE-DONE
-
-#         # MERGE THE AUDIO WITH VIDEO
-#         input_video = ffmpeg.input("../media_hub/video/{}.mp4".format(ytId))
-#         input_audio = ffmpeg.input(
-#             "../media_hub/spleeter/{}_accompaniment.wav".format(ytId))
-#         with ffmpeg.concat(input_video, input_audio, v=1, a=1).output(f"../media_hub/combined/{ytId}_finished.mp4"):
-#             print("Merged the audio with video")
-
-#         # MERGE THE VIDEO WITH SRT
-#         srtFile = "../media_hub/SrtFile/{}.srt".format(ytId)
-#         input_video1 = "../media_hub/combined/{}.mp4".format(ytId)
-#         # TO-BE-DONE
-
-#         # save the finished video to S3
-#         # TO-BE-DONE
-
-#         return json({"success": "true"})
-
-#     except:
-#         print("Attempt fail!")
-#         return json({"success": "false"})
 
 
 if __name__ == '__main__':
