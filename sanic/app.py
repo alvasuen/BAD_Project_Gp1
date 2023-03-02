@@ -8,12 +8,16 @@ import whisperx
 import ffmpeg
 
 
+print("1")
 app = Sanic("Karaoke")
 
-model_en = whisperx.load_model("medium.en")
-model_zh = whisperx.load_model("medium.zh")
+# model_en = whisperx.load_model("medium.en")
+# model_zh = whisperx.load_model("large")
 
-models = [model_en, model_zh]
+# models = [model_en, model_zh]
+
+model = whisperx.load_model("medium")
+print("model loaded")
 
 
 def generate_sentence_srt(data, aligned_segments):
@@ -26,10 +30,12 @@ def generate_sentence_srt(data, aligned_segments):
         text = segment['text']
         segmentId = count
         count += 1
-        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n\n"
+        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
+
+        a= data["ytId"]
 
         srtFilename = os.path.join(
-            "../media_hub/SrtFiles", f"{data.ytId}_sentence.srt")
+            "../media_hub/SrtFiles", f"{a}_sentence.srt")
         with open(srtFilename, 'a', encoding='utf-8') as srtFile:
             srtFile.write(segment)
 
@@ -47,82 +53,320 @@ def generate_word_srt(data, aligned_word_segments):
         text = segment['text']
         segmentId = count
         count += 1
-        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n\n"
+        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
+
+        a= data["ytId"]
 
         srtFilename = os.path.join(
-            "../media_hub/SrtFiles", f"{data.ytId}_word.srt")
+            "../media_hub/SrtFiles", f"{a}_word.srt")
         with open(srtFilename, 'a', encoding='utf-8') as srtFile:
             srtFile.write(segment)
 
     return srtFilename
 
 
+def generate_ass (ytId):
+    print("test generate ass function")
+    with open(f"../media_hub/SrtFiles/{ytId}_sentence.srt", "r", encoding="utf-8") as f:
+        sentenceLines = f.read().split("\n")
+
+    # Read the word-level .srt file
+    with open(f"../media_hub/SrtFiles/{ytId}_word.srt", "r", encoding="utf-8") as f:
+        wordLines = f.read().split("\n")
+
+    assLines = []
+    assLines.append("[Script Info]")
+    assLines.append("ScriptType: v4.00+")
+    assLines.append("PlayResX: 384")
+    assLines.append("PlayResY: 288")
+    assLines.append("ScaledBorderAndShadow: yes")
+    assLines.append("")
+    assLines.append("[V4+ Styles]")
+    assLines.append(
+    "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding"
+    )
+    assLines.append(
+    "Style: Default,Arial,18,&Hffffff,&Hff66ff,&H0,&H0,0,0,0,0,100,100,0,0,1,1,0,2,10,10,10,0"
+    )
+    assLines.append("[Events]")
+    assLines.append(
+    "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"
+    )
+
+    # mark the first word of every sentence
+    sentenceWordCount = []
+    count = 0
+    sentenceWordCount.append(1)
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(' ')
+        count += len(words)
+        sentenceWordCount.append(count + 1)
+    sentenceWordCount.pop()
+
+    wordDuration = []
+    word = []
+
+    for i in range(2,len(wordLines),4):
+    # count first word of every sentence
+        wordCount = int(wordLines[i - 2])
+        if wordCount in sentenceWordCount:
+            msStart = int(wordLines[i - 1][9:11])
+            sStart = int(wordLines[i - 1][6:8]) * 100
+            mStart = int(wordLines[i - 1][3:5]) * 60 * 100
+
+            wordStart = msStart + sStart + mStart
+
+            msEnd = int(wordLines[i - 1][26:28])
+            sEnd = int(wordLines[i - 1][23:25]) * 100
+            mEnd = int(wordLines[i - 1][20:22]) * 60 * 100
+
+            wordEnd = msEnd + sEnd + mEnd
+            duration = wordEnd - wordStart
+            wordDuration.append(duration)
+            word.append(wordLines[i])
+        else:
+            msStart = int(wordLines[i - 5][26:28])
+            sStart = int(wordLines[i - 5][23:25]) * 100
+            mStart = int(wordLines[i - 5][20:22]) * 60 * 100
+
+            wordStart = msStart + sStart + mStart
+
+            msEnd = int(wordLines[i - 1][26:28])
+            sEnd = int(wordLines[i - 1][23:25]) * 100
+            mEnd = int(wordLines[i - 1][20:22]) * 60 * 100
+
+            wordEnd = msEnd + sEnd + mEnd
+            duration = wordEnd - wordStart
+            wordDuration.append(duration)
+            word.append(wordLines[i])
+
+    arr = []
+    for i in range(0,len(sentenceLines),1):
+        # Split the sentence line into fields
+        sentenceFields = sentenceLines[i].split(" ")
+        arr.append(sentenceFields)
+
+    str1 = ""
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(" ")
+        for m in range(0,len(words),1): 
+            # loop every sentenceLines every lyrics
+            str1 += arr[i][m] + ' '
+
+    singleWord = str1.split(" ")
+
+    count2 = 0
+    sentenceWordLine = ""
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(" ")
+        for m in range(0,len(words),1):
+
+            sentenceWordLine += "{\\kf" + str(wordDuration[count2])+ "}"
+            sentenceWordLine += singleWord[count2] + " "
+            count2 = count2 + 1
+
+        assLine = "Dialogue: 0," + sentenceLines[i-1][0:11].replace(",",".") + "," + sentenceLines[i-1][17:28].replace(",",".") + ",Default,,0000,0000,0000,karaoke," + sentenceWordLine
+        assLines.append(assLine)
+        sentenceWordLine = ""
+
+    # Write the .ass file
+    with open(f"../media_hub/SrtFiles/{ytId}.ass", "w", encoding="utf-8") as f:
+        f.write( "\n".join(assLines))
+    # f = open("Video.mp4.ass", assLines.join("\n"), "utf-8", "w")
+    print(assLines)
+
+
+
+
+import asyncio
+
+job_status = {}
+
+async def background_runner(request, job_id):
+    try:
+        job_status[job_id] = 1
+        # Step1:
+        data = request.json
+        ytId = data["ytId"]
+        print(ytId)
+        print(data["language"])
+
+        job_status[job_id] = 2
+        # Step2: vocal and accompaniment separation
+        subprocess.call(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
+        print("separation done!")
+
+        job_status[job_id] = 3
+        # Step3:
+        device = "cpu"
+        
+        if (data["language"] == "English"):
+            video_language = "English"
+            video_language_code = "en"
+            # model=models[0]
+            print("English123")
+        elif (data["language"] == "Mandarin"):
+            video_language = "Chinese"
+            video_language_code = "zh"
+            # model=models[1]
+            print("Mandarin123")
+
+        print("got video language")
+
+        result = model.transcribe(
+            f"../media_hub/audio/{ytId}.mp3", fp16=False, language=video_language)
+        
+        job_status[job_id] = 4
+        # Step4:
+        model_a, metadata = whisperx.load_align_model(
+            language_code=video_language_code, device=device)
+        
+        print("model_a, metadata ran")
+
+        result_aligned = whisperx.align(
+            result["segments"], model_a, metadata, f"../media_hub/audio/{ytId}.mp3", device)
+        
+        print("result_aligned ran")
+
+        aligned_segments = result_aligned["segments"]
+        aligned_word_segments = result_aligned["word_segments"]
+
+        print((aligned_segments, aligned_word_segments))
+
+        job_status[job_id] = 5
+         # generate sentence-level srt
+        generate_sentence_srt(data, aligned_segments)
+        print("generated sentence level srt")
+
+        # generate word-level srt
+        generate_word_srt(data, aligned_word_segments)
+        print("generated word-level subtitles")
+
+        job_status[job_id] = 6
+        #Merge the video and the audio
+        # input_video = ffmpeg.input("../media_hub/video/{}.mp4".format(ytId))
+        # input_audio = ffmpeg.input(
+        #     "../media_hub/spleeter/{}_accompaniment.wav".format(ytId))
+        # with ffmpeg.concat(input_video, input_audio, v=1, a=1).output(f"../media_hub/combined/{ytId}_finished.mp4"):
+        #     print("Merged the audio with video")
+
+        # job_status[job_id] = 7
+        generate_ass (ytId)
+
+        job_status[job_id] = 8
+
+
+        return json({"success": "true"})
+
+
+    except Exception as e:
+        print(e)
+        return json({"success": "false"})
+
+import time
+
+@app.post("/add_job")
+def add_job(request):
+    ts = time.time()
+    job_id = str(ts)
+
+    job_status[job_id] = 0
+    task = request.app.add_task(background_runner(request, job_id = job_id), name = job_id)
+
+    return json({ "job_id" : job_id })
+
+@app.post("/get_job")
+def get_job(request):
+
+    data = request.json
+
+    job_id = data["job_id"]
+
+    task = request.app.get_task(job_id)
+
+    return json({ "job_done" : task.done(), "job_status" : job_status[job_id] })
+
 @app.post("/sanicytdl")
 def test(request):
     try:
         data = request.json
-        # print(data.ytId)
+        ytId = data["ytId"]
+        print(ytId)
+        print(data["language"])
 
-        #Step1: vocal and accompaniment separation
-        with subprocess.Popen(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '{data.ytId}.mp3'], stdout=subprocess.PIPE) as proc:
-            print(proc.stdout.read())
+        # Step1: vocal and accompaniment separation
+        subprocess.Popen(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
+        print("separation done!")
 
-        old_name1 = r'..\media_hub\spleeter\vocals.wav'
-        new_name1 = r'..\media_hub\spleeter\{data.ytId}_vocals.wav'
-        os.rename(old_name1, new_name1)
-        print('Amended name of the vocal file')
 
-        old_name2 = r'..\media_hub\spleeter\accompaniment.wav'
-        new_name2 = r'..\media_hub\spleeter\{data.ytId}_accompaniment.wav'
-        os.rename(old_name2, new_name2)
-        print('Amended name of the accompaniment file')
+        # old_name2 = r'../media_hub/spleeter/accompaniment.wav'
+        # new_name2 = r'../media_hub/spleeter/{ytId}_accompaniment.wav'
+        # os.rename(old_name2, new_name2)
+        # print('Amended name of the accompaniment file')
 
         # open a folder in S3 (name: the video ID)
         # save the video file in S3
         # save the vocal file in S3
 
+        
+        
+
         # Gen whisper lyrics subtitle
         device = "cpu"
-
-        if (data.language == "English"):
+        
+        if (data["language"] == "English"):
             video_language = "English"
             video_language_code = "en"
-            model=models[0]
-        elif (data.languae == "mandarin"):
+            # model=models[0]
+            print("English123")
+        elif (data["language"] == "Mandarin"):
             video_language = "Chinese"
             video_language_code = "zh"
-            model=models[1]
+            # model=models[1]
+            print("Mandarin123")
+
+        print("got video language")
 
         result = model.transcribe(
-            "../media_hub/spleeter/{data.ytId}_vocals.wav", fp16=False, language=video_language)
+            f"../media_hub/spleeter/{ytId}/vocals.wav", fp16=False, language=video_language)
+        
+        print("result run")
+
         model_a, metadata = whisperx.load_align_model(
             language_code=video_language_code, device=device)
+        
+        print("model_a, metadata ran")
+
         result_aligned = whisperx.align(
-            result["segments"], model_a, metadata, "../media_hub/spleeter/{data.ytId}_vocals.wav", device)
+            result["segments"], model_a, metadata, f"../media_hub/spleeter/{ytId}/vocals.wav", device)
+        
+        print("result_aligned ran")
+
         aligned_segments = result_aligned["segments"]
         aligned_word_segments = result_aligned["word_segments"]
 
         # generate sentence-level srt
         generate_sentence_srt(data, aligned_segments)
-        print("Generated sentence-level subtitles")
+
+        print("generated sentence level srt")
 
         # generate word-level srt
         generate_word_srt(data, aligned_word_segments)
-        print("Generated word-level subtitles")
+        print("generated word-level subtitles")
 
         # save the srt files in S3
         # TO-BE-DONE
 
         # MERGE THE AUDIO WITH VIDEO
-        input_video = ffmpeg.input("../media_hub/video/{data.ytId}.mp4")
+        input_video = ffmpeg.input("../media_hub/video/{}.mp4".format(ytId))
         input_audio = ffmpeg.input(
-            "../media_hub/spleeter/{data.ytId}_accompaniment.wav")
-        with ffmpeg.concat(input_video, input_audio, v=1, a=1).output("../media_hub/combined/{data.ytId}_finished.mp4"):
+            "../media_hub/spleeter/{}_accompaniment.wav".format(ytId))
+        with ffmpeg.concat(input_video, input_audio, v=1, a=1).output(f"../media_hub/combined/{ytId}_finished.mp4"):
             print("Merged the audio with video")
 
         # MERGE THE VIDEO WITH SRT
-        srtFile = "../media_hub/SrtFile/{data.ytId}.srt"
-        input_video1 = "../media_hub/combined/{data.ytId}.mp4"
+        srtFile = "../media_hub/SrtFile/{}.srt".format(ytId)
+        input_video1 = "../media_hub/combined/{}.mp4".format(ytId)
         # TO-BE-DONE
 
         # save the finished video to S3
