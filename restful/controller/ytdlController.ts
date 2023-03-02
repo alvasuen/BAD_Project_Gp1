@@ -4,8 +4,8 @@ import { YtdlService } from "../service/ytdlService";
 import { createWriteStream} from "fs";
 // import fs from "fs";
 import { errorHandler } from "../../error";
-import fetch from "cross-fetch";
-const youtubeMp3Converter = require('youtube-mp3-converter')
+// import fetch from "cross-fetch";
+// const youtubeMp3Converter = require('youtube-mp3-converter')
 
 
 export class YtdlController {
@@ -22,10 +22,10 @@ export class YtdlController {
         console.log(data);
 
         // creates Download function
-        const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
-        await convertLinkToMp3(URL, {
-        title: `${data.videoDetails.videoId}`
-    })
+        // const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
+        // await convertLinkToMp3(URL, {
+        //   title: `${data.videoDetails.videoId}`
+        // })
 
         //download video only
         ytdl(URL as string, {
@@ -38,22 +38,21 @@ export class YtdlController {
         );
 
         await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-        // let queue_id = await this.ytdlService.addQueue(data.videoDetails.title, data.videoDetails.videoId, URL)
         
           fetch("http://127.0.0.1:8080/add_job", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body:JSON.stringify({
+          body: JSON.stringify({
             ytId: data.videoDetails.videoId,
             language: language,
           })
-        }).then(()=>{
-          res.status(200).json({success:true});
+        }).then(() => {
+          res.status(200).json({ success: true });
           console.log("fetch success!")
         })
-        
+
       });
     } catch (err) {
       console.log(err);
