@@ -38,7 +38,7 @@ body {
   /* position: fixed; */
 }
 
-.username {
+.pro-username {
   color: white;
   position: relative;
   bottom: 275px;
@@ -81,8 +81,14 @@ body {
 .title {
   color: white;
   width: 100%;
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  margin-bottom: 5px;
   font-size: 20px;
+  text-transform: capitalize;
+}
+
+.songname {
+  text-transform: capitalize;
 }
 
 .songText {
