@@ -29,9 +29,6 @@ export async function seed(knex: Knex): Promise<void> {
     { artist_name: "Singer" },
     { artist_name: "Coldplay" },
     { artist_name: "五月天" },
-    { artist_name: "Singer" },
-    { artist_name: "Coldplay" },
-    { artist_name: "五月天" },
   ]);
 
   await knex("songs").insert([
@@ -62,17 +59,9 @@ export async function seed(knex: Knex): Promise<void> {
     },
   ]);
 
-  await knex("categories").insert([
-    { area: "TaiWan" },
-    { area: "UK" },
-  ]);
+  await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
   await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
   await knex("categories_songs").insert([
-    { songs_id: 1, categories_id: 1 },
-    { songs_id: 2, categories_id: 2 },
-    { songs_id: 3, categories_id: 2 },
-    { songs_id: 4, categories_id: 2 },
-    { songs_id: 5, categories_id: 2 },
     { songs_id: 1, categories_id: 1 },
     { songs_id: 2, categories_id: 2 },
     { songs_id: 3, categories_id: 2 },
@@ -84,21 +73,9 @@ export async function seed(knex: Knex): Promise<void> {
     { playlists_name: "playlist1", users_id: 1 },
     { playlists_name: "Number2 Playlist", users_id: 1 },
     { playlists_name: "My Favo", users_id: 2 },
-    { playlists_name: "playlist1", users_id: 1 },
-    { playlists_name: "Number2 Playlist", users_id: 1 },
-    { playlists_name: "My Favo", users_id: 2 },
   ]);
 
   await knex("playlists_songs").insert([
-    { playlists_id: 1, songs_id: 1 },
-    { playlists_id: 1, songs_id: 2 },
-    { playlists_id: 1, songs_id: 4 },
-    { playlists_id: 1, songs_id: 5 },
-    { playlists_id: 1, songs_id: 3 },
-    { playlists_id: 2, songs_id: 1 },
-    { playlists_id: 2, songs_id: 5 },
-    { playlists_id: 3, songs_id: 3 },
-    { playlists_id: 3, songs_id: 2 },
     { playlists_id: 1, songs_id: 1 },
     { playlists_id: 1, songs_id: 2 },
     { playlists_id: 1, songs_id: 4 },
