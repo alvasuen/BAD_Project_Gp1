@@ -2,8 +2,15 @@ body {
   color: white;
 }
 
-.playlist-page-container {
+/* .playlist-page-container {
   margin-left: 240px;
+} */
+.playlist-body {
+  margin-left: 2.5%;
+}
+
+.playlist {
+  display: flex;
 }
 
 .playlist-header {

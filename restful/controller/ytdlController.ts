@@ -4,20 +4,24 @@ import { YtdlService } from "../service/ytdlService";
 import { createWriteStream} from "fs";
 import fs from "fs";
 import { errorHandler } from "../../error";
+<<<<<<< HEAD
 import fetch from "cross-fetch";
 const youtubeMp3Converter = require('youtube-mp3-converter')
 
+=======
+// import fetch from "cross-fetch";
+>>>>>>> ec3d7aa959b1ff46982bee43e6eda11087de6b8c
 
 export class YtdlController {
   constructor(private ytdlService: YtdlService) {
-    this.ytdlService = ytdlService
+    this.ytdlService = ytdlService;
   }
 
   downloadVideo = (req: Request, res: Response) => {
     try {
       let URL = req.body.url;
-      let language = req.body.language
-      console.log(req.body)
+      let language = req.body.language;
+      console.log(req.body);
       ytdl.getInfo(URL as string).then(async (data) => {
         console.log(data);
 
@@ -42,7 +46,7 @@ export class YtdlController {
           fetch("http://127.0.0.1:8080/sanicytdl", {
           method: "POST",
           headers: {
-            "Content-Type":"application/json"
+            "Content-Type": "application/json",
           },
           body:JSON.stringify({
             ytId: data.videoDetails.videoId,
@@ -55,10 +59,8 @@ export class YtdlController {
         
       });
     } catch (err) {
-       console.log(err);
-       errorHandler(err, req, res);
+      console.log(err);
+      errorHandler(err, req, res);
     }
   };
 }
-
-

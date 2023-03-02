@@ -2,6 +2,7 @@
 # Macbook 
 # (Create database) i= write,  Esc = quit,  :w= save,  :q=quit
 # 切記份project唔好係ssh入面
+
 條key name唔好有空格
 下載ssh key 後，copy
 open terminal 
@@ -70,7 +71,7 @@ set role ubuntu;
 set左穩陣啲睇多次
 SELECT current_user;
 先開一個 database叫 ubuntu
-# 如果你份project有人要跟返.env既名，咁你就要跟返原本名，佢地啱洗就冇問題，我開一個為組員
+# 如果你份project有人要跟返.env既名，咁你就要跟返原本名，佢地啱洗就冇問題，我為組員方便開一個
 create database 名
 create USER User名 with PASSWORD '密碼';
 ALTER ROLE USER名 WITH SUPERUSER;
@@ -80,3 +81,9 @@ select current_user;
 轉哂成功後
 出返去將所有野轉入去EC2
 裝yarn
+# 如果成功連線，想退出時
+exit
+
+# 如果TS 擺好哂係一個叫src既folder，就可以
+yarn run build (將所有TS file change to js file)
+如果 ts file冇執好，唯有開一個index.js黎連上去黎踢著server，因為上面只食js

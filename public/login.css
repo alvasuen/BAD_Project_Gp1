@@ -1,37 +1,42 @@
+body {
+  color: rgb(255, 255, 255);
+}
+
 .form {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    width: -webkit-fill-available;
-    position: fixed;
-    height: 50%;
+  /* background-color: white; */
+  background-color: #101010;
+  display: flex;
+  justify-content: center;
+  width: -webkit-fill-available;
+  position: fixed;
+  height: 50%;
 }
 
 #login-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
 }
 
 .login {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .login a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .login a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .input-group input {
-    width: 100%;
+  width: 100%;
 }
