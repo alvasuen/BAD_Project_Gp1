@@ -4,8 +4,8 @@ import { YtdlService } from "../service/ytdlService";
 import { createWriteStream} from "fs";
 // import fs from "fs";
 import { errorHandler } from "../../error";
-// import fetch from "cross-fetch";
-// const youtubeMp3Converter = require('youtube-mp3-converter')
+import fetch from "cross-fetch";
+const youtubeMp3Converter = require('youtube-mp3-converter')
 
 
 export class YtdlController {
@@ -22,10 +22,10 @@ export class YtdlController {
         console.log(data);
 
         // creates Download function
-        // const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
-        // await convertLinkToMp3(URL, {
-        //   title: `${data.videoDetails.videoId}`
-        // })
+        const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
+        await convertLinkToMp3(URL, {
+          title: `${data.videoDetails.videoId}`
+        })
 
         //download video only
         ytdl(URL as string, {
