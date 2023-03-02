@@ -45,7 +45,7 @@ class UserService {
 
   async getUser(userId: number): Promise<{ username: string; email: string }> {
     let [result] = await knex("users")
-      .select("username", "email")
+      .select("username", "email", "users_id")
       .where("users_id", userId);
 
     return result;

@@ -141,14 +141,23 @@ body {
 }
 
 .user-status {
-  margin-left: 45%;
+  margin-left: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.user-name {
-  margin-top: 10px;
+.username {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.username:hover {
+  color: var(--text-color);
+}
+
+.username:active {
+  color: var(--p-color);
 }
 
 button {

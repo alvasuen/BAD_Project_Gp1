@@ -4,9 +4,10 @@ async function main() {
   let json = await res.json();
 
   isLogin = json.isLogin;
-  console.log(json, "6");
+  console.log(json);
 
-  render_topBar();
+  render_topBar(json.username, json.users_id);
+  // render_topBar(json.username);
   render_rightContainer();
 }
 function render_rightContainer() {
@@ -14,14 +15,21 @@ function render_rightContainer() {
   document.querySelector(".right_con.playlist").classList.remove("show");
 }
 
-function render_topBar() {
+function render_topBar(userName, userId) {
   let topBarNtn = document.querySelector(".user-name");
   if (isLogin) {
-    topBarNtn.innerHTML = /* html */ `<span>Username</span>
+    topBarNtn.innerHTML = /* html */ `<span class="username"></span>
         <button id="logout">Logout</button>`;
+    let userContent = document.createTextNode(userName);
+    let user_name = document.querySelector(".username");
+    user_name.appendChild(userContent);
+    user_name.addEventListener("click", async () => {
+      location.href = `./profile.html?id=${userId}`;
+    });
+
     reg_logout_event();
   } else {
-    topBarNtn.innerHTML = `<button id="user">User</button>`;
+    topBarNtn.innerHTML = `<button id="user">Login</button>`;
     reg_user_event();
   }
 }

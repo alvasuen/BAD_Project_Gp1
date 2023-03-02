@@ -24,14 +24,10 @@ document.querySelector(
     <span>liked songs</span>
 </div>
 
-<div class="page my-profile hide">
+</div>
+<!-- <div class="page my-profile hide">
     <ion-icon name="duplicate"></ion-icon>
     <span>profile</span>
-</div>
-</div>
-<!-- <div class="myProfile-box">
-    <ion-icon name="duplicate"></ion-icon>
-    <span class="myProfile">profile</span>
 </div> -->
 
 <!-- <div class="language">中文</div> -->`;
@@ -45,27 +41,6 @@ document.querySelector(
 //     console.log(html)
 //     right_con.innerHTML = html
 // }
-
-let myProfile = document.querySelector(".my-profile");
-myProfile.addEventListener("click", async function () {
-  let res = await fetch("/getUse");
-  let json = await res.json();
-  console.log(json);
-  if (json.isLogin) {
-    location.href = "./profile.html";
-  } else {
-    location.href = "./login.html";
-  }
-});
-
-window.onload = async (event) => {
-  //show username and icon in header
-  let res = await fetch("/getUse");
-  let json = await res.json();
-  if (json.isLogin) {
-    document.querySelector(".my-profile").classList.remove("hide");
-  }
-};
 
 document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   e.preventDefault();
