@@ -5,6 +5,7 @@ import { createWriteStream} from "fs";
 import fs from "fs";
 import { errorHandler } from "../../error";
 import fetch from "cross-fetch";
+const youtubeMp3Converter = require('youtube-mp3-converter')
 
 
 export class YtdlController {
@@ -19,20 +20,16 @@ export class YtdlController {
       console.log(req.body)
       ytdl.getInfo(URL as string).then(async (data) => {
         console.log(data);
-        
-        //download audio only
-        ytdl(URL as string, {
-          filter: "audioonly",
-          quality: "highestaudio"
-        }).pipe(
-          createWriteStream(
-            `./media_hub/audio/${data.videoDetails.videoId}.mp3`
-          )
-        );
+
+        // creates Download function
+        const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
+        await convertLinkToMp3(URL, {
+        title: `${data.videoDetails.videoId}`
+    })
 
         //download video only
         ytdl(URL as string, {
-          filter: "audioandvideo",
+          filter: "videoonly",
           quality: "highestvideo",
         }).pipe(
           createWriteStream(
@@ -42,30 +39,19 @@ export class YtdlController {
 
         await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
         
-        // pass video data to sanic server
-        // function checkFileExist (){
-        //   if (!fs.existsSync(`./media_hub/audio/${data.videoDetails.videoId}.mp3`) || !fs.existsSync(`./media_hub/video/${data.videoDetails.videoId}.mp4`)){
-        //     setTimeout(checkFileExist, 10000);
-        //   }else{
-        //     fetch("http://127.0.0.1:8080/sanicytdl", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type":"application/json"
-        //   },
-        //   body:JSON.stringify({
-        //     thumbnail: data.videoDetails.thumbnails.at(-1),
-        //     ytId: data.videoDetails.videoId,
-        //     name: data.videoDetails.title,
-        //     language: language,
-        //   })
-        // }).then(()=>{
-        //   res.status(200).json({success:true});
-        // })
-        //   }
-        // }
-        
-        // checkFileExist ()
-
+          fetch("http://127.0.0.1:8080/sanicytdl", {
+          method: "POST",
+          headers: {
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            ytId: data.videoDetails.videoId,
+            language: language,
+          })
+        }).then(()=>{
+          res.status(200).json({success:true});
+          console.log("fetch success!")
+        })
         
       });
     } catch (err) {
