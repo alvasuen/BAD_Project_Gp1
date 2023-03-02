@@ -4,13 +4,9 @@ import { YtdlService } from "../service/ytdlService";
 import { createWriteStream} from "fs";
 import fs from "fs";
 import { errorHandler } from "../../error";
-<<<<<<< HEAD
 import fetch from "cross-fetch";
 const youtubeMp3Converter = require('youtube-mp3-converter')
 
-=======
-// import fetch from "cross-fetch";
->>>>>>> ec3d7aa959b1ff46982bee43e6eda11087de6b8c
 
 export class YtdlController {
   constructor(private ytdlService: YtdlService) {
