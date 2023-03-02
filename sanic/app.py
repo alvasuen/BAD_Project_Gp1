@@ -247,13 +247,17 @@ async def background_runner(request, job_id):
         print("ass generated")
 
         job_status[job_id] = 8
-        subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', f'ass= "../media_hub/SrtFiles/{ytId}.ass"', f'../media_hub/combined/{ytId}.mp4'])
+
+        subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
+
+        # 'ass='+'"../media_hub/SrtFiles/'+ytId+'.ass"'
+
         print("Merge video with subtitles")
 
         job_status[job_id] = 9
         os.rename(f'../media_hub/spleeter/{ytId}/vocals.wav', f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav')
         print("vocals file renamed")
-        
+
         os.rename(f'../media_hub/spleeter/{ytId}/accompaniment.wav', f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav')
         print("accompaniment file renamed")
 
