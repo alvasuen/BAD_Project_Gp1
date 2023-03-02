@@ -7,14 +7,14 @@ import { errorHandler } from "../../error";
 
 export class YtdlController {
   constructor(private ytdlService: YtdlService) {
-    this.ytdlService = ytdlService
+    this.ytdlService = ytdlService;
   }
 
   downloadVideo = (req: Request, res: Response) => {
     try {
       let URL = req.body.url;
-      let language = req.body.language
-      console.log(req.body)
+      let language = req.body.language;
+      console.log(req.body);
       ytdl.getInfo(URL as string).then(async (data) => {
         console.log(data);
 
@@ -40,23 +40,27 @@ export class YtdlController {
           )
         );
 
-        await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
+        await this.ytdlService.newSong(
+          data.videoDetails.title,
+          data.videoDetails.videoId,
+          data.videoDetails.thumbnails.at(-1)
+        );
 
         // pass video data to sanic server
         fetch("http://127.0.0.1:8080/sanicytdl", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             thumbnail: data.videoDetails.thumbnails.at(-1),
             ytId: data.videoDetails.videoId,
             name: data.videoDetails.title,
             language: language,
-          })
+          }),
         }).then(() => {
           res.status(200).json({ success: true });
-        })
+        });
       });
     } catch (err) {
       console.log(err);
@@ -64,5 +68,3 @@ export class YtdlController {
     }
   };
 }
-
-

@@ -2,7 +2,7 @@
 
 body {
   --left_con--background: #000;
-  --topBar--background: rgb(16, 16, 16);
+  --topBar--background: #101010;
   --container--background: rgb(18, 18, 18);
   --text-color: rgb(255, 255, 255);
   --p-color: rgb(178, 178, 178);
@@ -11,6 +11,23 @@ body {
 }
 
 /* The left bar  */
+.karaoke-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-between; */
+}
+
+.logo {
+  width: 30%;
+}
+
+.web-name {
+  text-transform: uppercase;
+  margin: 0px;
+  /* text-align: center; */
+}
+
 .left_con {
   background-color: var(--left_con--background);
   position: fixed;
@@ -141,7 +158,10 @@ button {
   border-radius: 20px;
 }
 
-
 .myPlayListBox.hide {
+  display: none;
+}
+
+.hide {
   display: none;
 }
