@@ -5,7 +5,9 @@
 //     await getPlaylist(id);
 //     document.querySelector('.myPlayListBox').classList.remove('hide');
 // };
-
+async function main() {
+  reg_logout_event();
+}
 async function getPlaylist(id) {
   const res = await fetch(`http://localhost:8000/playlists/all/${id}`, {
     method: "GET",
