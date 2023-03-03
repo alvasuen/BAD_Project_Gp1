@@ -18,10 +18,13 @@ export class YtdlController {
     try {
       let URL = req.body.url;
       let language = req.body.language;
-      console.log(req.body);
+      // console.log(req.body);
       ytdl.getInfo(URL as string).then(async (data) => {
-        console.log(data);
+      // console.log(data);
 
+      let status_id = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number)
+      console.log(status_id);
+        
         // creates Download function
         const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
         await convertLinkToMp3(URL, {
@@ -39,7 +42,7 @@ export class YtdlController {
         );
 
         await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-        let status_id = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number)
+        
         
         //fetch to sanic server for karaoke subtitle processing
           fetch("http://127.0.0.1:8080/add_job", {

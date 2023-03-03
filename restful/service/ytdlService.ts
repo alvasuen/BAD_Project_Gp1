@@ -23,6 +23,7 @@ export class YtdlService {
             url: url,
             status: status,
             users_id: users_id,
-        }).returning("status_id")
+        }).into("download_status")
+        .returning("status_id")
     }
 }

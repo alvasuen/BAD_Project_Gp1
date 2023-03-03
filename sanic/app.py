@@ -187,6 +187,7 @@ async def background_runner(request, job_id):
         status_id = data["status_id"]
         print(ytId)
         print(data["language"])
+        print(status_id)
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (1, status_id))
         conn.commit()
