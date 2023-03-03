@@ -3,6 +3,7 @@ import path from "path";
 import {
   playlistRoutes,
   profileRoutes,
+  statusRoutes,
   userRoutes,
   ytdlRoutes,
 } from "./restful/route/route";
@@ -24,6 +25,7 @@ app.use("/user", userRoutes);
 app.use("/playlists", playlistRoutes);
 app.use("/", profileRoutes);
 app.use("/videos", ytdlRoutes);
+app.use("/videos", statusRoutes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(publicPath, "error.html"));
