@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  background-color: black;
+  color: aliceblue;
+}
+
+.search-container {
+  margin-top: 5%;
+  margin-left: 15%;
+}
+
+.search-title {
+  font-size: 25px;
+  color: aliceblue;
+  text-transform: capitalize;
+}
+
+.search-category {
+  display: flex;
+}
+
+.category-box {
+  margin-right: 3%;
+}
+
+.bg-box,
+.singer,
+.area,
+.en,
+.zh {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: rgb(241, 134, 118);
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.area {
+  background-color: rgb(13, 100, 182);
+}
+
+.en {
+  background-color: rgb(228, 174, 37);
+}
+
+.zh {
+  background-color: rgb(3, 99, 21);
+}
+
+.singer::after {
+  position: absolute;
+  content: "singer";
+  top: 33%;
+  left: 3%;
+  font-size: 300%;
+  text-transform: uppercase;
+}
+
+.area::after {
+  position: absolute;
+  content: "area";
+  top: 33%;
+  left: 3%;
+  font-size: 300%;
+  text-transform: uppercase;
+}
+
+.en::after {
+  position: absolute;
+  content: "english";
+  top: 33%;
+  left: 3%;
+  font-size: 300%;
+  text-transform: uppercase;
+}
+
+.zh::after {
+  position: absolute;
+  content: "chinese";
+  top: 33%;
+  left: 3%;
+  font-size: 300%;
+  text-transform: uppercase;
+}
