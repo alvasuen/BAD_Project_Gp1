@@ -6,6 +6,7 @@ import { createWriteStream } from "fs";
 import { errorHandler } from "../../error";
 // import fetch from "cross-fetch";
 const youtubeMp3Converter = require('youtube-mp3-converter')
+import "../../session";
 
 
 export class YtdlController {
@@ -38,8 +39,15 @@ export class YtdlController {
         );
 
         await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
+<<<<<<< HEAD
 
         fetch("http://127.0.0.1:8080/add_job", {
+=======
+        let status_id = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number)
+        
+        //fetch to sanic server for karaoke subtitle processing
+          fetch("http://127.0.0.1:8080/add_job", {
+>>>>>>> origin
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -47,6 +55,7 @@ export class YtdlController {
           body: JSON.stringify({
             ytId: data.videoDetails.videoId,
             language: language,
+            status_id: status_id
           })
         }).then(() => {
           res.status(200).json({ success: true });

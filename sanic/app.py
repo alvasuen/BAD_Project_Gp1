@@ -7,15 +7,14 @@ import os
 import whisperx
 import ffmpeg
 import asyncio
+import psycopg2
 
+# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST)
+conn = psycopg2.connect(dbname = "karaoke", user="karaoke", password="karaoke", host="localhost")
+cur = conn.cursor()
 
 print("1")
 app = Sanic("Karaoke")
-
-# model_en = whisperx.load_model("medium.en")
-# model_zh = whisperx.load_model("large")
-
-# models = [model_en, model_zh]
 
 model = whisperx.load_model("medium")
 print("model loaded")
@@ -177,8 +176,6 @@ def generate_ass (ytId):
     print(assLines)
 
 
-
-
 job_status = {}
 
 async def background_runner(request, job_id):
@@ -187,27 +184,32 @@ async def background_runner(request, job_id):
         # Step1:
         data = request.json
         ytId = data["ytId"]
+        status_id = data["status_id"]
         print(ytId)
         print(data["language"])
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (1, status_id))
+        conn.commit()
 
         job_status[job_id] = 2
         # Step2: vocal and accompaniment separation
         subprocess.call(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
         print("separation done!")
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (2, status_id))
+        conn.commit()
+
         job_status[job_id] = 3
-        # Step3:
+        # Step3: generate the subtitles
         device = "cpu"
         
         if (data["language"] == "English"):
             video_language = "English"
             video_language_code = "en"
-            # model=models[0]
             print("English123")
         elif (data["language"] == "Mandarin"):
             video_language = "Chinese"
             video_language_code = "zh"
-            # model=models[1]
             print("Mandarin123")
 
         print("got video language")
@@ -216,11 +218,14 @@ async def background_runner(request, job_id):
             f"../media_hub/audio/{ytId}.mp3", fp16=False, language=video_language)
         
         job_status[job_id] = 4
-        # Step4:
+        # Step4: load the aligned version of the subtitles
         model_a, metadata = whisperx.load_align_model(
             language_code=video_language_code, device=device)
         
         print("model_a, metadata ran")
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (3, status_id))
+        conn.commit()
 
         result_aligned = whisperx.align(
             result["segments"], model_a, metadata, f"../media_hub/audio/{ytId}.mp3", device)
@@ -232,6 +237,9 @@ async def background_runner(request, job_id):
 
         print((aligned_segments, aligned_word_segments))
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (4, status_id))
+        conn.commit()
+
         job_status[job_id] = 5
          # generate sentence-level srt
         generate_sentence_srt(data, aligned_segments)
@@ -242,18 +250,23 @@ async def background_runner(request, job_id):
         print("generated word-level subtitles")
 
         job_status[job_id] = 6
+        #generated ass file
         generate_ass (ytId)
         print("ass generated")
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (5, status_id))
+        conn.commit()
+
         job_status[job_id] = 8
-
+        #merge videos and ass subtitles
         subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
-
-        # 'ass='+'"../media_hub/SrtFiles/'+ytId+'.ass"'
-
         print("Merge video with subtitles")
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (6, status_id))
+        conn.commit()
+
         job_status[job_id] = 9
+        #rename the vocal and accompaniment files in spleeter folder for easier recognition
         os.rename(f'../media_hub/spleeter/{ytId}/vocals.wav', f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav')
         print("vocals file renamed")
 
@@ -263,6 +276,8 @@ async def background_runner(request, job_id):
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (7, status_id))
+        conn.commit()
 
         return json({"success": "true"})
 
