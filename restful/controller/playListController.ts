@@ -7,11 +7,16 @@ export class PlaylistsController {
     constructor(private playlistsService: PlaylistsService) { }
     loadPlaylist = async (req: Request, res: Response) => {
         try {
+            console.log(req.session.userId, '10');
+
             const userId = req.session.userId!
             const playlists_id = Number(req.params.id)
+            // const songs = Number(req.params.songs)
 
-            const playlists = await this.playlistsService.loadPlaylist(playlists_id, userId)
-            res.json({ playlists })
+            const songs = await this.playlistsService.loadPlaylist(playlists_id, userId)
+
+
+            res.json({ songs })
         } catch (err) {
             // console.log(err);
             // res.json({ success: false })
