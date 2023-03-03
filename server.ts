@@ -5,6 +5,7 @@ import {
   profileRoutes,
   userRoutes,
   ytdlRoutes,
+  searchRoutes,
 } from "./restful/route/route";
 import { env } from "./env";
 // import { UserController } from "./restful/controller/userController";
@@ -23,6 +24,7 @@ app.use(sessionMiddleware);
 app.use("/user", userRoutes);
 app.use("/playlists", playlistRoutes);
 app.use("/", profileRoutes);
+app.use("/", searchRoutes);
 app.use("/videos", ytdlRoutes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {

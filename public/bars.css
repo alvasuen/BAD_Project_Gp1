@@ -35,7 +35,7 @@ body {
   width: 240px;
   height: 100%;
   color: var(--p-color);
-  display: block;
+  display: inline-block;
   left: 0px;
   top: 0px;
 }
@@ -55,6 +55,15 @@ body {
 .page:hover {
   color: var(--text-color);
   cursor: pointer;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.sear-icon {
+  /* width: 230px; */
 }
 
 /* The main area */
@@ -105,12 +114,12 @@ body {
   margin: 20px auto 0 auto;
   height: auto;
 } */
-.search {
+/* .search {
   position: relative;
   width: 20%;
   float: left;
   margin-left: 15px;
-}
+} */
 
 .search-bar {
   margin-top: 13px;

@@ -8,8 +8,8 @@ document.querySelector(
 <!-- <img src=""> -->
 </div>
 <div class="options">
-<div class="page home">
-    <ion-icon name="search-outline"></ion-icon>
+<div class="page search">
+    <ion-icon class="sear-icon" name="search-outline"></ion-icon>
     <span>search</span>
 </div>
 
@@ -84,6 +84,12 @@ document.querySelector(".karaoke-img").addEventListener("click", (e) => {
   window.location = "/";
 });
 
+/* Search Page */
+document.querySelector(".search").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/search.html";
+});
+
 // document.querySelector(".my-song").addEventListener("click", async (e) => {
 //     e.preventDefault();
 //     console.log("hi");
@@ -92,5 +98,3 @@ document.querySelector(".karaoke-img").addEventListener("click", (e) => {
 //     console.log(json);
 //     // window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
 // })
-
-/* Search Page */
