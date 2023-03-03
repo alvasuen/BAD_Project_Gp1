@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import ytdl from "ytdl-core";
 import { YtdlService } from "../service/ytdlService";
-import { createWriteStream} from "fs";
+import { createWriteStream } from "fs";
 // import fs from "fs";
 import { errorHandler } from "../../error";
-import fetch from "cross-fetch";
+// import fetch from "cross-fetch";
 const youtubeMp3Converter = require('youtube-mp3-converter')
 
 
@@ -38,8 +38,8 @@ export class YtdlController {
         );
 
         await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-        
-          fetch("http://127.0.0.1:8080/add_job", {
+
+        fetch("http://127.0.0.1:8080/add_job", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
