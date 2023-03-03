@@ -22,9 +22,11 @@ export class YtdlController {
       ytdl.getInfo(URL as string).then(async (data) => {
         // console.log(data);
 
-        let status_id = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number)
-        console.log(status_id);
 
+      let result = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number, data.videoDetails.thumbnails.at(-1))
+      let status_id = result[0]["status_id"]
+      console.log(status_id);
+        
         // creates Download function
         const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
         await convertLinkToMp3(URL, {

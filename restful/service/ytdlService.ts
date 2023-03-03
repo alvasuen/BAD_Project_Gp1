@@ -15,15 +15,18 @@ export class YtdlService {
         return {success:true};
     }
 
-    download_status = async (title: string, ytId: string, url: string, status: number, users_id: number)=>{
-        await this.knex
+    download_status = async (title: string, ytId: string, url: string, status: number, users_id: number, thumbnail:string|any)=>{
+        let a = await this.knex
         .insert({
             title: title,
             ytId: ytId,
             url: url,
             status: status,
             users_id: users_id,
+            image: thumbnail,
         }).into("download_status")
         .returning("status_id")
+
+        return a;
     }
 }
