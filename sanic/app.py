@@ -184,13 +184,20 @@ async def background_runner(request, job_id):
         # Step1:
         data = request.json
         ytId = data["ytId"]
+        status_id = data["status_id"]
         print(ytId)
         print(data["language"])
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (1, status_id))
+        conn.commit()
 
         job_status[job_id] = 2
         # Step2: vocal and accompaniment separation
         subprocess.call(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
         print("separation done!")
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (2, status_id))
+        conn.commit()
 
         job_status[job_id] = 3
         # Step3: generate the subtitles
@@ -217,6 +224,9 @@ async def background_runner(request, job_id):
         
         print("model_a, metadata ran")
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (3, status_id))
+        conn.commit()
+
         result_aligned = whisperx.align(
             result["segments"], model_a, metadata, f"../media_hub/audio/{ytId}.mp3", device)
         
@@ -226,6 +236,9 @@ async def background_runner(request, job_id):
         aligned_word_segments = result_aligned["word_segments"]
 
         print((aligned_segments, aligned_word_segments))
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (4, status_id))
+        conn.commit()
 
         job_status[job_id] = 5
          # generate sentence-level srt
@@ -241,10 +254,16 @@ async def background_runner(request, job_id):
         generate_ass (ytId)
         print("ass generated")
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (5, status_id))
+        conn.commit()
+
         job_status[job_id] = 8
         #merge videos and ass subtitles
         subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
         print("Merge video with subtitles")
+
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (6, status_id))
+        conn.commit()
 
         job_status[job_id] = 9
         #rename the vocal and accompaniment files in spleeter folder for easier recognition
@@ -257,6 +276,8 @@ async def background_runner(request, job_id):
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
 
+        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (7, status_id))
+        conn.commit()
 
         return json({"success": "true"})
 
