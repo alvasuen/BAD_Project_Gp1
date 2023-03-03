@@ -7,7 +7,11 @@ import os
 import whisperx
 import ffmpeg
 import asyncio
+import psycopg2
 
+# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST)
+conn = psycopg2.connect(dbname = "karaoke", user="karaoke", password="karaoke", host="localhost")
+cur = conn.cursor()
 
 print("1")
 app = Sanic("Karaoke")
