@@ -1,19 +1,29 @@
 let isOpen = false;
 let myPlayLists = [];
-document.querySelector(
-  ".left_con"
-).innerHTML = /* html */ ` <div class="karaoke-img">
-<img class="logo" src="logo3.PNG" />
-<p class="web-name">karaoke</p>
-<!-- <img src=""> -->
-</div>
-<div class="options">
-<div class="page search">
-    <ion-icon class="sear-icon" name="search-outline"></ion-icon>
-    <span>search</span>
-</div>
 
-<div id="toggleBtn" class="page my-song">
+
+window.onload = async()=>{
+  let res = await fetch("user/getUser");
+  let json = await res.json();
+  console.log(json);
+
+  if (json.isLogin){
+    document.querySelector(
+      ".left_con"
+    ).innerHTML =
+    `<div class="karaoke-img">
+    <img class="logo" src="logo3.PNG" />
+    <a class="web-name" href="./index.html">karaoke</a>
+    <!-- <img src=""> -->
+    </div>
+    <div class="options">
+    <div class="page search">
+        <ion-icon class="sear-icon" name="search-outline"></ion-icon>
+        <span>search</span>
+    </div>
+    
+    </div>
+    <div id="toggleBtn" class="page my-song">
     <ion-icon name="diamond"></ion-icon>
     <span>My Playlists</span>
 </div>    
@@ -22,25 +32,7 @@ document.querySelector(
 <div class="page like-song">
     <ion-icon name="heart-circle"></ion-icon>
     <span>liked songs</span>
-</div>
-
-</div>
-<!-- <div class="page my-profile hide">
-    <ion-icon name="duplicate"></ion-icon>
-    <span>profile</span>
-</div> -->
-
-<!-- <div class="language">中文</div> -->`;
-
-/* 回主頁 */
-// let right_con = document.querySelector('.right_con');
-// async function homePage(url) {
-//     console.log('function homePage is called')
-//     let res = await fetch(url)
-//     let html = await res.text()
-//     console.log(html)
-//     right_con.innerHTML = html
-// }
+</div>`
 
 document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   e.preventDefault();
@@ -90,6 +82,73 @@ document.querySelector(".search").addEventListener("click", (e) => {
   window.location.href = "/search.html";
 });
 
+  }else{
+    document.querySelector(
+      ".left_con"
+    ).innerHTML = `
+    <div class="karaoke-img">
+<img class="logo" src="logo3.PNG" />
+<a class="web-name" href="./index.html">karaoke</a>
+<!-- <img src=""> -->
+</div>
+<div class="options">
+<div class="page search">
+    <ion-icon class="sear-icon" name="search-outline"></ion-icon>
+    <span>search</span>
+</div>
+</div>
+    `
+
+    /* Home Page */
+document.querySelector(".karaoke-img").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location = "/";
+});
+
+/* Search Page */
+document.querySelector(".search").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/search.html";
+});
+  }
+}
+
+
+// document.querySelector(
+//   ".left_con"
+// ).innerHTML = /* html */ 
+// ` <div class="karaoke-img">
+// <img class="logo" src="logo3.PNG" />
+// <p class="web-name">karaoke</p>
+// <!-- <img src=""> -->
+// </div>
+// <div class="options">
+// <div class="page search">
+//     <ion-icon class="sear-icon" name="search-outline"></ion-icon>
+//     <span>search</span>
+// </div>
+
+// </div>
+
+
+// <!-- <div class="page my-profile hide">
+//     <ion-icon name="duplicate"></ion-icon>
+//     <span>profile</span>
+// </div> -->
+
+// <!-- <div class="language">中文</div> -->`;
+
+// /* 回主頁 */
+// // let right_con = document.querySelector('.right_con');
+// // async function homePage(url) {
+// //     console.log('function homePage is called')
+// //     let res = await fetch(url)
+// //     let html = await res.text()
+// //     console.log(html)
+// //     right_con.innerHTML = html
+// // }
+
+
 // document.querySelector(".my-song").addEventListener("click", async (e) => {
 //     e.preventDefault();
 //     console.log("hi");
@@ -98,3 +157,4 @@ document.querySelector(".search").addEventListener("click", (e) => {
 //     console.log(json);
 //     // window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
 // })
+
