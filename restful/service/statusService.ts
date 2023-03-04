@@ -5,8 +5,7 @@ export class StatusService {
         this.knex =knex;
     }
     statusCheck= async (id: number)=>{
-        let result = await this.knex.select("title", "image", "status").from ("download_status").where ("users_id", id)
+        let result = await this.knex.select("title", "image", "status", "message").from ("download_status").where ("users_id", id).orderBy("status_id", "DESC")
         return result;
     }
-    
 }
