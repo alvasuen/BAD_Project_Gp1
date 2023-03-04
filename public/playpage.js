@@ -2,20 +2,6 @@ async function main() {
   reg_logout_event();
 }
 
-let playlistArr = [
-  "./test/howmanytimes_ass.mp4",
-  "./test/howmanytimes_ass.mp4",
-];
-let vocalArr = [
-  "test / howmanytimes_vocals.wav",
-  "test/howmanytimes_vocals.wav",
-];
-let bgmArr = [
-  "test/howmanytimes_accompaniment.wav",
-  "test/howmanytimes_accompaniment.wav",
-];
-let preludeArr = [9.26, 9.26];
-
 let videoPlayer = document.querySelector(".video-player");
 let vocalBtn = document.querySelector(".vocalBtn");
 let vocal = document.querySelector(".vocal");
@@ -24,6 +10,26 @@ let bgm = document.querySelector(".bgm");
 let controlBar = document.querySelector(".control-bar");
 let mainContainer = document.querySelector(".main-container");
 let slider = document.querySelector(".slider");
+
+let playlistArr = [];
+let vocalArr = [];
+let bgmArr = [];
+let preludeArr = [5];
+
+// get karaoke video and audio
+async function karaoke(id) {
+  const res = await fetch("/karaoke?id=" + id);
+  const json = await res.json();
+  // console.log(json.mp4);
+
+  videoPlayer.src = json.mp4;
+  vocal.src = json.vocals;
+  bgm.src = json.accompaniment;
+
+  playlistArr.push(json.pm4);
+  vocalArr.push(json.vocals);
+  bgmArr.push(json.accompaniment);
+}
 
 let back = document.querySelector(".back");
 back.addEventListener("click", () => {
@@ -42,6 +48,10 @@ videoPlayer.addEventListener("ended", () => {
   vocal.src = vocalArr[0];
   bgm.src = bgmArr[0];
   videoPlayer.play();
+
+  if (playlistArr == "") {
+    location.href = "http://localhost:8000/index.html";
+  }
 });
 
 videoPlayer.addEventListener("error", () => {
@@ -201,6 +211,13 @@ function hiddenSkipPrelude() {
 }
 
 setInterval(hiddenSkipPrelude, 1000);
+
+window.onload = async function () {
+  let params = new URL(document.location).searchParams;
+  let id = params.get("id");
+  console.log(id, 283923898329);
+  await karaoke(id);
+};
 
 // async function main() {
 //   reg_logout_event();

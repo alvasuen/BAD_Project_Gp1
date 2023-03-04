@@ -12,6 +12,7 @@ async function main() {
   // showPlayButton();
   // hidePlayButton();
 }
+
 async function getPlaylist(id) {
   const res = await fetch(`http://localhost:8000/playlists/all/${id}`, {
     method: "GET",
@@ -26,14 +27,14 @@ async function getPlaylist(id) {
     for (let song in json.result.songs) {
       // console.log(playlist);
       playlistsContainer.innerHTML += /* html */ `
-    <div class="playlist-c">
-    <div class="playlist-id " >${json.result.songs[song].songs_id}</div>
+    <a class="playlist-c" href="http://localhost:8000/playpage.html?id=${json.result.songs[song].songs_id}">
+    <div class="playlist-id" >${json.result.songs[song].songs_id}</div>
     <div class="playlist-showPlay hidden"><i class="fa-solid fa-play"></i></div>
     <div class="playlist-img">
     <img src=${json.result.songs[song].image}>
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
-    </div>
+    </a>
         `;
     }
     // console.log(json.result.songs[0].image);
@@ -52,11 +53,11 @@ async function getPlaylist(id) {
   // add song function
   let playButton = document.querySelectorAll(".playlist-c");
   function showPlayButton() {
-    console.log(playButton);
+    // console.log(playButton);
     for (let number of playButton) {
-      console.log(number);
+      // console.log(number);
       number.addEventListener("mouseover", (e) => {
-        console.log("function showPlayButton is called");
+        // console.log("function showPlayButton is called");
         number.querySelector(".playlist-showPlay").style.display = "unset";
         number.querySelector(".playlist-id").style.display = "none";
       });
@@ -66,7 +67,7 @@ async function getPlaylist(id) {
   function hidePlayButton() {
     for (let number of playButton) {
       number.addEventListener("mouseout", (e) => {
-        console.log("function hidePlayButton is called");
+        // console.log("function hidePlayButton is called");
         number.querySelector(".playlist-showPlay").style.display = "none";
         number.querySelector(".playlist-id").style.display = "unset";
       });
