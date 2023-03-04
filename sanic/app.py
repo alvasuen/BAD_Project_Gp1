@@ -402,6 +402,7 @@ async def background_runner(request, job_id):
 
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
+        # bucket = resource_s3.Bucket(BUCKET_NAME)
         # resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}.mp4')
         # resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniments.mp4', BUCKET_NAME, f'{ytId}.mp4')
         # resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.mp4', BUCKET_NAME, f'{ytId}.mp4')

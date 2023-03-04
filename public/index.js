@@ -4,7 +4,7 @@ async function main() {
   let json = await res.json();
 
   isLogin = json.isLogin;
-  console.log(json);
+  // console.log(json);
 
   render_topBar(json.username, json.users_id);
   // render_topBar(json.username);
