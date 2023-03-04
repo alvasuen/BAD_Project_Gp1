@@ -2,7 +2,7 @@ let isOpen = false;
 let myPlayLists = [];
 
 
-window.onload = async()=>{
+async function add_bar (){
   let res = await fetch("user/getUser");
   let json = await res.json();
   console.log(json);
@@ -127,6 +127,8 @@ document.querySelector(".ytdl").addEventListener("click", (e) => {
   window.location.href = "/search.html";
 })
 }}
+
+add_bar();
 
 
 // document.querySelector(
