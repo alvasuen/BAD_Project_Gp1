@@ -13,7 +13,7 @@ window.onload = async()=>{
     ).innerHTML =
     `<div class="karaoke-img">
     <img class="logo" src="logo3.PNG" />
-    <a class="web-name" href="./index.html">karaoke</a>
+    <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>
     <!-- <img src=""> -->
     </div>
     <div class="options">
@@ -29,10 +29,16 @@ window.onload = async()=>{
 </div>    
 <ul class="myPlayListBox hide"></ul>
 
-<div class="page like-song">
+<div class="page download-status">
     <ion-icon name="heart-circle"></ion-icon>
-    <span>liked songs</span>
-</div>`
+    <span>Download Status</span>
+</div>
+
+<div class="page ytdl">
+    <ion-icon name="heart-circle"></ion-icon>
+    <span>Youtube to Karaoke</span>
+</div>
+`
 
 document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   e.preventDefault();
@@ -82,45 +88,53 @@ document.querySelector(".search").addEventListener("click", (e) => {
   window.location.href = "/search.html";
 });
 
+document.querySelector(".download-status").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/status.html";
+});
+
+document.querySelector(".ytdl").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/videoLink.html";
+});
+
   }else{
     document.querySelector(
       ".left_con"
     ).innerHTML = `
     <div class="karaoke-img">
-<img class="logo" src="logo3.PNG" />
-<a class="web-name" href="./index.html">karaoke</a>
-<!-- <img src=""> -->
-</div>
-<div class="options">
-<div class="page search">
+    <img class="logo" src="logo3.PNG" />
+    <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>
+    <!-- <img src=""> -->
+    </div>
+    <div class="options">
+    <div class="page search">
     <ion-icon class="sear-icon" name="search-outline"></ion-icon>
     <span>search</span>
-</div>
-</div>
+    </div>
+    </div>
     `
 
     /* Home Page */
-document.querySelector(".karaoke-img").addEventListener("click", (e) => {
+  document.querySelector(".karaoke-img").addEventListener("click", (e) => {
   e.preventDefault();
   window.location = "/";
-});
+  });
 
 /* Search Page */
-document.querySelector(".search").addEventListener("click", (e) => {
+  document.querySelector(".search").addEventListener("click", (e) => {
   e.preventDefault();
   window.location.href = "/search.html";
-});
-  }
-}
+})
+}}
 
 
 // document.querySelector(
 //   ".left_con"
 // ).innerHTML = /* html */ 
-// ` <div class="karaoke-img">
+// `<div class="karaoke-img">
 // <img class="logo" src="logo3.PNG" />
 // <p class="web-name">karaoke</p>
-// <!-- <img src=""> -->
 // </div>
 // <div class="options">
 // <div class="page search">
@@ -128,7 +142,7 @@ document.querySelector(".search").addEventListener("click", (e) => {
 //     <span>search</span>
 // </div>
 
-// </div>
+// </div>`
 
 
 // <!-- <div class="page my-profile hide">
