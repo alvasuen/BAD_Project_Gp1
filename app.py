@@ -32,8 +32,8 @@ for obj in bucket.objects.all():
     # print(obj.key)
 
 #Generate a presigned URL for the S3 object
-presignedURL = client_s3.generate_presigned_url('get_object',Params={'Bucket': BUCKET_NAME,'Key': 'k4V3Mo61fJM.mp4'},ExpiresIn=3600)
-print(presignedURL)
+# presignedURL = client_s3.generate_presigned_url('get_object',Params={'Bucket': BUCKET_NAME,'Key': 'k4V3Mo61fJM.mp4'},ExpiresIn=3600)
+# print(presignedURL)
 
 
 # urlRoute = presignedURL
