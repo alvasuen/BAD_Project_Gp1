@@ -9,12 +9,12 @@ client_s3 = boto3.client("s3", region_name=AWS_REGION_NAME)
 resource_s3 = boto3.resource("s3", region_name=AWS_REGION_NAME)
 
 # List all buckets
-for bucket in resource_s3.buckets.all():
-    pass
-    # print (bucket.name)
+# for bucket in resource_s3.buckets.all():
+#     pass
+#     # print (bucket.name)
 
-# List all objects in a bucket
-bucket = resource_s3.Bucket(BUCKET_NAME)
+# # List all objects in a bucket
+# bucket = resource_s3.Bucket(BUCKET_NAME)
 
 # Upload file
 # try:

@@ -6,8 +6,14 @@ window.onload = async () => {
   let container = document.querySelector(".container");
 
   for (let i = 0; i < json.result.length + 1; i++) {
-    let progressBarContainer = document.createElement("div");
+    let progressBarContainer = document.createElement("a");
     progressBarContainer.className = "progressBarContainer";
+    progressBarContainer.style.cursor = "pointer";
+    progressBarContainer.style.backgroundColor = "#fbf9f932";
+    progressBarContainer.style.padding = "15px";
+    progressBarContainer.style.textDecoration = "none";
+    progressBarContainer.style.color = "white";
+    progressBarContainer.href = `http://localhost:8000/playpage.html?id=${json.result[i].songs_id}`;
     let conatiner_two = document.createElement("div");
     conatiner_two.className = "conatiner_two";
     let song_title = document.createElement("h3");
@@ -44,7 +50,7 @@ window.onload = async () => {
     li_6.innerHTML = "Step 7";
     let li_7 = document.createElement("li");
     li_7.id = "step7";
-    li_7.innerHTML = "Step 8";
+    li_7.innerHTML = "DONE!";
     let status_msg = document.createElement("div")
     status_msg.innerHTML = `${json.result[i].message}`
 

@@ -4,6 +4,7 @@ const languageSelect = document.querySelector(".languageContainer")
 
 sendBtn.addEventListener("click", async (event) => {
   event.preventDefault();
+  location.href="./status.html"
   if(URLinput.value ==null||
     URLinput.value ==undefined ||
     URLinput.value == NaN|| 
@@ -26,13 +27,13 @@ sendBtn.addEventListener("click", async (event) => {
     })
     const res_json = res.json();
     console.log(res_json);
-    if(!res_json.success){
-      if(res_json.duplicated = true){
-        location.href="./status.html"
-      }else{
-        location.href="./index.html"
-      }
-    }
+    // if(!res_json.success){
+    //   if(res_json.duplicated = true){
+    //     location.href="./status.html"
+    //   }else{
+    //     location.href="./index.html"
+    //   }
+    // }
     
   }catch (err){
     console.log(err)

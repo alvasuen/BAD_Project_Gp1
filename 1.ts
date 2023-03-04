@@ -4,7 +4,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 // Constants:
 const MRAP = "karaoke-gcat";
 // const BODY = "hello-world";
-const KEY = "k4V3Mo61fJM.mp4"
+const KEY = "logo3.PNG"
 
 const client = new S3Client({ region: "ap-southeast-1", disableMultiregionAccessPoints: true });
 
