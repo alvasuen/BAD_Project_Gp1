@@ -11,12 +11,16 @@ import { PlaylistsService } from "../service/playListService";
 import { ProfileService } from "../service/profileService";
 import { SearchService } from "../service/searchService";
 import { YtdlService } from "../service/ytdlService";
+import{ StatusController } from "../controller/statusController";
+import { StatusService } from "../service/statusService";
+
 
 export let userRoutes = express.Router();
 export let playlistRoutes = express.Router();
 export let profileRoutes = express.Router();
 export let ytdlRoutes = express.Router();
 export let searchRoutes = express.Router();
+export let statusRoutes = express.Router();
 
 export type User = {
   username: string;
@@ -33,6 +37,9 @@ let profileController = new ProfileController(profileService);
 
 let ytdlService = new YtdlService(knex);
 let ytdlController = new YtdlController(ytdlService);
+
+let statusService = new StatusService(knex);
+let statusController = new StatusController(statusService);
 
 let searchService = new SearchService(knex);
 let searchController = new SearchController(searchService);
@@ -62,3 +69,5 @@ searchRoutes.get("/singer", isLoggedInAPI, searchController.loadSinger);
 searchRoutes.get("/area", isLoggedInAPI, searchController.loadArea);
 searchRoutes.get("/language", isLoggedInAPI, searchController.loadArea);
 // searchRoutes.get("/searchall", isLoggedInAPI, searchController.);
+
+statusRoutes.get("/download/job_status", statusController.statusCheck);

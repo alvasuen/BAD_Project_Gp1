@@ -22,8 +22,12 @@ export class PlaylistsService {
             .from("playlists_songs")
             .where("playlists_id", id)
         })
+      let playlistName = await this.knex("playlists")
+        .select("playlists_name")
+        .where("playlists_id", id)
 
-      return songs;
+      console.log(songs)
+      return { songs, playlistName };
     } catch (err: any) {
       throw new Error(err.message)
     }
