@@ -38,52 +38,60 @@
       <div class="main-container">
         <div class="video-container">
           <video class="video-player" autoplay muted preload="auto">
-            <source src="./test/howmanytimes_ass.mp4" type="video/mp4" />
+            <source src="./test/fixyoumv_ass.mp4" type="video/mp4" />
           </video>
           <audio class="bgm" autoplay preload="auto">
-            <source src="./test/howmanytimes_accompaniment.wav" />
+            <source src="./test/fixyou_accompaniment.wav" />
           </audio>
-          <audio class="vocal" autoplay muted preload="auto">
-            <source src="./test/howmanytimes_vocals.wav" />
+          <audio class="vocal" autoplay preload="auto">
+            <source src="./test/fixyou_vocal.wav" />
           </audio>
         </div>
 
         <!-- control bar -->
-        <div class="control-bar hidden">
+        <div class="control-bar">
           <div class="vocalButton">
             <div>Vocal:</div>
             <label class="switch">
               <input type="checkbox" />
-              <span class="slider vocalBtn"></span>
+              <span class="slider vocalBtn" onclick="vocalSwitch()"></span>
             </label>
           </div>
 
           <div class="middle-function">
-            <button class="encore"><i class="fa-solid fa-repeat"></i></button>
-            <button class="backward">
+            <button class="encore" onclick="encore();">
+              <i class="fa-solid fa-repeat"></i>
+            </button>
+            <button class="backward" onclick="backward()">
               <i class="fa-solid fa-rotate-left"></i>
             </button>
-            <button class="play hidden">
+            <button class="play hidden" onclick="play()">
               <i class="fa-solid fa-play"></i>
             </button>
-            <button class="pause"><i class="fa-solid fa-pause"></i></button>
-            <button class="forward">
+            <button class="pause" onclick="pause()">
+              <i class="fa-solid fa-pause"></i>
+            </button>
+            <button class="forward" onclick="forward()">
               <i class="fa-solid fa-rotate-right"></i>
             </button>
-            <button class="skip"><i class="fa-solid fa-forward"></i></button>
+            <button class="skip" onclick="skip()">
+              <i class="fa-solid fa-forward"></i>
+            </button>
           </div>
 
           <div class="full-screen">
-            <button class="full-screen">
+            <button class="full-screen" onclick="fullScreen()">
               <i class="fa-solid fa-expand"></i>
             </button>
           </div>
         </div>
         <!-- control bar -->
 
-        <button class="skipPrelude">Skip Prelude</button>
+        <button class="skipPrelude" onclick="skipPrelude()">
+          Skip Prelude
+        </button>
 
-        <button class="back hidden">
+        <button class="back hidden" onclick="back()">
           <i class="fa-solid fa-arrow-left"></i>
         </button>
       </div>
