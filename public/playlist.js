@@ -26,7 +26,7 @@ async function getPlaylist(id) {
     for (let song in json.result.songs) {
       // console.log(playlist);
       playlistsContainer.innerHTML += /* html */ `
-    <div class="playlist">
+    <div class="playlist-c">
     <div class="playlist-id " >${json.result.songs[song].songs_id}</div>
     <div class="playlist-showPlay hidden"><i class="fa-solid fa-play"></i></div>
     <div class="playlist-img">
@@ -37,51 +37,44 @@ async function getPlaylist(id) {
         `;
     }
     // console.log(json.result.songs[0].image);
-    const playlistContentName = document.querySelector(".playlist-content-name");
+    const playlistContentName = document.querySelector(
+      ".playlist-content-name"
+    );
     playlistContentName.innerHTML = `${json.result.playlistName[0].playlists_name}`;
 
-    const playlistCoverImg = document.querySelector(".playlist-cover-img");
-
-    let playlistCover = document.querySelector(".playlist-cover")
-    let test = document.createElement("img")
-    test.classList.add("playlist-cover-img")
-    test.src = `${json.result.songs[0].image}`
-    playlistCover.appendChild(test)
+    let playlistCover = document.querySelector(".playlist-cover");
+    let playlistCoverImg = document.createElement("img");
+    playlistCoverImg.classList.add("playlist-cover-img");
+    playlistCoverImg.src = `${json.result.songs[0].image}`;
+    playlistCover.appendChild(playlistCoverImg);
   }
 
-  let playlistPlay = document.querySelectorAll(".playlist-showPlay")
-
+  // add song function
+  let playButton = document.querySelectorAll(".playlist-c");
   function showPlayButton() {
-    console.log("showPlayButton");
-    let playButton = document.querySelectorAll('.playlist')
-    console.log(playButton)
+    console.log(playButton);
     for (let number of playButton) {
-      number.addEventListener("mouseenter", e => {
-        console.log('function showPlayButton is called');
-        number.querySelector('.playlist-showPlay').style.display = 'unset';
-        number.querySelector('.playlist-id').style.display = 'none';
-        playlistPlay.classList.remove("hidden")
-
-      })
+      console.log(number);
+      number.addEventListener("mouseover", (e) => {
+        console.log("function showPlayButton is called");
+        number.querySelector(".playlist-showPlay").style.display = "unset";
+        number.querySelector(".playlist-id").style.display = "none";
+      });
     }
   }
+
   function hidePlayButton() {
-    console.log("hidePlayButton");
-    let playButton = document.querySelectorAll('.playlist')
     for (let number of playButton) {
-      number.addEventListener("mouseleave", e => {
-        console.log('function hidePlayButton is called');
-        number.querySelector('.playlist-showPlay').style.display = 'none';
-        number.querySelector('.playlist-id').style.display = 'unset';
-        playlistPlay.classList.add("hidden")
-
-      })
+      number.addEventListener("mouseout", (e) => {
+        console.log("function hidePlayButton is called");
+        number.querySelector(".playlist-showPlay").style.display = "none";
+        number.querySelector(".playlist-id").style.display = "unset";
+      });
     }
   }
-  showPlayButton()
-  hidePlayButton()
+  showPlayButton();
+  hidePlayButton();
 }
-
 
 /* Number change to play */
 // let showPlayButton = false
@@ -98,7 +91,6 @@ async function getPlaylist(id) {
 //     let
 //   })
 // }
-
 
 // function showPlayButton() {
 //   let playlistElements = document.querySelectorAll('.playlist-body .playlist-item');
@@ -124,11 +116,9 @@ async function getPlaylist(id) {
 // })
 // }
 
-
-main()
+main();
 // function loadSongs(songs) {
 //   // console.log(playlists);
-
 
 //   const playlistsContainer = document.querySelector(".playlist-body");
 //   playlistsContainer.innerHTML = "";
@@ -153,4 +143,3 @@ main()
 //   console.log(json)
 //   myPlayLists = json;
 // }
-
