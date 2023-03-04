@@ -6,16 +6,17 @@ export class YtdlService {
     }
 
     newSong = async (title:string, ytId:string,thumbnail:string|any )=>{
-        await this.knex
+        let a = await this.knex
         .insert({
             songs_name: title,
             yt_id:ytId,
             image:thumbnail.url})
         .into("songs")
-        return {success:true};
+        .returning("songs_id")
+        return a;
     }
 
-    download_status = async (title: string, ytId: string, url: string, status: number, users_id: number, thumbnail:string|any, message: string)=>{
+    download_status = async (title: string, ytId: string, url: string, status: number, users_id: number, thumbnail:string|any, message: string, )=>{
         let a = await this.knex
         .insert({
             title: title,
@@ -42,5 +43,10 @@ export class YtdlService {
         })
         .where("status_id", id)
     } 
+
+    download_update = async (id:number|any, status_id : number|any)=>{
+        await this.knex.insert({songs_id: id}).into("download_status").where(status_id, status_id)
+        
+    }
 
 }

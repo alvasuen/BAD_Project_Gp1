@@ -17,10 +17,13 @@ cur = conn.cursor()
 #CONNECT TO S3
 BUCKET_NAME = "karaoke-gcat"
 AWS_REGION_NAME = "ap-southeast-1"
-client_s3 = boto3.client("s3", region_name=AWS_REGION_NAME)
-resource_s3 = boto3.resource("s3", region_name=AWS_REGION_NAME)
+AWS_ACCESS_KEY= "AKIAVFNJBF6YRDGBDJYL"
+ASW_SECRET_KEY= "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"
+client_s3 = boto3.client("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
+resource_s3 = boto3.resource("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
 for bucket in resource_s3.buckets.all():
     pass
+    print(bucket.name)
 bucket = resource_s3.Bucket(BUCKET_NAME)
 
 print("1")
@@ -403,11 +406,14 @@ async def background_runner(request, job_id):
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
         bucket = resource_s3.Bucket(BUCKET_NAME)
-        resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}.mp4')
-        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniments.mp4', BUCKET_NAME, f'{ytId}.mp4')
-        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.mp4', BUCKET_NAME, f'{ytId}.mp4')
+        resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}/{ytId}.mp4')
+        print("uploaded mp4 file to s3")
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        print("uploaded accompaniment file to s3")
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        print("uploaded vocals file to s3")
 
-        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (7, status_id))
+        cur.execute("UPDATE download_status SET status = %s, messgae = %s WHERE status_id = %s;", (7, "done!", status_id))
         conn.commit()
 
         return json({"success": "true"})
