@@ -8,7 +8,6 @@ body{
     color: white;
 }
 
-
 .seperator{
     /* height: 150px; */
     position: fixed;
@@ -24,13 +23,10 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* margin-left: ; */
-   
 }
 
 .progressBarContainer{
     margin-top: 40px;
-    /* margin-left: 100px; */
     margin-bottom:30px;
     width: 100%;
     display: flex;
@@ -63,6 +59,7 @@ ul.progressbar {
     padding: 0;
     counter-reset: step;
   }
+
   ul.progressbar li {
     list-style-type: none;
     color: rgb(255, 255, 255);

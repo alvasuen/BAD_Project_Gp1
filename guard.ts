@@ -4,11 +4,12 @@ import { errorHandler } from "./error";
 
 export const isLoggedInAPI = (req:express.Request, res:express.Response, next:express.NextFunction) => {
     try {
-        if (req.session.isLogin) {
-            next();
-        }else{
-            // console.log(req.route.path)
+        if (!req.session.isLogin) {
             throw new Error('No permission to access this API')
+        }else{
+            next()
+            // console.log(req.route.path)
+            
         }    
     } catch (err) {
         // res.json({
