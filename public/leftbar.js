@@ -62,7 +62,7 @@ document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   document.querySelector(".myPlayListBox").innerHTML = myPlayLists
     .map(
       (obj) => `
-        <li class="playlist" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
+      <li class="playlist" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
     `
     )
     .join("");

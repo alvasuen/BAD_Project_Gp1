@@ -1,5 +1,5 @@
 import type { Knex } from "knex";
-import { env } from "./env";
+import {env} from "./env"
 
 // Update with your config settings.
 
@@ -39,9 +39,9 @@ const config: { [key: string]: Knex.Config } = {
   production: {
     client: "postgresql",
     connection: {
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD,
+      database: "my_db",
+      user: "username",
+      password: "password",
     },
     pool: {
       min: 2,
@@ -52,7 +52,5 @@ const config: { [key: string]: Knex.Config } = {
     },
   },
 };
-// console.log(config);
-// console.log('from knexfile.ts');
 
 module.exports = config;

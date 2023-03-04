@@ -176,10 +176,28 @@ button {
   border-radius: 20px;
 }
 
-.myPlayListBox.hide {
+.myPlayListBox {
+  margin-bottom: 0;
+}
+
+.hide {
   display: none;
 }
 
 .hide {
   display: none;
+}
+
+.my-song {
+  margin-bottom: 10px;
+}
+
+.playlist {
+  cursor: pointer;
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+.playlist:hover {
+  color: white;
 }
