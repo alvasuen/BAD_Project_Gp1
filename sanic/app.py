@@ -15,13 +15,13 @@ conn = psycopg2.connect(dbname = "karaoke", user="karaoke", password="karaoke", 
 cur = conn.cursor()
 
 #CONNECT TO S3
-# BUCKET_NAME = "karaoke-gcat"
-# AWS_REGION_NAME = "ap-southeast-1"
-# client_s3 = boto3.client("s3", region_name=AWS_REGION_NAME)
-# resource_s3 = boto3.resource("s3", region_name=AWS_REGION_NAME)
-# for bucket in resource_s3.buckets.all():
-#     pass
-# bucket = resource_s3.Bucket(BUCKET_NAME)
+BUCKET_NAME = "karaoke-gcat"
+AWS_REGION_NAME = "ap-southeast-1"
+client_s3 = boto3.client("s3", region_name=AWS_REGION_NAME)
+resource_s3 = boto3.resource("s3", region_name=AWS_REGION_NAME)
+for bucket in resource_s3.buckets.all():
+    pass
+bucket = resource_s3.Bucket(BUCKET_NAME)
 
 print("1")
 app = Sanic("Karaoke")
@@ -402,10 +402,10 @@ async def background_runner(request, job_id):
 
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
-        # bucket = resource_s3.Bucket(BUCKET_NAME)
-        # resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}.mp4')
-        # resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniments.mp4', BUCKET_NAME, f'{ytId}.mp4')
-        # resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.mp4', BUCKET_NAME, f'{ytId}.mp4')
+        bucket = resource_s3.Bucket(BUCKET_NAME)
+        resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}.mp4')
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniments.mp4', BUCKET_NAME, f'{ytId}.mp4')
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.mp4', BUCKET_NAME, f'{ytId}.mp4')
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (7, status_id))
         conn.commit()
