@@ -48,4 +48,12 @@ export class PlaylistsService {
       .select("playlists_name", "playlists.playlists_id", "created_at")
       .where("users_id", userId);
   };
+
+  addSongToPlayList = async (playlists_id: number, songs_id:number)=>{
+    await this.knex("playlists_songs")
+    .insert({
+      playlists_id: playlists_id,
+      songs_id: songs_id
+    })
+  }
 }

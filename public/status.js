@@ -5,7 +5,19 @@ window.onload = async () => {
 
   let container = document.querySelector(".container");
 
-  for (let i = 0; i < json.result.length + 1; i++) {
+  let playlist_res = await fetch("/playlists/user");
+  let res_json = await playlist_res.json();
+  console.log(res_json);
+
+  for (j = 0; j < res_json.length; j++) {
+    let playlist = document.createElement("div");
+    playlist.id = `${res_json[j].playlists_id}`;
+    playlist.className = "playlistBtn";
+    playlist.innerHTML = `${res_json[j].playlists_name}`;
+    document.querySelector(".generate-post").appendChild(playlist);
+  }
+
+  for (let i = 0; i < json.result.length; i++) {
     let progressBarContainer = document.createElement("a");
     progressBarContainer.className = "progressBarContainer";
     progressBarContainer.style.cursor = "pointer";
@@ -133,26 +145,33 @@ window.onload = async () => {
     }
 
     let addBtns = document.querySelectorAll(".add");
-    addBtns.forEach((addBtn) => {
-      addBtn.addEventListener("click", async (event) => {
+    // addBtns.forEach((addBtn) => {
+      addBtns[i].addEventListener("click", async (event) => {
         event.preventDefault();
         document
           .querySelector(".generate-post-container")
           .classList.remove("hidden");
-        let res = await fetch("/playlists/user");
-        let res_json = await res.json();
-        console.log(res_json);
 
-        if (i == 0) {
-          for (j = 0; j < res_json.length; j++) {
-            let playlist = document.createElement("div");
-            playlist.id = `id-${i}`;
-            playlist.innerHTML = `${res_json[j].playlists_name}`;
-            document.querySelector(".generate-post").appendChild(playlist);
-          }
-        } else {
-          return;
-        }
+          let playlistBtns = document.querySelectorAll(".playlistBtn");
+          playlistBtns.forEach((btn) => {
+            btn.addEventListener("click", async (event) => {
+              console.log(123);
+              document
+              .querySelector(".generate-post-container")
+              .classList.add("hidden");
+              location.href ="./status.html"
+              // console.log("playlist"+ btn.id);
+              // console.log("addBtn" + addBtn.id);
+              await fetch("/playlists/songs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  playlists_id: btn.id,
+                  songs_id:  addBtns[i].id,
+                }),
+              });
+            });
+          // });
       });
     });
   }

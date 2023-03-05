@@ -41,7 +41,16 @@ export class PlaylistsController {
         }
     }
 
-
-    
+    addSongToPlayList = async (req:Request, res:Response)=>{
+        try{
+            let playlists_id = req.body.playlists_id
+            let songs_id = req.body.songs_id
+            console.log(playlists_id,songs_id );
+            
+            await this.playlistsService.addSongToPlayList(playlists_id, songs_id)
+        }catch (err){
+            errorHandler(err, req, res)
+        }
+    }
 }
 
