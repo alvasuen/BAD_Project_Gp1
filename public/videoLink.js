@@ -5,6 +5,7 @@ const languageSelect = document.querySelector(".languageContainer")
 sendBtn.addEventListener("click", async (event) => {
   event.preventDefault();
   location.href="./status.html"
+  let URLinputValue = URLinput.value;
   if(URLinput.value ==null||
     URLinput.value ==undefined ||
     URLinput.value == NaN|| 
@@ -15,6 +16,9 @@ sendBtn.addEventListener("click", async (event) => {
     ){
     alert("Please make sure you have fill in the link and select the language!")
     return;
+    }else if (!URLinputValue.includes("watch?v=")||!URLinputValue.includes("youtube.com")){
+     alert("Invalid URL! Only video link for youtube.com is supported!")
+     return;      
   }else{
   try{
     let res = await fetch("/videos/download", {

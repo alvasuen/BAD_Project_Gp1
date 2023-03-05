@@ -23,6 +23,7 @@ export let ytdlRoutes = express.Router();
 export let searchRoutes = express.Router();
 export let statusRoutes = express.Router();
 export let karaokeRoutes = express.Router();
+export let playlistSongRoutes = express.Router();
 
 export type User = {
   username: string;
@@ -57,6 +58,7 @@ userRoutes.get("/getUser", isLoggedInAPI, userController.getUser);
 
 //Playlist
 playlistRoutes.get("/all/:id", isLoggedInAPI, playListController.loadPlaylist);
+playlistRoutes.post("/songs", isLoggedInAPI, playListController.addSongToPlayList);
 playlistRoutes.get(
   "/user",
   isLoggedInAPI,
@@ -70,9 +72,9 @@ profileRoutes.get("/profile", profileController.loadProfile);
 ytdlRoutes.post("/download", ytdlController.downloadVideo);
 
 //Search
-searchRoutes.get("/singer", isLoggedInAPI, searchController.loadSinger);
-searchRoutes.get("/area", isLoggedInAPI, searchController.loadArea);
-searchRoutes.get("/language", isLoggedInAPI, searchController.loadArea);
+searchRoutes.get("/singer", searchController.loadSinger);
+searchRoutes.get("/area", searchController.loadArea);
+searchRoutes.get("/language", searchController.loadArea);
 // searchRoutes.get("/searchall", isLoggedInAPI, searchController.);
 
 statusRoutes.get("/download/job_status", statusController.statusCheck);

@@ -87,3 +87,8 @@ exit
 # 如果TS 擺好哂係一個叫src既folder，就可以
 yarn run build (將所有TS file change to js file)
 如果 ts file冇執好，唯有開一個index.js黎連上去黎踢著server，因為上面只食js
+
+forever list 可以睇到而家既狀態
+想停用 forever stop ^C (呢句唔知要唔要用)
+再forever stop 0 (0無你係list個時睇返其中一句data中用[]入面既數字)
+想改野用 vim 你要改既野

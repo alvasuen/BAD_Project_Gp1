@@ -66,7 +66,7 @@ function createSongBox(json) {
 
   //Create the playlist div
   for (let num = 0; num < json.profilePlaylistSongs.length; num++) {
-    console.log(`第${num}次Playlist`);
+    // console.log(`第${num}次Playlist`);
     let playlistName = json.profilePlaylistSongs[num][0].playlists_name;
 
     let profilePlaylist = document.createElement("div");
