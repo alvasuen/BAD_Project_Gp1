@@ -21,14 +21,32 @@ async function karaoke(id) {
   const res = await fetch("/karaoke?id=" + id);
   const json = await res.json();
   // console.log(json.mp4);
+  console.log(json);
+  console.log(json.mp4);
+  console.log(json.mp4.length);
 
-  videoPlayer.src = json.mp4;
-  vocal.src = json.vocals;
-  bgm.src = json.accompaniment;
+  if (Array.isArray(json.mp4)) {
+    for (let i = 0; i < json.mp4.length; i++) {
+      videoPlayer.src = json.mp4[0];
+      vocal.src = json.vocal[0];
+      bgm.src = json.accompaniment[0];
 
-  playlistArr.push(json.pm4);
-  vocalArr.push(json.vocals);
-  bgmArr.push(json.accompaniment);
+      playlistArr.push(json.mp4[i]);
+      vocalArr.push(json.vocal[i]);
+      bgmArr.push(json.accompaniment[i]);
+      console.log(playlistArr);
+    }
+  } else {
+    videoPlayer.src = json.mp4;
+    vocal.src = json.vocal;
+    bgm.src = json.accompaniment;
+
+    console.log(123);
+
+    playlistArr.push(json.mp4);
+    vocalArr.push(json.vocal);
+    bgmArr.push(json.accompaniment);
+  }
 }
 
 let back = document.querySelector(".back");
