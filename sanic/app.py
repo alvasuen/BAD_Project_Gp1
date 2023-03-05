@@ -379,10 +379,10 @@ async def background_runner(request, job_id):
         #generated ass file
         if (data["language"] == "English"):
             generate_ass (ytId)
-            print("ass generated")
-        elif (data["language"] == "English"):
+            print("en ass generated")
+        elif (data["language"] == "Mandarin"):
             generate_zh_ass (ytId)
-            print("ass generated")
+            print("zh ass generated")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (5, status_id))
         conn.commit()
