@@ -21,12 +21,14 @@ export class PlaylistsService {
             .where("playlists_id", id);
         })
         .orderBy("songs.songs_id", "asc");
-      let playlistName = await this.knex("playlists")
-        .select("playlists_name")
+      let playlist = await this.knex("playlists")
+        .select("playlists_name","playlists_id")
         .where("playlists_id", id);
+        console.log();
+        
 
       console.log(songs);
-      return { songs, playlistName };
+      return { songs, playlist };
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -48,4 +50,20 @@ export class PlaylistsService {
       .select("playlists_name", "playlists.playlists_id", "created_at")
       .where("users_id", userId);
   };
+
+  addSongToPlayList = async (playlists_id: number, songs_id:number)=>{
+    await this.knex("playlists_songs")
+    .insert({
+      playlists_id: playlists_id,
+      songs_id: songs_id
+    })
+  }
+
+  createPlaylist = async(playlists_name: string, users_id:number)=>{
+    await this.knex("playlists")
+    .insert({
+      playlists_name: playlists_name,
+      users_id: users_id
+    })
+  }
 }

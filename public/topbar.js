@@ -1,7 +1,19 @@
 document.querySelector(
   ".topBarContainer"
 ).innerHTML = /*html*/ `<div class="topBar">
+<<<<<<< HEAD
 
+=======
+<div class="turn-page-btn btn-left" onclick="history.back()">
+
+    <ion-icon name="chevron-back-circle-outline"></ion-icon>
+ 
+</div>
+<div class="turn-page-btn" onclick="history.forward()">
+    <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+ 
+</div>
+>>>>>>> refs/remotes/origin/main
 
 <form class="searchForm" id="searchForm">
 <div class="search">

@@ -14,28 +14,48 @@ let slider = document.querySelector(".slider");
 let playlistArr = [];
 let vocalArr = [];
 let bgmArr = [];
-let preludeArr = [5];
+let preludeArr = [15];
 
 // get karaoke video and audio
 async function karaoke(id) {
   const res = await fetch("/karaoke?id=" + id);
   const json = await res.json();
   // console.log(json.mp4);
+  console.log(json);
+  console.log(json.mp4);
 
-  videoPlayer.src = json.mp4;
-  vocal.src = json.vocals;
-  bgm.src = json.accompaniment;
+  if (Array.isArray(json.mp4)) {
+    for (let i = 0; i < json.mp4.length; i++) {
+      videoPlayer.src = json.mp4[0];
+      vocal.src = json.vocals[0];
+      bgm.src = json.accompaniment[0];
 
-  playlistArr.push(json.pm4);
-  vocalArr.push(json.vocals);
-  bgmArr.push(json.accompaniment);
+      playlistArr.push(json.mp4[i]);
+      vocalArr.push(json.vocals[i]);
+      bgmArr.push(json.accompaniment[i]);
+      console.log(playlistArr);
+    }
+  } else {
+    videoPlayer.src = json.mp4;
+    vocal.src = json.vocals;
+    bgm.src = json.accompaniment;
+
+    playlistArr.push(json.mp4);
+    vocalArr.push(json.vocals);
+    bgmArr.push(json.accompaniment);
+
+    console.log(json.vocals);
+  }
 }
 
+// back to home page
 let back = document.querySelector(".back");
 back.addEventListener("click", () => {
   location.href = "./index.html";
 });
 
+
+// when the video finished, back to home page
 videoPlayer.addEventListener("ended", () => {
   // remove current (first) video from playlist
   playlistArr.shift();
@@ -58,11 +78,13 @@ videoPlayer.addEventListener("error", () => {
   console.log(`Error loading ${videoPlayer.src}.`);
 });
 
+// show control bar
 onmousemove = (event) => {
   controlBar.classList.remove("hidden");
   back.classList.remove("hidden");
 };
 
+// hidden control bar if hold mouse 3s
 let timeout;
 document.onmousemove = function () {
   clearTimeout(timeout);
@@ -112,7 +134,7 @@ vocalBtn.addEventListener("click", () => {
   }
 });
 
-// play and pause function
+// pause function
 let pause = document.querySelector(".pause");
 let play = document.querySelector(".play");
 pause.addEventListener("click", () => {
@@ -124,6 +146,7 @@ pause.addEventListener("click", () => {
   pause.classList.add("hidden");
 });
 
+// play function
 play.addEventListener("click", () => {
   videoPlayer.play();
   bgm.play();
@@ -132,6 +155,7 @@ play.addEventListener("click", () => {
   play.classList.add("hidden");
 });
 
+// forward function
 let forward = document.querySelector(".forward");
 forward.addEventListener("click", () => {
   if (videoPlayer.currentTime + 10 <= videoPlayer.duration) {
@@ -143,6 +167,7 @@ forward.addEventListener("click", () => {
   }
 });
 
+// backward function
 let backward = document.querySelector(".backward");
 backward.addEventListener("click", () => {
   if (videoPlayer.currentTime - 10 >= 0) {
@@ -154,6 +179,7 @@ backward.addEventListener("click", () => {
   }
 });
 
+// full screen function
 function openFullscreen() {
   if (mainContainer.requestFullscreen) {
     mainContainer.requestFullscreen();
@@ -189,6 +215,7 @@ fullScreen.addEventListener("click", () => {
   }
 });
 
+// skip prelude function
 let skipPrelude = document.querySelector(".skipPrelude");
 skipPrelude.addEventListener("click", () => {
   videoPlayer.currentTime = preludeArr[0] - 5;

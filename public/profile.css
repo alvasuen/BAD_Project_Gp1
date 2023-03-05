@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 body {
   background-color: black;
   color: aliceblue;
@@ -129,6 +130,17 @@ body {
 .readmore:active {
   cursor: pointer;
   color: #14c6c6;
+}
+
+
+.createPlaylistContainer {
+  margin-left: 30px;
+}
+
+.createPlaylist {
+  width: 50%;
+  height: 40px;
+  border-radius: 15px;
 }
 
 /*

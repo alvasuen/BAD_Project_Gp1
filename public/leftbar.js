@@ -1,13 +1,26 @@
 let isOpen = false;
 let myPlayLists = [];
 
+<<<<<<< HEAD
 async function add_bar() {
+=======
+
+async function add_bar (){
+>>>>>>> refs/remotes/origin/main
   let res = await fetch("user/getUser");
   let json = await res.json();
   console.log(json);
 
+<<<<<<< HEAD
   if (json.isLogin) {
     document.querySelector(".left_con").innerHTML = `<div class="karaoke-img">
+=======
+  if (json.isLogin){
+    document.querySelector(
+      ".left_con"
+    ).innerHTML =
+    `<div class="karaoke-img">
+>>>>>>> refs/remotes/origin/main
     <img class="logo" src="logo3.PNG" />
     <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>
     <!-- <img src=""> -->
@@ -22,6 +35,8 @@ async function add_bar() {
     <div id="toggleBtn" class="page my-song">
     <ion-icon name="diamond"></ion-icon>
     <span>My Playlists</span>
+    <div createPlaylistContainer>
+    </div>
 </div>    
 <ul class="myPlayListBox hide"></ul>
 
@@ -36,6 +51,7 @@ async function add_bar() {
 </div>
 `;
 
+<<<<<<< HEAD
     document
       .querySelector("#toggleBtn")
       .addEventListener("click", async (e) => {
@@ -73,19 +89,57 @@ async function add_bar() {
           });
         }
       });
+=======
+document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
+  e.preventDefault();
+  isOpen = !isOpen;
+  if (!isOpen) {
+    document.querySelector(".myPlayListBox").classList.add("hide");
+    return;
+  }
+  document.querySelector(".myPlayListBox").classList.remove("hide");
 
-    /* Home Page */
-    document.querySelector(".karaoke-img").addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location = "/";
+  if (myPlayLists.length === 0) {
+    const res = await fetch("http://localhost:8000/playlists/user", {
+      method: "GET",
     });
+    const json = await res.json();
+    // console.log(json)
+    myPlayLists = json;
+  }
+  document.querySelector(".myPlayListBox").innerHTML = myPlayLists
+    .map(
+      (obj) => `
+      <li class="playlist" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
+    `
+    )
+    .join("");
 
-    /* Search Page */
-    document.querySelector(".search").addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location.href = "/search.html";
+  let myPlayListLi = document.querySelectorAll(".playlist");
+  for (let li of myPlayListLi) {
+    li.addEventListener("click", async (e) => {
+      let playlistId = e.target.dataset.id;
+      await getPlaylist(playlistId);
+      document.querySelector(".right_con.home").classList.remove("show");
+      document.querySelector(".right_con.playlist").classList.add("show");
     });
+  }
+});
+>>>>>>> refs/remotes/origin/main
 
+/* Home Page */
+document.querySelector(".karaoke-img").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location = "/";
+});
+
+/* Search Page */
+document.querySelector(".search").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/search.html";
+});
+
+<<<<<<< HEAD
     document
       .querySelector(".download-status")
       .addEventListener("click", (e) => {
@@ -99,6 +153,22 @@ async function add_bar() {
     });
   } else {
     document.querySelector(".left_con").innerHTML = `
+=======
+document.querySelector(".download-status").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/status.html";
+});
+
+document.querySelector(".ytdl").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/videoLink.html";
+});
+
+  }else{
+    document.querySelector(
+      ".left_con"
+    ).innerHTML = `
+>>>>>>> refs/remotes/origin/main
     <div class="karaoke-img">
     <img class="logo" src="logo3.PNG" />
     <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>
@@ -113,11 +183,12 @@ async function add_bar() {
     `;
 
     /* Home Page */
-    document.querySelector(".karaoke-img").addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location = "/";
-    });
+  document.querySelector(".karaoke-img").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location = "/";
+  });
 
+<<<<<<< HEAD
     /* Search Page */
     document.querySelector(".search").addEventListener("click", (e) => {
       e.preventDefault();
@@ -125,6 +196,14 @@ async function add_bar() {
     });
   }
 }
+=======
+/* Search Page */
+  document.querySelector(".search").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/search.html";
+})
+}}
+>>>>>>> refs/remotes/origin/main
 
 add_bar();
 

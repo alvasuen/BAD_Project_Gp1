@@ -1,11 +1,23 @@
 window.onload = async () => {
-  let res = await fetch("/videos/download/job_status");
+  let res = await fetch("/status/download/job_status");
   let json = await res.json();
   // console.log(json.result[0].songs_id);
 
   let container = document.querySelector(".container");
 
-  for (let i = 0; i < json.result.length + 1; i++) {
+  let playlist_res = await fetch("/playlists/user");
+  let res_json = await playlist_res.json();
+  console.log(res_json);
+
+  for (j = 0; j < res_json.length; j++) {
+    let playlist = document.createElement("div");
+    playlist.id = `${res_json[j].playlists_id}`;
+    playlist.className = "playlistBtn";
+    playlist.innerHTML = `${res_json[j].playlists_name}`;
+    document.querySelector(".generate-post").appendChild(playlist);
+  }
+
+  for (let i = 0; i < json.result.length; i++) {
     let progressBarContainer = document.createElement("a");
     progressBarContainer.className = "progressBarContainer";
     progressBarContainer.style.cursor = "pointer";
@@ -56,10 +68,10 @@ window.onload = async () => {
     li_7.innerHTML = "DONE!";
     let status_msg = document.createElement("div");
     status_msg.innerHTML = `${json.result[i].message}`;
-    let add = document.createElement("div");
-    add.classList.add("add");
-    add.id = `${json.result[i].songs_id}`;
-    add.innerHTML = `<i class="fa-solid fa-plus"></i>`;
+    // let add = document.createElement("div");
+    // add.classList.add("add");
+    // add.id = `${json.result[i].songs_id}`;
+    // add.innerHTML = `<i class="fa-solid fa-plus"></i>`;
 
     progressbar.appendChild(li_0);
     progressbar.appendChild(li_1);
@@ -76,7 +88,7 @@ window.onload = async () => {
     videoImgContainer.appendChild(img);
     progressBarContainer.appendChild(conatiner_two);
     progressBarContainer.appendChild(progressBarWrapper);
-    container.appendChild(add);
+    // container.appendChild(add);
     container.appendChild(progressBarContainer);
 
     if (json.result[i].status == 0) {
@@ -132,28 +144,36 @@ window.onload = async () => {
       status_msg.style.color = "red";
     }
 
-    let addBtns = document.querySelectorAll(".add");
-    addBtns.forEach((addBtn) => {
-      addBtn.addEventListener("click", async (event) => {
-        event.preventDefault();
-        document
-          .querySelector(".generate-post-container")
-          .classList.remove("hidden");
-        let res = await fetch("/playlists/user");
-        let res_json = await res.json();
-        console.log(res_json);
+    // let addBtns = document.querySelectorAll(".add");
+    // // addBtns.forEach((addBtn) => {
+    //   addBtns[i].addEventListener("click", async (event) => {
+    //     event.preventDefault();
+    //     let generatePostContainer = document.querySelector(".generate-post-container")
+    //     console.log(2434);
+    //      generatePostContainer.classList.remove("hidden");
 
-        if (i == 0) {
-          for (j = 0; j < res_json.length; j++) {
-            let playlist = document.createElement("div");
-            playlist.id = `id-${i}`;
-            playlist.innerHTML = `${res_json[j].playlists_name}`;
-            document.querySelector(".generate-post").appendChild(playlist);
-          }
-        } else {
-          return;
-        }
-      });
-    });
+    //       let playlistBtns = document.querySelectorAll(".playlistBtn");
+    //       playlistBtns.forEach((btn) => {
+    //         btn.addEventListener("click", async (event) => {
+              
+    //           console.log(123);
+    //           document
+    //           .querySelector(".generate-post-container")
+    //           .classList.add("hidden");
+    //           location.href ="./status.html"
+    //           // console.log("playlist"+ btn.id);
+    //           // console.log("addBtn" + addBtn.id);
+    //           await fetch("/playlists/songs", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //               playlists_id: btn.id,
+    //               songs_id:  addBtns[i].id,
+    //             }),
+    //           });
+    //         });
+    //       // });
+    //   });
+    // });
   }
 };

@@ -19,19 +19,30 @@ export class ProfileController {
         userId
       );
 
+      console.log(profilePlaylist);
+      console.log(profilePlaylist.length);
+      
       let profilePlaylistSongs = [];
       for (let index = 0; index < profilePlaylist.length; index++) {
         let profilePlaylistSongId =
           await this.profileService.getProfilePlaylistSongId(
             profilePlaylist[index].playlists_id
+           
+            
           );
+          console.log(profilePlaylist[index].playlists_id);
         profilePlaylistSongs.push(profilePlaylistSongId);
       }
+
+
+      // console.log("profilePlaylistSongs",profilePlaylistSongs);
+      
 
       res.json({
         success: true,
         profileUsername,
         profilePlaylistSongs,
+        profilePlaylist
       });
     } catch (err) {
       errorHandler(err, req, res);
