@@ -12,6 +12,7 @@ async function main() {
   // showPlayButton();
   // hidePlayButton();
 }
+
 async function getPlaylist(id) {
   const res = await fetch(`http://localhost:8000/playlists/all/${id}`, {
     method: "GET",
@@ -27,12 +28,13 @@ async function getPlaylist(id) {
       // console.log(playlist);
       playlistsContainer.innerHTML += /* html */ `
     <div class="playlist-c">
-    <div class="playlist-id " >${json.result.songs[song].songs_id}</div>
-    <div class="playlist-showPlay hidden"><i class="fa-solid fa-play"></i></div>
+    <div class="playlist-id" >${json.result.songs[song].songs_id}</div>
     <div class="playlist-img">
     <img src=${json.result.songs[song].image}>
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
+    <a class="playlist-showPlay" href="http://localhost:8000/playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    <div class="remove-song"><i class="fa-solid fa-trash"></i></div>
     </div>
         `;
     }
@@ -48,33 +50,33 @@ async function getPlaylist(id) {
     playlistCoverImg.src = `${json.result.songs[0].image}`;
     playlistCover.appendChild(playlistCoverImg);
   }
-
-  // add song function
-  let playButton = document.querySelectorAll(".playlist-c");
-  function showPlayButton() {
-    console.log(playButton);
-    for (let number of playButton) {
-      console.log(number);
-      number.addEventListener("mouseover", (e) => {
-        console.log("function showPlayButton is called");
-        number.querySelector(".playlist-showPlay").style.display = "unset";
-        number.querySelector(".playlist-id").style.display = "none";
-      });
-    }
-  }
-
-  function hidePlayButton() {
-    for (let number of playButton) {
-      number.addEventListener("mouseout", (e) => {
-        console.log("function hidePlayButton is called");
-        number.querySelector(".playlist-showPlay").style.display = "none";
-        number.querySelector(".playlist-id").style.display = "unset";
-      });
-    }
-  }
-  showPlayButton();
-  hidePlayButton();
 }
+
+// add song function
+//   let playButton = document.querySelectorAll(".playlist-showPlay");
+//   function showPlayButton() {
+//     // console.log(playButton);
+//     for (let number of playButton) {
+//       // console.log(number);
+//       number.addEventListener("mouseover", (e) => {
+//         // console.log("function showPlayButton is called");
+//         number.querySelector(".playlist-showPlay").style.display = "unset";
+//         number.querySelector(".playlist-id").style.display = "none";
+//       });
+//     }
+//   }
+
+//   function hidePlayButton() {
+//     for (let number of playButton) {
+//       number.addEventListener("mouseout", (e) => {
+//         // console.log("function hidePlayButton is called");
+//         number.querySelector(".playlist-showPlay").style.display = "none";
+//         number.querySelector(".playlist-id").style.display = "unset";
+//       });
+//     }
+//   }
+//   showPlayButton();
+//   hidePlayButton();
 
 /* Number change to play */
 // let showPlayButton = false

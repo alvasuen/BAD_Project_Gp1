@@ -11,9 +11,10 @@ import { PlaylistsService } from "../service/playListService";
 import { ProfileService } from "../service/profileService";
 import { SearchService } from "../service/searchService";
 import { YtdlService } from "../service/ytdlService";
-import{ StatusController } from "../controller/statusController";
+import { StatusController } from "../controller/statusController";
 import { StatusService } from "../service/statusService";
-
+import { VideoController } from "../controller/videoController";
+import { VideoService } from "../service/videoService";
 
 export let userRoutes = express.Router();
 export let playlistRoutes = express.Router();
@@ -21,6 +22,7 @@ export let profileRoutes = express.Router();
 export let ytdlRoutes = express.Router();
 export let searchRoutes = express.Router();
 export let statusRoutes = express.Router();
+export let karaokeRoutes = express.Router();
 
 export type User = {
   username: string;
@@ -43,6 +45,9 @@ let statusController = new StatusController(statusService);
 
 let searchService = new SearchService(knex);
 let searchController = new SearchController(searchService);
+
+let videoService = new VideoService(knex);
+let videoController = new VideoController(videoService);
 
 //User login/logout
 userRoutes.post("/signup", userController.signup);
@@ -70,5 +75,6 @@ searchRoutes.get("/area", isLoggedInAPI, searchController.loadArea);
 searchRoutes.get("/language", isLoggedInAPI, searchController.loadArea);
 // searchRoutes.get("/searchall", isLoggedInAPI, searchController.);
 
-//status
-statusRoutes.get("/download/job_status", isLoggedInAPI, statusController.statusCheck);
+statusRoutes.get("/download/job_status", statusController.statusCheck);
+
+karaokeRoutes.get("/karaoke", videoController.video);

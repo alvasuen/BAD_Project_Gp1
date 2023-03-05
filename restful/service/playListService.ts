@@ -12,8 +12,6 @@ export class PlaylistsService {
       // let songs = await this.knex("songs").select("*").whereIn("songs_id")
       // console.log(rows)
 
-
-
       let songs = await this.knex("songs")
         // .join("playlists", "playlists.users_id", "=", `${userId}`)
         .select("*")
