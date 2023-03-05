@@ -1,0 +1,24 @@
+name: karaoke-gcat
+
+on:
+  push:
+    branches:
+      - "ci"
+      - "cd"
+  workflow_dispatch:
+
+env:
+  POSTGRES_DB: memo-wall-test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: postgres
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container: node:18.12.1-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          yarn install 
+          yarn jest

@@ -4,7 +4,7 @@ import "../../session";
 let app = express();
 
 export class PlaylistsService {
-  constructor(private knex: Knex) { }
+  constructor(private knex: Knex) {}
   loadPlaylist = async (id: number, userId: number) => {
     try {
       // let rows = await this.knex("playlists_songs").select("songs_id")
@@ -12,22 +12,24 @@ export class PlaylistsService {
       // let songs = await this.knex("songs").select("*").whereIn("songs_id")
       // console.log(rows)
 
-
-
       let songs = await this.knex("songs")
         // .join("playlists", "playlists.users_id", "=", `${userId}`)
         .select("*")
         .whereIn("songs.songs_id", function () {
           this.select("songs_id")
             .from("playlists_songs")
-            .where("playlists_id", id)
+            .where("playlists_id", id);
         })
+        .orderBy("songs.songs_id", "asc");
+      let playlistName = await this.knex("playlists")
+        .select("playlists_name")
+        .where("playlists_id", id);
 
-      return songs;
+      console.log(songs);
+      return { songs, playlistName };
     } catch (err: any) {
-      throw new Error(err.message)
+      throw new Error(err.message);
     }
-
 
     //   return await this.knex("playlists")
     //     .select("playlists_name", "playlists.playlists_id", "created_at")

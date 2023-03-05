@@ -1,0 +1,192 @@
+h2{
+    text-align: center;
+    font-size: 30px;
+    margin: 10px;
+}
+
+body{
+    color: white;
+}
+
+.seperator{
+    /* height: 300px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    top:100px;
+    width: 100%;
+    padding-left: 240px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progressBarContainer{
+    margin-top: 40px;
+    margin-bottom:30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_two{
+    display: flex;
+    flex-direction: column;
+}
+
+.videoImgContainer{
+    width:400px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.videoImg{
+    width: 400px;
+    object-fit: cover;
+    padding-left: 20px;
+}
+
+h3{
+  padding-left: 20px;
+}
+
+.progressBarWrapper{
+    margin-left: 0px;
+    padding-right: 20px;
+}
+
+ul.progressbar {
+    height: 100px;
+    padding: 0;
+    counter-reset: step;
+  }
+
+  ul.progressbar li {
+    list-style-type: none;
+    color: rgb(255, 255, 255);
+    float: left;
+    position: relative;
+    text-align: center;
+    font-size: 15px;
+    margin: 10px
+  }
+  ul.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    color: #333;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    background: rgb(216,216,216);
+  }
+  ul.progressbar li:after {
+    content: "";
+    background: #ddd;
+    position: absolute;
+    width: 100%;
+    height: 14px;
+    top: 14px;
+    right: -50%;
+    z-index: -1;
+  }
+  ul.progressbar li:last-child:after {
+    content: none;
+  }
+  ul.progressbar li.done:before, ul.progressbar li.done:after {
+    background:rgb(153, 190, 198);
+    color: #000000;
+  
+  }
+  ul.progressbar li.current:before {
+    background: rgb(104, 191, 250);
+    color: #fff;
+  }
+  ul.progressbar li.fail:before {
+    background: rgb(229, 48, 40)
+  }
+
+  h3{
+    font-size: 20px;
+    margin-top:10px;
+  }
+
+  .add{
+    position:relative;
+    left: 1210px;
+    top:300px;
+    background-color: gainsboro;
+    color: black;
+    width: 50px;
+    height:50px;
+    border-radius: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .add:hover{
+    background-color: rgb(238, 238, 194)
+  }
+
+  .generate-post-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    position: fixed;
+  }
+  
+  .generate-post {
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    border: #c28d06 2px solid;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    /* overflow: scroll; */
+  }
+  
+  .generate-post-header {
+    height: 40px;
+    border-bottom: #0b3e5a 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .close-create-post {
+    display: flex;
+    justify-content: end;
+    width: 180px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .generate-post-main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+
+
+  .hidden {
+    display: none;
+  }
+  

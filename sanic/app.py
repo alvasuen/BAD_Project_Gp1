@@ -8,10 +8,23 @@ import whisperx
 import ffmpeg
 import asyncio
 import psycopg2
+import boto3
 
-# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST)
+#CONNETCT TO DB
 conn = psycopg2.connect(dbname = "karaoke", user="karaoke", password="karaoke", host="localhost")
 cur = conn.cursor()
+
+#CONNECT TO S3
+BUCKET_NAME = "karaoke-gcat"
+AWS_REGION_NAME = "ap-southeast-1"
+AWS_ACCESS_KEY= "AKIAVFNJBF6YRDGBDJYL"
+ASW_SECRET_KEY= "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"
+client_s3 = boto3.client("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
+resource_s3 = boto3.resource("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
+for bucket in resource_s3.buckets.all():
+    pass
+    print(bucket.name)
+bucket = resource_s3.Bucket(BUCKET_NAME)
 
 print("1")
 app = Sanic("Karaoke")
@@ -176,6 +189,118 @@ def generate_ass (ytId):
     print(assLines)
 
 
+def generate_zh_ass (ytId):
+    print("123")
+
+    sLines = open(f"../media_hub/SrtFiles/{ytId}_sentence.srt", "r", encoding="utf-8")
+    sentenceLines = sLines.read().split("\n")
+
+    # Read the word-level .srt file
+    wLines = open(f"../media_hub/SrtFiles/{ytId}_word.srt", "r", encoding="utf-8")
+    wordLines = wLines.read().split("\n")
+
+    assLines = []
+    assLines.append("[Script Info]")
+    assLines.append("ScriptType: v4.00+")
+    assLines.append("PlayResX: 384")
+    assLines.append("PlayResY: 288")
+    assLines.append("ScaledBorderAndShadow: yes")
+    assLines.append("")
+    assLines.append("[V4+ Styles]")
+    assLines.append(
+    "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding"
+    )
+    assLines.append(
+    "Style: Default,Arial,18,&Hffffff,&Hff66ff,&H0,&H0,0,0,0,0,100,100,0,0,1,1,0,2,10,10,10,0"
+    )
+    assLines.append("[Events]")
+    assLines.append(
+    "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"
+    )
+
+    # mark the first word of every sentence
+    sentenceWordCount = []
+    count = 0
+    sentenceWordCount.append(1)
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(' ')
+        count += len(words)
+        sentenceWordCount.append(count + 1)
+    sentenceWordCount.pop()
+
+    wordDuration = []
+    word = []
+
+    for i in range(2,len(wordLines),4):
+    # count first word of every sentence
+        wordCount = int(wordLines[i - 2])
+        if wordCount in sentenceWordCount:
+            msStart = int(wordLines[i - 1][9:11])
+            sStart = int(wordLines[i - 1][6:8]) * 100
+            mStart = int(wordLines[i - 1][3:5]) * 60 * 100
+
+            wordStart = msStart + sStart + mStart
+
+            msEnd = int(wordLines[i - 1][26:28])
+            sEnd = int(wordLines[i - 1][23:25]) * 100
+            mEnd = int(wordLines[i - 1][20:22]) * 60 * 100
+
+            wordEnd = msEnd + sEnd + mEnd
+            duration = wordEnd - wordStart
+            wordDuration.append(duration)
+            word.append(wordLines[i])
+        else:
+            msStart = int(wordLines[i - 5][26:28])
+            sStart = int(wordLines[i - 5][23:25]) * 100
+            mStart = int(wordLines[i - 5][20:22]) * 60 * 100
+
+            wordStart = msStart + sStart + mStart
+
+            msEnd = int(wordLines[i - 1][26:28])
+            sEnd = int(wordLines[i - 1][23:25]) * 100
+            mEnd = int(wordLines[i - 1][20:22]) * 60 * 100
+
+            wordEnd = msEnd + sEnd + mEnd
+            duration = wordEnd - wordStart
+            wordDuration.append(duration)
+            word.append(wordLines[i])
+
+    arr = []
+    for i in range(0,len(sentenceLines),1):
+        # Split the sentence line into fields
+        sentenceFields = sentenceLines[i].split(" ")
+        arr.append(sentenceFields)
+
+    str1 = ""
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(" ")
+        for m in range(0,len(words),1): 
+            # loop every sentenceLines every lyrics
+            str1 += arr[i][m] + ' '
+
+    singleWord = str1.split(" ")
+
+    count2 = 0
+    sentenceWordLine = ""
+    for i in range(2,len(sentenceLines),4):
+        words = sentenceLines[i].split(" ")
+        for m in range(0,len(words),1):
+
+            sentenceWordLine += "{\\kf" + str(wordDuration[count2])+ "}"
+            sentenceWordLine += singleWord[count2] + " "
+            count2 = count2 + 1
+
+        assLine = "Dialogue: 0," + sentenceLines[i-1][0:11].replace(",",".") + "," + sentenceLines[i-1][17:28].replace(",",".") + ",Default,,0000,0000,0000,karaoke," + sentenceWordLine
+        assLines.append(assLine)
+        sentenceWordLine = ""
+
+    # Write the .ass file
+    f = open(f"../media_hub/SrtFiles/{ytId}.ass", "w", encoding="utf-8")
+    f.write( "\n".join(assLines))
+    # f = open("Video.mp4.ass", assLines.join("\n"), "utf-8", "w")
+    print(assLines)
+
+
 job_status = {}
 
 async def background_runner(request, job_id):
@@ -252,8 +377,12 @@ async def background_runner(request, job_id):
 
         job_status[job_id] = 6
         #generated ass file
-        generate_ass (ytId)
-        print("ass generated")
+        if (data["language"] == "English"):
+            generate_ass (ytId)
+            print("ass generated")
+        elif (data["language"] == "English"):
+            generate_zh_ass (ytId)
+            print("ass generated")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (5, status_id))
         conn.commit()
@@ -276,8 +405,15 @@ async def background_runner(request, job_id):
 
         job_status[job_id] = 10
         #save video merged with ass, vocal and accompaniment mp3 to S3
+        bucket = resource_s3.Bucket(BUCKET_NAME)
+        resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}/{ytId}.mp4')
+        print("uploaded mp4 file to s3")
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        print("uploaded accompaniment file to s3")
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        print("uploaded vocals file to s3")
 
-        cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (7, status_id))
+        cur.execute("UPDATE download_status SET status = %s, message = %s WHERE status_id = %s;", (7, "done!", status_id))
         conn.commit()
 
         return json({"success": "true"})

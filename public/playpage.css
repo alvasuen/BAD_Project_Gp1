@@ -28,3 +28,163 @@ a:hover,
 a:visited {
   color: #76daff;
 }
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.video-player {
+  height: 100vh;
+  width: 100vw;
+}
+
+.back {
+  position: absolute;
+  width: 100px;
+  top: 40px;
+  left: 90px;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: transparent;
+  color: rgb(160, 160, 160);
+}
+
+.back:hover {
+  color: white;
+}
+
+.skipPrelude {
+  position: absolute;
+  width: 100px;
+  bottom: 120px;
+  right: 90px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.skipPrelude:hover {
+  background-color: white;
+}
+
+.control-bar {
+  height: 50px;
+  z-index: 10;
+  width: 720px;
+  position: absolute;
+  bottom: 60px;
+  background-color: rgb(160, 160, 160);
+  border-radius: 10px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.vocalButton {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 240px;
+}
+
+.vocalButton div {
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #e4027f;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #e4027f;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(32px);
+  -ms-transform: translateX(32px);
+  transform: translateX(32px);
+}
+
+.middle-function {
+  display: flex;
+  width: 240px;
+}
+
+.middle-function i {
+  margin: 10px;
+  font-size: 25px;
+  color: black;
+}
+
+.middle-function button {
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+}
+
+.full-screen {
+  width: 240px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.full-screen i {
+  margin: 10px;
+  font-size: 25px;
+  color: black;
+}
+
+.full-screen button {
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+}
+
+.hidden {
+  display: none;
+}

@@ -7,16 +7,16 @@ export class PlaylistsController {
     constructor(private playlistsService: PlaylistsService) { }
     loadPlaylist = async (req: Request, res: Response) => {
         try {
-            console.log(req.session.userId, '10');
+            // console.log(req.session.userId, '10');
 
             const userId = req.session.userId!
             const playlists_id = Number(req.params.id)
             // const songs = Number(req.params.songs)
 
-            const songs = await this.playlistsService.loadPlaylist(playlists_id, userId)
+            const result = await this.playlistsService.loadPlaylist(playlists_id, userId)
 
 
-            res.json({ songs })
+            res.json({ result })
         } catch (err) {
             // console.log(err);
             // res.json({ success: false })
@@ -40,5 +40,8 @@ export class PlaylistsController {
             res.json({ success: false })
         }
     }
+
+
+    
 }
 
