@@ -12,8 +12,16 @@ export class SearchService {
   //Get songs by artists id
   getSingerSongs = async (artistsId: number) => {
     return await this.knex
-      .select("songs_name", "image", "songs_id")
-      .where("artists_id", artistsId);
+      .select(
+        "songs_name",
+        "image",
+        "songs_id",
+        "artist_name",
+        "songs.artists_id"
+      )
+      .from("songs")
+      .innerJoin("artists", "songs.artists_id", "artists.artists_id")
+      .where("artists.artists_id", artistsId);
   };
 
   //Get categories_id, area

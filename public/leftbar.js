@@ -52,7 +52,8 @@ document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   document.querySelector(".myPlayListBox").classList.remove("hide");
 
   if (myPlayLists.length === 0) {
-    const res = await fetch("http://localhost:8000/playlists/user", {
+    // const res = await fetch("http://localhost:8000/playlists/user", {
+    const res = await fetch("/playlists/user", {
       method: "GET",
     });
     const json = await res.json();

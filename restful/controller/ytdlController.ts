@@ -2,19 +2,11 @@ import { Request, Response } from "express";
 import ytdl from "ytdl-core";
 import { YtdlService } from "../service/ytdlService";
 import { createWriteStream } from "fs";
-<<<<<<< HEAD
 import fs from "fs";
 import { errorHandler } from "../../error";
 // import fetch from "cross-fetch";
 // const youtubeMp3Converter = require("youtube-mp3-converter");
-=======
-// import fs from "fs";
-import { errorHandler } from "../../error";
-import fetch from "cross-fetch";
-const youtubeMp3Converter = require('youtube-mp3-converter')
 import "../../session";
-
->>>>>>> refs/remotes/origin/main
 
 export class YtdlController {
   constructor(private ytdlService: YtdlService) {
@@ -27,23 +19,22 @@ export class YtdlController {
       let language = req.body.language;
       // console.log(req.body);
       ytdl.getInfo(URL as string).then(async (data) => {
-      // console.log(data);
+        // console.log(data);
 
-      let status_id = await this.ytdlService.download_status(data.videoDetails.title, data.videoDetails.videoId, URL, 0, req.session.userId as number)
-      console.log(status_id);
-        
+        let status_id = await this.ytdlService.download_status(
+          data.videoDetails.title,
+          data.videoDetails.videoId,
+          URL,
+          0,
+          req.session.userId as number
+        );
+        console.log(status_id);
+
         // creates Download function
-<<<<<<< HEAD
         // const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`);
         // await convertLinkToMp3(URL, {
         //   title: `${data.videoDetails.videoId}`,
         // });
-=======
-        const convertLinkToMp3 = youtubeMp3Converter(`./media_hub/audio/`)
-        await convertLinkToMp3(URL, {
-          title: `${data.videoDetails.videoId}`
-        })
->>>>>>> refs/remotes/origin/main
 
         //download video only
         ytdl(URL as string, {
@@ -55,21 +46,14 @@ export class YtdlController {
           )
         );
 
-<<<<<<< HEAD
         await this.ytdlService.newSong(
           data.videoDetails.title,
           data.videoDetails.videoId,
           data.videoDetails.thumbnails.at(-1)
         );
 
-        fetch("http://127.0.0.1:8080/sanicytdl", {
-=======
-        await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-        
-
         //fetch to sanic server for karaoke subtitle processing
-          fetch("http://127.0.0.1:8080/add_job", {
->>>>>>> refs/remotes/origin/main
+        fetch("http://127.0.0.1:8080/add_job", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -77,21 +61,12 @@ export class YtdlController {
           body: JSON.stringify({
             ytId: data.videoDetails.videoId,
             language: language,
-<<<<<<< HEAD
+            status_id: status_id,
           }),
         }).then(() => {
           res.status(200).json({ success: true });
           console.log("fetch success!");
         });
-=======
-            status_id: status_id
-          })
-        }).then(() => {
-          res.status(200).json({ success: true });
-          console.log("fetch success!")
-        })
-
->>>>>>> refs/remotes/origin/main
       });
     } catch (err) {
       console.log(err);

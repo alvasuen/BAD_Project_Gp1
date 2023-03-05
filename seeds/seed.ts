@@ -60,13 +60,12 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
 
   await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
-  await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
   await knex("categories_songs").insert([
-    { songs_id: 1, categories_id: 1 },
+    { songs_id: 1, categories_id: 2 },
     { songs_id: 2, categories_id: 2 },
     { songs_id: 3, categories_id: 2 },
-    { songs_id: 4, categories_id: 2 },
-    { songs_id: 5, categories_id: 2 },
+    { songs_id: 4, categories_id: 1 },
+    { songs_id: 5, categories_id: 1 },
   ]);
 
   await knex("playlists").insert([
