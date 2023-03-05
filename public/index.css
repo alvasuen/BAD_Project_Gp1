@@ -57,3 +57,20 @@
  }
 
  @media (max-width: 768px) {}
+
+ /* Scroll Bar */
+ /* Webkit - Mac OS X */
+ ::-webkit-scrollbar {
+   width: none;
+ }
+
+ /* MS - Windows */
+ /* ::-ms-scrollbar {
+   width: none;
+ } */
+
+ /* .panel::-webkit-scrollbar {
+   display: none;
+  
+ } */
+ /* Safari and Chrome */

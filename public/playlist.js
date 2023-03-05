@@ -11,6 +11,7 @@ async function main() {
   // getPlaylist(id);
   // showPlayButton();
   // hidePlayButton();
+  getPlaylist()
 }
 
 async function getPlaylist(id) {
@@ -18,10 +19,10 @@ async function getPlaylist(id) {
     method: "GET",
   });
   const json = await res.json();
-  console.log("json", json);
+  // console.log("json", json);
   if (json.result) {
     // loadSongs(json.result);
-    console.log(json.result, "23");
+    // console.log(json.result, "23");
     const playlistsContainer = document.querySelector(".playlist-body");
     playlistsContainer.innerHTML = "";
     for (let song in json.result.songs) {
@@ -53,15 +54,18 @@ async function getPlaylist(id) {
 
     // add location to playpage.html
     //play all songs in playlist
-    let playBtn = document.querySelector(".playBtn");
-    playBtn.addEventListener("click", () => {
+    let playBtnBtn = document.querySelector(".playlist-body");
+    console.log('test playBtn');
+    playBtnBtn.addEventListener("click", (e) => {
+      console.log('playBtn clicked');
+      e.preventDefault();
       window.location = `./playpage.html?id=playlist-${json.result.playlist[0].playlists_id}`;
-      // console.log(json.result.playlist[0].playlists_id);
+      console.log(json.result.playlist[0].playlists_id);
     });
 
 
 
-    
+
   }
 }
 
