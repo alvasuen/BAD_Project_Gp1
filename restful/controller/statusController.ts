@@ -12,6 +12,8 @@ export class StatusController {
     statusCheck = async(req:Request, res:Response)=>{
         try{
             const result = await this.statusService.statusCheck(req.session.userId as number)
+            console.log(result);
+            
             // console.log(req.session.userId);
             // console.log(result);
             
@@ -24,6 +26,7 @@ export class StatusController {
         }
 
     }
+
 
 }
 

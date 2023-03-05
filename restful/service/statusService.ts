@@ -18,7 +18,8 @@ export class StatusService {
                     await this.knex("download_status").update("message","Download timeout!").where("status_id", check[i].status_id)
                 }
             }
-            let result = await this.knex.select("title", "image", "status", "message").from ("download_status").where ("users_id", id).orderBy("status_id", "DESC")
+            let result = await this.knex.select("title", "image", "status", "message", "ytId", "songs_id").from ("download_status").where ("users_id", id).orderBy("created_at", "DESC")
+            
             return result;
         }
 

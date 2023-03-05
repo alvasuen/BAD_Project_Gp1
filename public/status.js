@@ -1,13 +1,22 @@
 window.onload = async () => {
   let res = await fetch("/videos/download/job_status");
   let json = await res.json();
-  console.log(json);
+  // console.log(json.result[0].songs_id);
 
   let container = document.querySelector(".container");
 
   for (let i = 0; i < json.result.length + 1; i++) {
-    let progressBarContainer = document.createElement("div");
+    let progressBarContainer = document.createElement("a");
     progressBarContainer.className = "progressBarContainer";
+    progressBarContainer.style.cursor = "pointer";
+    progressBarContainer.style.backgroundColor = "#fbf9f932";
+    progressBarContainer.style.padding = "15px";
+    progressBarContainer.style.textDecoration = "none";
+    progressBarContainer.style.color = "white";
+    console.log("TT", json.result[i].songs_id);
+    progressBarContainer.href =
+      "./playpage.html?id=" + `${json.result[i].songs_id}`;
+
     let conatiner_two = document.createElement("div");
     conatiner_two.className = "conatiner_two";
     let song_title = document.createElement("h3");
@@ -44,11 +53,13 @@ window.onload = async () => {
     li_6.innerHTML = "Step 7";
     let li_7 = document.createElement("li");
     li_7.id = "step7";
-    li_7.innerHTML = "Step 8";
-    let status_msg = document.createElement("div")
-    status_msg.innerHTML = `${json.result[i].message}`
-
-    console.log(json.result[i]);
+    li_7.innerHTML = "DONE!";
+    let status_msg = document.createElement("div");
+    status_msg.innerHTML = `${json.result[i].message}`;
+    let add = document.createElement("div");
+    add.classList.add("add");
+    add.id = `${json.result[i].songs_id}`;
+    add.innerHTML = `<i class="fa-solid fa-plus"></i>`;
 
     progressbar.appendChild(li_0);
     progressbar.appendChild(li_1);
@@ -65,6 +76,7 @@ window.onload = async () => {
     videoImgContainer.appendChild(img);
     progressBarContainer.appendChild(conatiner_two);
     progressBarContainer.appendChild(progressBarWrapper);
+    container.appendChild(add);
     container.appendChild(progressBarContainer);
 
     if (json.result[i].status == 0) {
@@ -113,8 +125,35 @@ window.onload = async () => {
       li_7.classList.add("done");
     }
 
-    if(json.result[i].status == "Duplicated! Please enjoy the karaoke video by searching it in our library!"){
-        status_msg.style.color = "red"
+    if (
+      json.result[i].status ==
+      "Duplicated! Please enjoy the karaoke video by searching it in our library!"
+    ) {
+      status_msg.style.color = "red";
     }
+
+    let addBtns = document.querySelectorAll(".add");
+    addBtns.forEach((addBtn) => {
+      addBtn.addEventListener("click", async (event) => {
+        event.preventDefault();
+        document
+          .querySelector(".generate-post-container")
+          .classList.remove("hidden");
+        let res = await fetch("/playlists/user");
+        let res_json = await res.json();
+        console.log(res_json);
+
+        if (i == 0) {
+          for (j = 0; j < res_json.length; j++) {
+            let playlist = document.createElement("div");
+            playlist.id = `id-${i}`;
+            playlist.innerHTML = `${res_json[j].playlists_name}`;
+            document.querySelector(".generate-post").appendChild(playlist);
+          }
+        } else {
+          return;
+        }
+      });
+    });
   }
 };
