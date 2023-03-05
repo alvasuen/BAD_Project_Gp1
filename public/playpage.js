@@ -22,8 +22,10 @@ async function karaoke(id) {
   const json = await res.json();
   // console.log(json.mp4);
   console.log(json);
+  console.log(json.mp4);
+  console.log(json.mp4.length);
 
-  if (json.mp4.length > 1) {
+  if (Array.isArray(json.mp4)) {
     for (let i = 0; i < json.mp4.length; i++) {
       videoPlayer.src = json.mp4[0];
       vocal.src = json.vocal[0];
@@ -38,6 +40,8 @@ async function karaoke(id) {
     videoPlayer.src = json.mp4;
     vocal.src = json.vocal;
     bgm.src = json.accompaniment;
+
+    console.log(123);
 
     playlistArr.push(json.mp4);
     vocalArr.push(json.vocal);
