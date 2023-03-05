@@ -34,6 +34,7 @@
     "listening-on": "^2.0.9",
     "pg": "^8.9.0",
     "populate-env": "^2.0.0",
+    "sqlite3": "^5.1.4",
     "youtube-mp3-converter": "^1.0.3",
     "ytdl-core": "^4.11.2"
   },
