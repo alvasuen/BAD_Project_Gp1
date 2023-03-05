@@ -45,7 +45,7 @@ export class YtdlService {
     } 
 
     download_update = async (id:number|any, status_id : number|any)=>{
-        await this.knex.insert({songs_id: id}).into("download_status").where(status_id, status_id)
+        await this.knex("download_status").update({songs_id: id}).where(status_id, status_id)
         
     }
 

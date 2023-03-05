@@ -70,4 +70,5 @@ searchRoutes.get("/area", isLoggedInAPI, searchController.loadArea);
 searchRoutes.get("/language", isLoggedInAPI, searchController.loadArea);
 // searchRoutes.get("/searchall", isLoggedInAPI, searchController.);
 
-statusRoutes.get("/download/job_status", statusController.statusCheck);
+//status
+statusRoutes.get("/download/job_status", isLoggedInAPI, statusController.statusCheck);

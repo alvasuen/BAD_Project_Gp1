@@ -413,7 +413,7 @@ async def background_runner(request, job_id):
         resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
         print("uploaded vocals file to s3")
 
-        cur.execute("UPDATE download_status SET status = %s, messgae = %s WHERE status_id = %s;", (7, "done!", status_id))
+        cur.execute("UPDATE download_status SET status = %s, message = %s WHERE status_id = %s;", (7, "done!", status_id))
         conn.commit()
 
         return json({"success": "true"})

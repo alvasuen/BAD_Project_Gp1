@@ -68,7 +68,10 @@ export class YtdlController {
           console.log("fetch success!")
         })
       let a = await this.ytdlService.newSong(data.videoDetails.title, data.videoDetails.videoId, data.videoDetails.thumbnails.at(-1))
-      await this.ytdlService.download_update(a, status_id)
+      
+      console.log(a[0]["songs_id"]);
+      
+      await this.ytdlService.download_update(a[0]["songs_id"], status_id)
       res.status(200).json({ success: true });
       });
     } catch (err) {
