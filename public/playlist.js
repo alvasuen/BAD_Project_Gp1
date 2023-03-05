@@ -11,7 +11,7 @@ async function main() {
   // getPlaylist(id);
   // showPlayButton();
   // hidePlayButton();
-  getPlaylist()
+  getPlaylist();
 }
 
 async function getPlaylist(id) {
@@ -55,9 +55,9 @@ async function getPlaylist(id) {
     // add location to playpage.html
     //play all songs in playlist
     let playBtn = document.querySelector(".playBtn");
-    console.log('test playBtn');
-    playBtn.addEventListener("click", (e) => {
-      console.log('playBtn clicked');
+    console.log("test playBtn");
+    playBtn.addEventListener("click", () => {
+      console.log("playBtn clicked");
       window.location = `./playpage.html?id=playlist-${json.result.playlist[0].playlists_id}`;
     });
   }

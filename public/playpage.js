@@ -23,29 +23,28 @@ async function karaoke(id) {
   // console.log(json.mp4);
   console.log(json);
   console.log(json.mp4);
-  console.log(json.mp4.length);
 
   if (Array.isArray(json.mp4)) {
     for (let i = 0; i < json.mp4.length; i++) {
       videoPlayer.src = json.mp4[0];
-      vocal.src = json.vocal[0];
+      vocal.src = json.vocals[0];
       bgm.src = json.accompaniment[0];
 
       playlistArr.push(json.mp4[i]);
-      vocalArr.push(json.vocal[i]);
+      vocalArr.push(json.vocals[i]);
       bgmArr.push(json.accompaniment[i]);
       console.log(playlistArr);
     }
   } else {
     videoPlayer.src = json.mp4;
-    vocal.src = json.vocal;
+    vocal.src = json.vocals;
     bgm.src = json.accompaniment;
 
-    console.log(123);
-
     playlistArr.push(json.mp4);
-    vocalArr.push(json.vocal);
+    vocalArr.push(json.vocals);
     bgmArr.push(json.accompaniment);
+
+    console.log(json.vocals);
   }
 }
 
@@ -161,16 +160,16 @@ forward.addEventListener("click", () => {
   }
 });
 
-let backward = document.querySelector(".backward");
-backward.addEventListener("click", () => {
-  if (videoPlayer.currentTime - 10 >= 0) {
-    videoPlayer.currentTime = videoPlayer.currentTime - 10;
-    bgm.currentTime = bgm.currentTime - 10;
-    vocal.currentTime = vocal.currentTime - 10;
-  } else {
-    return;
-  }
-});
+// let backward = document.querySelector(".backward");
+// backward.addEventListener("click", () => {
+//   if (videoPlayer.currentTime - 10 >= 0) {
+//     videoPlayer.currentTime = videoPlayer.currentTime - 10;
+//     bgm.currentTime = bgm.currentTime - 10;
+//     vocal.currentTime = vocal.currentTime - 10;
+//   } else {
+//     return;
+//   }
+// });
 
 function openFullscreen() {
   if (mainContainer.requestFullscreen) {
@@ -354,14 +353,14 @@ window.onload = async function () {
 //   }
 // }
 
-// // backward function
-// function backward() {
-//   if (videoPlayer.currentTime - 10 >= 0) {
-//     videoPlayer.currentTime = videoPlayer.currentTime - 10;
-//     bgm.currentTime = bgm.currentTime - 10;
-//     vocal.currentTime = vocal.currentTime - 10;
-//   }
-// }
+// backward function
+function backward() {
+  if (videoPlayer.currentTime - 10 >= 0) {
+    videoPlayer.currentTime = videoPlayer.currentTime - 10;
+    bgm.currentTime = bgm.currentTime - 10;
+    vocal.currentTime = vocal.currentTime - 10;
+  }
+}
 
 // // full screen whole function
 // function openFullscreen() {
