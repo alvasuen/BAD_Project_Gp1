@@ -26,9 +26,10 @@ async function getPlaylist(id) {
     playlistsContainer.innerHTML = "";
     for (let song in json.result.songs) {
       // console.log(playlist);
+      let songId = parseInt(song) + 1;
       playlistsContainer.innerHTML += /* html */ `
     <div class="playlist-c">
-    <div class="playlist-id" >${json.result.songs[song].songs_id}</div>
+    <div class="playlist-id" >${songId}</div>
     <div class="playlist-img">
     <img src=${json.result.songs[song].image}>
     </div>
@@ -51,6 +52,8 @@ async function getPlaylist(id) {
     playlistCover.appendChild(playlistCoverImg);
   }
 }
+
+let pla
 
 // add song function
 //   let playButton = document.querySelectorAll(".playlist-showPlay");
