@@ -52,12 +52,12 @@ async function getPlaylist(id) {
   let playlistPlay = document.querySelectorAll(".playlist-showPlay")
 
   function showPlayButton() {
-    console.log("showPlayButton");
+    // console.log("showPlayButton");
     let playButton = document.querySelectorAll('.playlist')
-    console.log(playButton)
+    // console.log(playButton)
     for (let number of playButton) {
       number.addEventListener("mouseenter", e => {
-        console.log('function showPlayButton is called');
+        // console.log('function showPlayButton is called');
         number.querySelector('.playlist-showPlay').style.display = 'unset';
         number.querySelector('.playlist-id').style.display = 'none';
         playlistPlay.classList.remove("hidden")
@@ -66,11 +66,11 @@ async function getPlaylist(id) {
     }
   }
   function hidePlayButton() {
-    console.log("hidePlayButton");
+    // console.log("hidePlayButton");
     let playButton = document.querySelectorAll('.playlist')
     for (let number of playButton) {
       number.addEventListener("mouseleave", e => {
-        console.log('function hidePlayButton is called');
+        // console.log('function hidePlayButton is called');
         number.querySelector('.playlist-showPlay').style.display = 'none';
         number.querySelector('.playlist-id').style.display = 'unset';
         playlistPlay.classList.add("hidden")

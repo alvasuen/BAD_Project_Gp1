@@ -21,7 +21,7 @@ document.querySelector(
 
 <div class="page like-song">
     <ion-icon name="heart-circle"></ion-icon>
-    <span>liked songs</span>
+    <span>Liked Song</span>
 </div>
 
 </div>
