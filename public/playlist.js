@@ -14,14 +14,14 @@ async function main() {
 }
 
 async function getPlaylist(id) {
-  const res = await fetch(`http://localhost:8000/playlists/all/${id}`, {
+  const res = await fetch(`./playlists/all/${id}`, {
     method: "GET",
   });
   const json = await res.json();
-  // console.log("json", json);
+  console.log("json", json);
   if (json.result) {
     // loadSongs(json.result);
-    // console.log(json.result, '23');
+    console.log(json.result, "23");
     const playlistsContainer = document.querySelector(".playlist-body");
     playlistsContainer.innerHTML = "";
     for (let song in json.result.songs) {
@@ -34,7 +34,7 @@ async function getPlaylist(id) {
     <img src=${json.result.songs[song].image}>
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
-    <a class="playlist-showPlay" href="http://localhost:8000/playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    <a class="playlist-showPlay" href="./playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
     <!-- <div class="remove-song"><i class="fa-solid fa-trash"></i></div> -->
     </div>
         `;
@@ -43,13 +43,25 @@ async function getPlaylist(id) {
     const playlistContentName = document.querySelector(
       ".playlist-content-name"
     );
-    playlistContentName.innerHTML = `${json.result.playlistName[0].playlists_name}`;
+    playlistContentName.innerHTML = `${json.result.playlist[0].playlists_name}`;
 
     let playlistCover = document.querySelector(".playlist-cover");
     let playlistCoverImg = document.createElement("img");
     playlistCoverImg.classList.add("playlist-cover-img");
     playlistCoverImg.src = `${json.result.songs[0].image}`;
     playlistCover.appendChild(playlistCoverImg);
+
+    // add location to playpage.html
+    //play all songs in playlist
+    let playBtn = document.querySelector(".playBtn");
+    playBtn.addEventListener("click", () => {
+      window.location = `./playpage.html?id=playlist-${json.result.playlist[0].playlists_id}`;
+      // console.log(json.result.playlist[0].playlists_id);
+    });
+
+
+
+    
   }
 }
 

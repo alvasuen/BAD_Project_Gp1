@@ -21,12 +21,14 @@ export class PlaylistsService {
             .where("playlists_id", id);
         })
         .orderBy("songs.songs_id", "asc");
-      let playlistName = await this.knex("playlists")
-        .select("playlists_name")
+      let playlist = await this.knex("playlists")
+        .select("playlists_name","playlists_id")
         .where("playlists_id", id);
+        console.log();
+        
 
       console.log(songs);
-      return { songs, playlistName };
+      return { songs, playlist };
     } catch (err: any) {
       throw new Error(err.message);
     }
