@@ -58,6 +58,7 @@ userRoutes.get("/getUser", isLoggedInAPI, userController.getUser);
 
 //Playlist
 playlistRoutes.get("/all/:id", isLoggedInAPI, playListController.loadPlaylist);
+playlistRoutes.post("/creation", isLoggedInAPI, playListController.createPlaylist);
 playlistRoutes.post("/songs", isLoggedInAPI, playListController.addSongToPlayList);
 playlistRoutes.get(
   "/user",

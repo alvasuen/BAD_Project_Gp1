@@ -139,3 +139,21 @@ window.onload = async function () {
 
   await loadProfile(id);
 };
+
+
+
+let createPlaylistBtn = document.querySelector("#createPlaylistBtn")
+let createPlaylistInput = document.querySelector("#createPlaylist")
+createPlaylistBtn.addEventListener("click",async (event)=>{
+  // event.preventDefault();
+  // console.log(createPlaylistInput.value);
+  let res=await fetch("/playlists/creation",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({content:createPlaylistInput.value})
+  })
+  res_json = res.json();
+  if (!res_json.success){
+    alert("Playlist creation failed! Please try again later!")
+  }
+})
