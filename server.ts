@@ -30,7 +30,7 @@ app.use("/playlists", playlistRoutes);
 app.use("/", profileRoutes);
 app.use("/", searchRoutes);
 app.use("/videos", ytdlRoutes);
-app.use("/videos", isLoggedInAPI, statusRoutes);
+app.use("/status", isLoggedInAPI, statusRoutes);
 app.use("/", karaokeRoutes);
 app.use("/playlists", playlistSongRoutes);
 

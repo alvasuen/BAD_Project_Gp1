@@ -58,4 +58,12 @@ export class PlaylistsService {
       songs_id: songs_id
     })
   }
+
+  createPlaylist = async(playlists_name: string, users_id:number)=>{
+    await this.knex("playlists")
+    .insert({
+      playlists_name: playlists_name,
+      users_id: users_id
+    })
+  }
 }
