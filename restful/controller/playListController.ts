@@ -16,7 +16,7 @@ export class PlaylistsController {
             const result = await this.playlistsService.loadPlaylist(playlists_id, userId)
 
 
-            res.json({ result,});
+            res.json({ result});
         } catch (err) {
             // console.log(err);
             // res.json({ success: false })
@@ -46,7 +46,6 @@ export class PlaylistsController {
             let playlists_id = req.body.playlists_id
             let songs_id = req.body.songs_id
             console.log(playlists_id,songs_id );
-            
             await this.playlistsService.addSongToPlayList(playlists_id, songs_id)
             res.json({success:true})
         }catch (err){
