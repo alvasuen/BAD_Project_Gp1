@@ -97,7 +97,7 @@ function createSongBox(json) {
       index < json.profilePlaylistSongs[num].length;
       index++
     ) {
-      console.log("innerIndex", index);
+      // console.log("innerIndex", index);
       let songBox = document.createElement("div");
       songBox.classList.add("song-box");
       let songCover = document.createElement("img");
