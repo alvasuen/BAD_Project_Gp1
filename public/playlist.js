@@ -53,8 +53,6 @@ async function getPlaylist(id) {
   }
 }
 
-let pla
-
 // add song function
 //   let playButton = document.querySelectorAll(".playlist-showPlay");
 //   function showPlayButton() {

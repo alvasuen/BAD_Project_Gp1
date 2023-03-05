@@ -1,10 +1,11 @@
 .form {
-    background-color: white;
+    background-color: black;
     display: flex;
     justify-content: center;
     width: -webkit-fill-available;
     position: fixed;
     height: 50%;
+    color: white;
 }
 
 #signup-form {
@@ -39,4 +40,10 @@
 
 .input-group input {
     width: 100%;
+}
+
+.signUpBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

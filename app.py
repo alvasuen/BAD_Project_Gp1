@@ -9,11 +9,11 @@ client_s3 = boto3.client("s3", region_name=AWS_REGION_NAME)
 resource_s3 = boto3.resource("s3", region_name=AWS_REGION_NAME)
 
 # List all buckets
-# for bucket in resource_s3.buckets.all():
-#     pass
-#     # print (bucket.name)
+for bucket in resource_s3.buckets.all():
+    pass
+    print (bucket.name)
 
-# # List all objects in a bucket
+# List all objects in a bucket
 # bucket = resource_s3.Bucket(BUCKET_NAME)
 
 # Upload file
@@ -27,8 +27,8 @@ resource_s3.meta.client.upload_file('./uploads/k4V3Mo61fJM.mp4', BUCKET_NAME, 'k
 
 
 
-for obj in bucket.objects.all():
-    pass
+# for obj in bucket.objects.all():
+#     pass
     # print(obj.key)
 
 #Generate a presigned URL for the S3 object

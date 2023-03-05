@@ -10,14 +10,23 @@ export class SearchController {
     try {
       //Get artists id and artists name
       const singers = await this.searchService.getAllSinger();
+      // console.log("test id", singers[0].artists_id);
+      // console.log("length:", singers.length);
 
-      let singerId = req.body.singer_id;
-      //Get all the songs by the artists id
-      const singerSongs = await this.searchService.getSingerSongs(singerId);
+      let songsArr = [];
+      for (let index = 0; index < singers.length; index++) {
+        let singerId = singers[index].artists_id;
+        // console.log("singerIds", singerId);
+
+        //Get all the songs by the artists id
+        let singerSongs = await this.searchService.getSingerSongs(singerId);
+        songsArr.push(...singerSongs);
+        // console.log("songsArr", songsArr);
+      }
 
       res.json({
         success: true,
-        singerSongs,
+        songsArr,
       });
     } catch (err) {
       errorHandler(err, req, res);
@@ -28,14 +37,20 @@ export class SearchController {
     try {
       //Get category id and area
       const area = await this.searchService.getArea();
+      console.log(area);
 
-      let categoryId = req.body.categories_id;
-      //Get all the songs by the categories_id
-      const areaSongs = await this.searchService.getAreaSongs(categoryId);
+      let songsArr = [];
+      for (let index = 0; index < area.length; index++) {
+        // Get all the songs by the categories_id
+        let areaSongs = await this.searchService.getAreaSongs(
+          area[index].categories_id
+        );
+        songsArr.push(...areaSongs);
+      }
 
       res.json({
         success: true,
-        areaSongs,
+        songsArr,
       });
     } catch (err) {
       errorHandler(err, req, res);
