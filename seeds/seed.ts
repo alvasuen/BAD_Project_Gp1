@@ -25,6 +25,8 @@ export async function seed(knex: Knex): Promise<void> {
     },
   ]);
 
+   await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
+
   await knex("artists").insert([
     { artist_name: "Singer" },
     { artist_name: "Joji" },
@@ -143,8 +145,6 @@ export async function seed(knex: Knex): Promise<void> {
       yt_id: "vx2u5uUu3DE",
     },
   ]);
-
-  await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
 
   await knex("categories_songs").insert([
     { songs_id: 1, categories_id: 2 },
