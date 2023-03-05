@@ -19,6 +19,7 @@ export class StatusService {
                 }
             }
             let result = await this.knex.select("title", "image", "status", "message", "ytId", "songs_id").from ("download_status").where ("users_id", id).orderBy("created_at", "DESC")
+            
             return result;
         }
 

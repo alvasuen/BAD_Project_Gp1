@@ -33,7 +33,7 @@ async function karaoke(id) {
 
 let back = document.querySelector(".back");
 back.addEventListener("click", () => {
-  location.href = "http://localhost:8000/index.html";
+  location.href = "./index.html";
 });
 
 videoPlayer.addEventListener("ended", () => {
@@ -50,7 +50,7 @@ videoPlayer.addEventListener("ended", () => {
   videoPlayer.play();
 
   if (playlistArr == "") {
-    location.href = "http://localhost:8000/index.html";
+    location.href = "./index.html";
   }
 });
 
