@@ -34,6 +34,7 @@ async function getPlaylist(id) {
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
     <a class="playlist-showPlay" href="http://localhost:8000/playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    <div class="remove-song"><i class="fa-solid fa-trash"></i></div>
     </div>
         `;
     }
@@ -51,7 +52,7 @@ async function getPlaylist(id) {
   }
 }
 
-  // add song function
+// add song function
 //   let playButton = document.querySelectorAll(".playlist-showPlay");
 //   function showPlayButton() {
 //     // console.log(playButton);
