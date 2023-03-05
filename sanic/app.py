@@ -379,18 +379,19 @@ async def background_runner(request, job_id):
         #generated ass file
         if (data["language"] == "English"):
             generate_ass (ytId)
-            print("en ass generated")
-        elif (data["language"] == "Mandarin"):
-            generate_zh_ass (ytId)
-            print("zh ass generated")
+            print("ass generated")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (5, status_id))
         conn.commit()
 
         job_status[job_id] = 8
         #merge videos and ass subtitles
-        subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
-        print("Merge video with subtitles")
+        if (data["language"] == "English"):
+            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
+            print("Merge video with subtitles")
+        elif (data["language"] == "Mandarin"):
+            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'subtitles='+'../media_hub/SrtFiles/'+ ytId +'_sentence.srt', f'../media_hub/combined/{ytId}.mp4'])
+            print("Merge video with subtitles")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (6, status_id))
         conn.commit()
@@ -408,16 +409,15 @@ async def background_runner(request, job_id):
         bucket = resource_s3.Bucket(BUCKET_NAME)
         resource_s3.meta.client.upload_file(f'../media_hub/combined/{ytId}.mp4', BUCKET_NAME, f'{ytId}/{ytId}.mp4')
         print("uploaded mp4 file to s3")
-        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav', BUCKET_NAME, f'{ytId}/{ytId}_accompaniment.wav')
         print("uploaded accompaniment file to s3")
-        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav', BUCKET_NAME, f'{ytId}/{ytId}.wav')
+        resource_s3.meta.client.upload_file(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav', BUCKET_NAME, f'{ytId}/{ytId}_vocals.wav')
         print("uploaded vocals file to s3")
 
         cur.execute("UPDATE download_status SET status = %s, message = %s WHERE status_id = %s;", (7, "done!", status_id))
         conn.commit()
 
         return json({"success": "true"})
-
 
     except Exception as e:
         print(e)
