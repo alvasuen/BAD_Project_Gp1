@@ -17,7 +17,7 @@ sendBtn.addEventListener("click", async (event) => {
     alert("Please make sure you have fill in the link and select the language!")
     return;
     }else if (!URLinputValue.includes("watch?v=")||!URLinputValue.includes("youtube.com")){
-     alert("Invalid URL! Only video link for youtube.com is supported!")
+     alert("Invalid URL! Only video link from youtube.com is supported!")
      return;      
   }else{
   try{

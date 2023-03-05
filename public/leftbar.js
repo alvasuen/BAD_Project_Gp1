@@ -26,6 +26,8 @@ async function add_bar (){
     <div id="toggleBtn" class="page my-song">
     <ion-icon name="diamond"></ion-icon>
     <span>My Playlists</span>
+    <div createPlaylistContainer>
+    </div>
 </div>    
 <ul class="myPlayListBox hide"></ul>
 

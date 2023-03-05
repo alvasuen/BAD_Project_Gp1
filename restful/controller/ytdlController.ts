@@ -83,8 +83,7 @@ export class YtdlController {
           data.videoDetails.thumbnails.at(-1)
         );
 
-        console.log(a[0]["songs_id"]);
-
+        console.log({status_id});
         await this.ytdlService.download_update(a[0]["songs_id"], status_id);
         res.status(200).json({ success: true });
       });
