@@ -223,11 +223,6 @@ window.onload = async function () {
 //   reg_logout_event();
 // }
 
-// let playlistArr = ["./test/fixyoumv_ass.mp4", "./test/fixyoumv_ass.mp4"];
-// let vocalArr = ["./test/fixyou_vocal.wav"];
-// let bgmArr = ["./test/fixyou_accompaniment.wav"];
-// let preludeArr = [9.26, 9.26];
-
 // let videoPlayer = document.querySelector(".video-player");
 // let vocalBtn = document.querySelector(".vocalBtn");
 // let vocal = document.querySelector(".vocal");
@@ -280,6 +275,7 @@ window.onload = async function () {
 //   videoPlayer.currentTime = 0;
 //   bgm.currentTime = 0;
 //   vocal.currentTime = 0;
+// }
 
 //   videoPlayer.play();
 //   bgm.play();

@@ -15,8 +15,6 @@ body {
   align-items: center;
   margin-bottom: 10px;
   height: 55px;
-  text-decoration: inherit;
-  color: inherit;
 }
 
 .playlist-body .playlist:hover {
@@ -56,7 +54,7 @@ body {
 .playlist-content {
   color: white;
   font-family: "Times New Roman", Times, serif;
-  margin-left: 10px;
+  margin-left: 40px;
   width: 800px;
 }
 
@@ -139,7 +137,7 @@ body {
 .playlist-title {
   display: flex;
   justify-content: flex-start;
-  width: 1025px;
+  width: 900px;
   margin-left: 10px;
 }
 
@@ -154,4 +152,12 @@ body {
 
 .playlist-showPlay {
   cursor: pointer;
+  text-decoration: inherit;
+  color: rgb(210, 207, 207);
+  font-size: 20px;
+}
+
+.playlist-showPlay:hover {
+  color: white;
+  transform: scale(1.1, 1.1);
 }
