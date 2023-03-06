@@ -45,6 +45,11 @@ export async function seed(knex: Knex): Promise<void> {
     { artist_name: "Novo Amor" },
     { artist_name: "Bon Jovi" },
     { artist_name: "Coldplay" },
+    { artist_name: "Kelly Clarkson" },
+    { artist_name: "Adam Levine" },
+    { artist_name: "Eason CHan" },
+    { artist_name: "Ivana Wong" },
+    { artist_name: "Idina Menzel" },
   ]);
 
   await knex("songs").insert([
@@ -145,6 +150,43 @@ export async function seed(knex: Knex): Promise<void> {
       image: "https://i.ytimg.com/vi/vx2u5uUu3DE/sddefault.jpg",
       yt_id: "vx2u5uUu3DE",
     },
+    {
+      songs_name: "Coldplay - Christmas Lights (Official Video)",
+      artists_id: 16,
+      image: "https://i.ytimg.com/vi/z1rYmzQ8C9Q/maxresdefault.jpg",
+      yt_id: "z1rYmzQ8C9Q",
+    },
+    {
+      songs_name: "Kelly Clarkson - Catch My Breath (Official Video_",
+      artists_id: 17,
+      image: "https://i.ytimg.com/vi_webp/HEValZuFYRU/maxresdefault.webp",
+      yt_id: "HEValZuFYRU",
+    },
+    {
+      songs_name: "Adam Levine - Lost Stars (from Begin Again)",
+      artists_id: 18,
+      image: "https://i.ytimg.com/vi/cL4uhaQ58Rk/maxresdefault.jpg",
+      yt_id: "cL4uhaQ58Rk",
+    },
+    {
+      songs_name: "陳奕迅 - 讓我留在你身邊(高音質版)",
+      artists_id: 19,
+      image: "https://i.ytimg.com/vi_webp/bWdawOZ0mDI/maxresdefault.webp",
+      yt_id: "bWdawOZ0mDI",
+    },
+    {
+      songs_name: "王菀之 Ivana Wong - 我真的受傷了 (The Magical Teeter Totter演唱會2017)",
+      artists_id: 20,
+      image: "https://i.ytimg.com/vi/xZAvtEcUnpw/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBkgEyh_MA8=&rs=AOn4CLAnWi2QJeD0zkCq4lbd-6Xthtn5qg",
+      yt_id: "xZAvtEcUnpw",
+    },
+    {
+      songs_name: "Disney's Frozen Let It Go Sequence Performed by Idina Menzel",
+      artists_id: 21,
+      image: "https://i.ytimg.com/vi/moSFlvxnbgk/maxresdefault.jpg",
+      yt_id: "moSFlvxnbgk",
+    },
+  
   ]);
 
   await knex("categories_songs").insert([
@@ -164,6 +206,11 @@ export async function seed(knex: Knex): Promise<void> {
     { songs_id: 14, categories_id: 2 },
     { songs_id: 15, categories_id: 2 },
     { songs_id: 16, categories_id: 2 },
+    { songs_id: 17, categories_id: 2 },
+    { songs_id: 18, categories_id: 2 },
+    { songs_id: 19, categories_id: 1 },
+    { songs_id: 20, categories_id: 1 },
+    { songs_id: 21, categories_id: 2 },
   ]);
 
   await knex("playlists").insert([
