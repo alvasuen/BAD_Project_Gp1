@@ -40,6 +40,14 @@ body {
   top: 0px;
 }
 
+.ytdl {
+  display: flex;
+}
+
+.ytdlSpan {
+  margin-left: 6px;
+}
+
 .karaoke-img {
   font-size: 30px;
   margin: 10px;

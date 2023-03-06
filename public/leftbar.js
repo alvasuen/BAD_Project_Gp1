@@ -37,8 +37,8 @@ async function add_bar() {
 </div>
 
 <div class="page ytdl">
-    <ion-icon name="heart-circle"></ion-icon>
-    <span>Youtube to Karaoke</span>
+    <div class="sum-icon"><ion-icon name="heart-circle"></ion-icon></div>
+    <div class="ytdlSpan"><span>Youtube to Karaoke</span></div>
 </div>
 `;
 

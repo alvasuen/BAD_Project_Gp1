@@ -139,6 +139,7 @@ body::-webkit-scrollbar-thumb {
 
 .responsive {
   display: flex;
+  width: fit-content;
 }
 
 .song-cover {
@@ -219,3 +220,20 @@ body::-webkit-scrollbar-thumb {
     height: ;
 }
 } */
+
+.sliderContainer {
+  display: flex;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  margin: 30px;
+}
+
+.sliderContainer>* {
+  user-select: none;
+
+}
+
+img {
+  pointer-events: none;
+}
