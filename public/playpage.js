@@ -74,9 +74,9 @@ videoPlayer.addEventListener("ended", () => {
   }
 });
 
-videoPlayer.addEventListener("error", () => {
-  console.log(`Error loading ${videoPlayer.src}.`);
-});
+// videoPlayer.addEventListener("error", () => {
+//   console.log(`Error loading ${videoPlayer.src}.`);
+// });
 
 // show control bar
 onmousemove = (event) => {
@@ -121,6 +121,10 @@ skip.addEventListener("click", () => {
   bgm.src = bgmArr[0];
 
   console.log(playlistArr);
+
+   if (playlistArr == "") {
+     location.href = "./index.html";
+   }
 });
 
 // switch vocal and bgm function
