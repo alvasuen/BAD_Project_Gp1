@@ -10,6 +10,7 @@ function createSongBox(json) {
 
   //Create the playlist div
   // for (let num = 0; num < json.profilePlaylistSongs.length; num++) {
+    console.log(json.profilePlaylist);
   for (let num = 0; num < json.profilePlaylist.length; num++) {
     // console.log(`第${num}次Playlist`);
     let playlistName = json.profilePlaylist[num].playlists_name;
@@ -105,11 +106,13 @@ window.onload = async function () {
   }
 };
 
-if (login) {
+// if (login) {
   let createPlaylistBtn = document.querySelector("#createPlaylistBtn");
+  console.log(createPlaylistBtn);
   let createPlaylistInput = document.querySelector("#createPlaylist");
   createPlaylistBtn.addEventListener("click", async (event) => {
     event.preventDefault();
+    console.log(123);
     let res = await fetch("/playlists/creation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -130,4 +133,4 @@ if (login) {
       await loadProfile(id);
     }
   });
-}
+// }

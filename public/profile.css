@@ -7,18 +7,46 @@ body {
   /* overflow: auto; */
 }
 
+/* body::-webkit-scrollbar{
+  color: transparent;
+} 
+body:horizontal::-webkit-scrollbar{
+
+  color: transparent;
+} 
+
+body::-webkit-scrollbar {
+  width: none ;
+  display: none;
+  }
+  body:horizontal::-webkit-scrollbar {
+    width: none ;
+    display: none;
+    overflow: hidden;
+    }
+body::-webkit-scrollbar-corner {
+  display: none;
+}
+  
+body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+  } */
+
 .coverContainer {
-  height: 220px;
-  width: 100%;
   /* position: fixed; */
+  object-fit: cover;
+  width: 100%;
+  height: 20%;
+  margin: 0px;
+  z-index: -1;
+  margin-top: 2.5%;
 }
 
 .cover {
   object-fit: cover;
   width: 100%;
   margin: 0px;
-  background-color: aliceblue;
-  /* position: fixed; */
 }
 
 .icon {
@@ -26,11 +54,16 @@ body {
   height: 250px;
   border-radius: 50%;
   background-color: aliceblue;
-  position: relative;
+  /* position: relative; */
   bottom: 160px;
   left: 50px;
   /* position: fixed; */
   /* overflow: hidden; */
+}
+
+.user-information {
+  display: flex;
+  margin: 20px;
 }
 
 .icon img {
@@ -41,7 +74,7 @@ body {
 
 .pro-username {
   color: white;
-  position: relative;
+  /* position: relative; */
   bottom: 275px;
   left: 400px;
   font-size: 30px;
@@ -49,10 +82,13 @@ body {
   font-family: "Phudu", cursive;
   font-weight: bold;
   /* position: fixed; */
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
 }
 
 .seperator {
-  height: 320px;
+  /* height: 320px; */
 }
 
 .mainContainer {
@@ -135,6 +171,7 @@ body {
 
 .createPlaylistContainer {
   margin-left: 30px;
+  margin-top: 1%;
 }
 
 .createPlaylist {
