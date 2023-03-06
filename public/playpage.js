@@ -14,7 +14,7 @@ let slider = document.querySelector(".slider");
 let playlistArr = [];
 let vocalArr = [];
 let bgmArr = [];
-let preludeArr = [5];
+let preludeArr = [15];
 
 // get karaoke video and audio
 async function karaoke(id) {
@@ -48,11 +48,14 @@ async function karaoke(id) {
   }
 }
 
+// back to home page
 let back = document.querySelector(".back");
 back.addEventListener("click", () => {
   location.href = "./index.html";
 });
 
+
+// when the video finished, back to home page
 videoPlayer.addEventListener("ended", () => {
   // remove current (first) video from playlist
   playlistArr.shift();
@@ -75,11 +78,13 @@ videoPlayer.addEventListener("error", () => {
   console.log(`Error loading ${videoPlayer.src}.`);
 });
 
+// show control bar
 onmousemove = (event) => {
   controlBar.classList.remove("hidden");
   back.classList.remove("hidden");
 };
 
+// hidden control bar if hold mouse 3s
 let timeout;
 document.onmousemove = function () {
   clearTimeout(timeout);
@@ -129,7 +134,7 @@ vocalBtn.addEventListener("click", () => {
   }
 });
 
-// play and pause function
+// pause function
 let pause = document.querySelector(".pause");
 let play = document.querySelector(".play");
 pause.addEventListener("click", () => {
@@ -141,6 +146,7 @@ pause.addEventListener("click", () => {
   pause.classList.add("hidden");
 });
 
+// play function
 play.addEventListener("click", () => {
   videoPlayer.play();
   bgm.play();
@@ -149,6 +155,7 @@ play.addEventListener("click", () => {
   play.classList.add("hidden");
 });
 
+// forward function
 let forward = document.querySelector(".forward");
 forward.addEventListener("click", () => {
   if (videoPlayer.currentTime + 10 <= videoPlayer.duration) {
@@ -160,17 +167,19 @@ forward.addEventListener("click", () => {
   }
 });
 
-// let backward = document.querySelector(".backward");
-// backward.addEventListener("click", () => {
-//   if (videoPlayer.currentTime - 10 >= 0) {
-//     videoPlayer.currentTime = videoPlayer.currentTime - 10;
-//     bgm.currentTime = bgm.currentTime - 10;
-//     vocal.currentTime = vocal.currentTime - 10;
-//   } else {
-//     return;
-//   }
-// });
+// backward function
+let backward = document.querySelector(".backward");
+backward.addEventListener("click", () => {
+  if (videoPlayer.currentTime - 10 >= 0) {
+    videoPlayer.currentTime = videoPlayer.currentTime - 10;
+    bgm.currentTime = bgm.currentTime - 10;
+    vocal.currentTime = vocal.currentTime - 10;
+  } else {
+    return;
+  }
+});
 
+// full screen function
 function openFullscreen() {
   if (mainContainer.requestFullscreen) {
     mainContainer.requestFullscreen();
@@ -206,6 +215,7 @@ fullScreen.addEventListener("click", () => {
   }
 });
 
+// skip prelude function
 let skipPrelude = document.querySelector(".skipPrelude");
 skipPrelude.addEventListener("click", () => {
   videoPlayer.currentTime = preludeArr[0] - 5;
@@ -353,14 +363,14 @@ window.onload = async function () {
 //   }
 // }
 
-// backward function
-function backward() {
-  if (videoPlayer.currentTime - 10 >= 0) {
-    videoPlayer.currentTime = videoPlayer.currentTime - 10;
-    bgm.currentTime = bgm.currentTime - 10;
-    vocal.currentTime = vocal.currentTime - 10;
-  }
-}
+// // backward function
+// function backward() {
+//   if (videoPlayer.currentTime - 10 >= 0) {
+//     videoPlayer.currentTime = videoPlayer.currentTime - 10;
+//     bgm.currentTime = bgm.currentTime - 10;
+//     vocal.currentTime = vocal.currentTime - 10;
+//   }
+// }
 
 // // full screen whole function
 // function openFullscreen() {

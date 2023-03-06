@@ -35,7 +35,9 @@ async function getPlaylist(id) {
     <img src=${json.result.songs[song].image}>
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
+    <div class="playlist-showPlay-container">
     <a class="playlist-showPlay" href="./playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    </div>
     <!-- <div class="remove-song"><i class="fa-solid fa-trash"></i></div> -->
     </div>
         `;

@@ -40,7 +40,7 @@ async function add_bar (){
     <ion-icon name="heart-circle"></ion-icon>
     <span>Youtube to Karaoke</span>
 </div>
-`
+`;
 
 document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
   e.preventDefault();
@@ -115,7 +115,7 @@ document.querySelector(".ytdl").addEventListener("click", (e) => {
     <span>search</span>
     </div>
     </div>
-    `
+    `;
 
     /* Home Page */
   document.querySelector(".karaoke-img").addEventListener("click", (e) => {
@@ -123,19 +123,19 @@ document.querySelector(".ytdl").addEventListener("click", (e) => {
   window.location = "/";
   });
 
-/* Search Page */
-  document.querySelector(".search").addEventListener("click", (e) => {
-  e.preventDefault();
-  window.location.href = "/search.html";
-})
-}}
+    /* Search Page */
+    document.querySelector(".search").addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "/search.html";
+    });
+  }
+}
 
 add_bar();
 
-
 // document.querySelector(
 //   ".left_con"
-// ).innerHTML = /* html */ 
+// ).innerHTML = /* html */
 // `<div class="karaoke-img">
 // <img class="logo" src="logo3.PNG" />
 // <p class="web-name">karaoke</p>
@@ -147,7 +147,6 @@ add_bar();
 // </div>
 
 // </div>`
-
 
 // <!-- <div class="page my-profile hide">
 //     <ion-icon name="duplicate"></ion-icon>
@@ -166,7 +165,6 @@ add_bar();
 // //     right_con.innerHTML = html
 // // }
 
-
 // document.querySelector(".my-song").addEventListener("click", async (e) => {
 //     e.preventDefault();
 //     console.log("hi");
@@ -175,4 +173,3 @@ add_bar();
 //     console.log(json);
 //     // window.location = "/playlist.html?id=" + json.playlists[0]['playlists_id']
 // })
-
