@@ -3,6 +3,7 @@ import { hashPassword } from "../hash";
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
+  await knex("download_status").del();
   await knex("playlists_songs").del();
   await knex("playlists").del();
   await knex("categories_songs").del();
