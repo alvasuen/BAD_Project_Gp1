@@ -1,9 +1,6 @@
 document.querySelector(
   ".topBarContainer"
 ).innerHTML = /*html*/ `<div class="topBar">
-<<<<<<< HEAD
-
-=======
 <div class="turn-page-btn btn-left" onclick="history.back()">
 
     <ion-icon name="chevron-back-circle-outline"></ion-icon>
@@ -13,10 +10,9 @@ document.querySelector(
     <ion-icon name="chevron-forward-circle-outline"></ion-icon>
  
 </div>
->>>>>>> refs/remotes/origin/main
 
 <form class="searchForm" id="searchForm">
-<div class="search">
+<div class="search-bar-container">
             <input class="search-bar" name="search" id="search" type="text" placeholder="Search..."></input>
             <button class="searchSubmit" type="submit" id="searchSubmit">Submit</button>
             </div>
