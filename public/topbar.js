@@ -11,9 +11,12 @@ document.querySelector(
  
 </div>
 
-<div class="search">
-    <input class="search-bar" type="text" name="search" id="search" placeholder="Search...">
-</div>
+<form class="searchForm" id="searchForm">
+<div class="search-bar-container">
+            <input class="search-bar" name="search" id="search" type="text" placeholder="Search..."></input>
+            <button class="searchSubmit" type="submit" id="searchSubmit">Submit</button>
+            </div>
+          </form>
 
 <div class="user-status">
 <div class="user-name"></div>
@@ -24,7 +27,3 @@ document.querySelector(
 //     e.preventDefault();
 //     window.location = "/login.html";
 // })
-
-
-
-

@@ -3,6 +3,7 @@ import { hashPassword } from "../hash";
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
+  await knex("download_status").del();
   await knex("playlists_songs").del();
   await knex("playlists").del();
   await knex("categories_songs").del();
@@ -24,6 +25,8 @@ export async function seed(knex: Knex): Promise<void> {
       password: await hashPassword("123456"),
     },
   ]);
+
+   await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
 
   await knex("artists").insert([
     { artist_name: "Singer" },
@@ -143,8 +146,6 @@ export async function seed(knex: Knex): Promise<void> {
       yt_id: "vx2u5uUu3DE",
     },
   ]);
-
-  await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
 
   await knex("categories_songs").insert([
     { songs_id: 1, categories_id: 2 },

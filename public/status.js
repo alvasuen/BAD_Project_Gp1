@@ -1,5 +1,5 @@
 window.onload = async () => {
-  let res = await fetch("/videos/download/job_status");
+  let res = await fetch("/status/download/job_status");
   let json = await res.json();
   // console.log(json.result[0].songs_id);
 

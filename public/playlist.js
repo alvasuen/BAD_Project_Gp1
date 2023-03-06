@@ -11,7 +11,7 @@ async function main() {
   // getPlaylist(id);
   // showPlayButton();
   // hidePlayButton();
-  // getPlaylist()
+  getPlaylist();
 }
 
 async function getPlaylist(id) {
@@ -35,7 +35,9 @@ async function getPlaylist(id) {
     <img src=${json.result.songs[song].image}>
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
+    <div class="playlist-showPlay-container">
     <a class="playlist-showPlay" href="./playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    </div>
     <!-- <div class="remove-song"><i class="fa-solid fa-trash"></i></div> -->
     </div>
         `;
@@ -54,18 +56,12 @@ async function getPlaylist(id) {
 
     // add location to playpage.html
     //play all songs in playlist
-    let playBtnBtn = document.querySelector(".playlist-body");
-    console.log('test playBtn');
-    playBtnBtn.addEventListener("click", (e) => {
-      console.log('playBtn clicked');
-      e.preventDefault();
+    let playBtn = document.querySelector(".playBtn");
+    console.log("test playBtn");
+    playBtn.addEventListener("click", () => {
+      console.log("playBtn clicked");
       window.location = `./playpage.html?id=playlist-${json.result.playlist[0].playlists_id}`;
-      console.log(json.result.playlist[0].playlists_id);
     });
-
-
-
-
   }
 }
 

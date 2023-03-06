@@ -7,6 +7,32 @@ body {
   /* overflow: auto; */
 }
 
+/* body::-webkit-scrollbar{
+  color: transparent;
+} 
+body:horizontal::-webkit-scrollbar{
+
+  color: transparent;
+} 
+
+body::-webkit-scrollbar {
+  width: none ;
+  display: none;
+  }
+  body:horizontal::-webkit-scrollbar {
+    width: none ;
+    display: none;
+    overflow: hidden;
+    }
+body::-webkit-scrollbar-corner {
+  display: none;
+}
+  
+body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+  } */
+
 .coverContainer {
   /* position: fixed; */
   object-fit: cover;
