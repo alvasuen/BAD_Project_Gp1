@@ -1,7 +1,21 @@
 //Login button
 let login = false;
-
+let slider_arr = []
 //TODO Remove element when the page loading
+function playSongs() {	
+  let songBoxs = document.querySelectorAll(".song-box");	
+  console.log("songBoxs", songBoxs);	
+  //add event listener	
+  for (let songBox of songBoxs) {	
+    songBox.addEventListener("click", (event) => {	
+      // console.log("CLICK!");	
+      let getId = songBox.id.slice(2);	
+      console.log("getId", getId);	
+      // e.preventDefault();	
+      window.location.href = `./playpage.html?id=${getId}`;	
+    });	
+  }	
+}
 
 //TODO Create song box function
 const mainContainer = document.querySelector(".ppContainer");
@@ -26,6 +40,7 @@ function createSongBox(json) {
     let sliderRes = document.createElement("div");
     sliderRes.classList.add("slider");
     sliderRes.classList.add("responsive");
+    sliderRes.id = `slider-${num}`;
 
     console.log(
       "profilePlaylistSongs.length",
@@ -49,8 +64,18 @@ function createSongBox(json) {
       sliderRes.appendChild(songBox);
       profilePlaylist.appendChild(playlistTitle);
       profilePlaylist.appendChild(sliderRes);
+      let sliderContainer = document.createElement("section");	
+    sliderContainer.classList.value = `sliderContainer ${num}`;	
+    profilePlaylist.appendChild(sliderContainer)	
+    sliderContainer.appendChild(sliderRes);
       // profilePlaylist.appendChild(readMore);
       mainContainer.appendChild(profilePlaylist);
+      slider_arr.push({	
+        sliderContainerIsClick: false,	
+        starting_point: 0,	
+        ending_point: 0,	
+        move_pos: 0	
+      })
     }
     //Create the div of songs in each playlist
     for (
@@ -61,6 +86,10 @@ function createSongBox(json) {
       // console.log("innerIndex", index);
       let songBox = document.createElement("div");
       songBox.classList.add("song-box");
+      songBox.setAttribute(	
+        "id",	
+        `s-${json.profilePlaylistSongs[num][index].songs_id}`	
+      );
       let songCover = document.createElement("img");
       songCover.classList.add("song-cover");
       songCover.src = `${json.profilePlaylistSongs[num][index].image}`;
@@ -78,6 +107,39 @@ function createSongBox(json) {
     // profilePlaylist.appendChild(readMore);
     mainContainer.appendChild(profilePlaylist);
   }
+  playSongs()
+  reg_mouse_down_up_event()	
+  reg_slider_container_mouse_move_event()	
+}	
+let idx = 0	
+function reg_mouse_down_up_event() {	
+  let AllContainer = document.querySelectorAll(".sliderContainer")	
+  for (let eachContainer of AllContainer) {	
+    eachContainer.addEventListener("mousedown", e => {	
+      idx = eachContainer.classList.value.split(" ")[1]	
+      slider_arr[`${idx}`].sliderContainerIsClick = true	
+      slider_arr[`${idx}`].starting_point = e.clientX	
+      // ending_point = localStorage.getItem("end")	
+    })	
+  }	
+  document.querySelector(".wrapper").addEventListener("mouseup", e => {	
+    slider_arr[`${idx}`].sliderContainerIsClick = false	
+    slider_arr[`${idx}`].ending_point += slider_arr[`${idx}`].move_pos	
+  })	
+}	
+function reg_slider_container_mouse_move_event() {	
+  let all_slider_container = document.querySelectorAll(".sliderContainer")	
+  for (let eachContainer of all_slider_container) {	
+    eachContainer.addEventListener("mousemove", e => {	
+      if (slider_arr[`${idx}`].sliderContainerIsClick) {	
+        slider_arr[`${idx}`].move_pos = slider_arr[`${idx}`].starting_point - e.clientX	
+        let slider = document.querySelector(`#slider-${idx}`)	
+        slider.style.transform = `translate(-${slider_arr[`${idx}`].ending_point + slider_arr[`${idx}`].move_pos}px, 0px)`	
+      }	
+    })	
+  }	
+  // let pos = parseInt(id)	
+  // document.querySelector(".slider-container").style.transition = `${width * }`
 }
 
 //TODO Load the profile page
