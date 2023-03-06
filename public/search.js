@@ -12,9 +12,40 @@ window.onload = async (e) => {
   loadArea();
   loadEngSongs();
   loadZhSongs();
+  showPlaylistContent ()
 };
 
 const resultS = document.querySelector(".result-songs");
+
+async function showPlaylistContent (){
+  let playlistsContainer = document.querySelector(".playlistsContainer")
+  let res = await fetch ("/playlists/user")
+  let playlistsContent = await res.json();
+  console.log(playlistsContent)
+  for (let i =0; i<playlistsContent.length; i++){
+    let div = document.createElement("div")
+    div.innerHTML =  `${playlistsContent[i].playlists_name}`
+    div.id = `${playlistsContent[i].playlists_id}`
+    div.className = "playlistItems"
+    playlistsContainer.appendChild(div)
+  }
+}
+
+async function addPlaylistFunc(){
+  let playlistBtns = document.querySelectorAll(".playlistItems")
+  playlistBtns.forEach((btn)=>{
+    btn.addEventListener("click",(event)=>{
+      console.log("123");
+    })
+    
+  })
+
+}
+
+
+
+
+
 
 //Show the play button on each song
 function showPlayBtn(songId, isLogin) {
@@ -23,9 +54,11 @@ function showPlayBtn(songId, isLogin) {
   //TODO log 出黎啱，但去嘅網頁唔係呢個id？？
   let shadows = document.querySelectorAll(".shadow");
   for (let shadow of shadows) {
+    console.log(shadows.length);
     shadow.addEventListener("mouseover", (event) => {
       let showBtn = event.currentTarget.querySelector(".btn-play");
       showBtn.classList.remove("hidden");
+    
       //add event listener
       showBtn.addEventListener("click", (event) => {
         // e.preventDefault();
@@ -37,12 +70,20 @@ function showPlayBtn(songId, isLogin) {
         addBtn.classList.remove("hidden");
         //add event listener
         addBtn.addEventListener("click", (event) => {
+          document.querySelector(".generate-post-container").classList.remove("hidden");
+          
+          addPlaylistFunc()
+
+
           console.log("Add Plush!!!");
           // e.preventDefault();
           // window.location.href = `./playpage.html?id=${songId}`;
         });
+        
       }
     });
+    
+    
     shadow.addEventListener("mouseout", (event) => {
       let showBtn = event.currentTarget.querySelector(".btn-play");
       showBtn.classList.add("hidden");
@@ -54,29 +95,7 @@ function showPlayBtn(songId, isLogin) {
   }
 }
 
-//Show the add button on each song
-// function showAddBtn() {
-//   console.log("FN_ID:", songId);
-//   console.log("HERF", `./playpage.html?id=${songId}`);
-//   //TODO log 出黎啱，但去嘅網頁唔係呢個id？？
-//   let shadows = document.querySelectorAll(".shadow");
-//   for (let shadow of shadows) {
-//     shadow.addEventListener("mouseover", (event) => {
-//       let addBtn = event.currentTarget.querySelector(".add");
-//       addBtn.classList.remove("hidden");
-//       //add event listener
-//       addBtn.addEventListener("click", (event) => {
-//         console.log("Add Plush!!!");
-//         // e.preventDefault();
-//         // window.location.href = `./playpage.html?id=${songId}`;
-//       });
-//     });
-//     shadow.addEventListener("mouseout", (event) => {
-//       let addBtn = event.currentTarget.querySelector(".add");
-//       addBtn.classList.add("hidden");
-//     });
-//   }
-// }
+
 
 //Classify Songs
 function classifySongs(json) {
@@ -473,6 +492,8 @@ function loadEngSongs() {
       resultS.appendChild(typeBox);
       // showPlayBtn();
       for (let index = 0; index < eng.length; index++) {
+        // console.log(eng.length);
+        // console.log(json.song);
         showPlayBtn(json.songsArr[index].songs_id, login);
       }
     } else if (shows) {
