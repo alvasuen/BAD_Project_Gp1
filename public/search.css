@@ -175,6 +175,30 @@ body {
   border-radius: 70%;
 }
 
+.add {
+  /* background-color: gainsboro;
+  color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+   */
+  color: #47d760;
+  font-size: 38px;
+  bottom: 85px;
+  left: 30px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.add:hover {
+  color: #7de78f;
+  font-size: 43px;
+}
+
 .hidden {
   display: none;
 }

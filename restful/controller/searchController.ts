@@ -74,21 +74,45 @@ export class SearchController {
   //Get all the result of different tables from user input
   loadSearchInput = async (req: Request, res: Response) => {
     try {
+      console.log(req.body);
+
       let searchContent = req.body.userInput;
+
       //From songs table
       const getSongs = await this.searchService.getSearchInputSong(
         searchContent
       );
+      console.log("getSongs", getSongs);
+
+      // let songsSearchArr = [];
+      // if (getSongs.length > 0) {
+      //   //step2: find the songs_id by artist_id
+      //   for (let num = 0; num < getSongs.length; num++) {
+      //     let songsSong = await this.searchService.getSingerSongs(
+      //       getSongs[num].songs_id
+      //     );
+      //     songsSearchArr.push(songsSong);
+      //   }
+      // }
 
       //From artists table
       //step1: get artists_id
       const getArtists = await this.searchService.getSearchInputArtist(
         searchContent
       );
-      //step2: find the songs_id by artist_id
-      const artistsSongs = await this.searchService.getArtSongs(
-        getArtists.artist_id
-      );
+
+      console.log("getArtists", getArtists);
+
+      let artistsSearchArr = [];
+      if (getArtists.length > 0) {
+        //step2: find the songs_id by artists_id
+        for (let num = 0; num < getArtists.length; num++) {
+          let artistsSong = await this.searchService.getArtSongs(
+            getArtists[num].artists_id
+          );
+          artistsSearchArr.push(...artistsSong);
+        }
+      }
 
       //From categories table
       //step1: get categories_id
@@ -96,24 +120,53 @@ export class SearchController {
         searchContent
       );
 
-      //step2: find the songs_id by categories_id
-      const placeSongs = await this.searchService.getPSongs(
-        getArea.categories_id
-      );
+      console.log("getArea", getArea);
+
+      let areaSearchArr = [];
+      if (getArea.length > 1) {
+        //step2: find the songs_id by artist_id
+        for (let num = 0; num < getArea.length; num++) {
+          //step2: find the songs_id by categories_id
+          let placeSongs = await this.searchService.getPSongs(
+            getArea[num].categories_id
+          );
+          areaSearchArr.push(...placeSongs);
+        }
+      }
 
       //Add all songs_id
       let allSongsId = [];
       allSongsId.push(...getSongs);
-      allSongsId.push(...artistsSongs);
-      allSongsId.push(...placeSongs);
+      allSongsId.push(...artistsSearchArr);
+      allSongsId.push(...areaSearchArr);
+      console.log("allSongsId", allSongsId);
 
-      //Remove duplicate id
-      let arrToSet = new Set(allSongsId);
-      let songsIdArr = [...arrToSet];
+      let genAll = [];
+      if (allSongsId.length > 1) {
+        //Remove duplicate id
+        let arrToSet = new Set(allSongsId);
+        let songsIdArr = [...arrToSet];
+        for (let index = 0; index < songsIdArr.length; index++) {
+          let genAllSongs = await this.searchService.getSongsBySId(
+            songsIdArr[index].songs_id
+          );
+          genAll.push(...genAllSongs);
+        }
+      } else {
+        for (let index = 0; index < allSongsId.length; index++) {
+          let genAllSongs = await this.searchService.getSongsBySId(
+            allSongsId[index].songs_id
+          );
+          genAll.push(...genAllSongs);
+        }
+      }
+      console.log("genAll", genAll);
 
       res.json({
         success: true,
-        songsIdArr,
+        genAll,
+        // songsIdArr,
+        // getSongs,
       });
     } catch (err) {
       errorHandler(err, req, res);

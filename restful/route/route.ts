@@ -76,7 +76,7 @@ ytdlRoutes.post("/download", ytdlController.downloadVideo);
 searchRoutes.get("/singer", searchController.loadSinger);
 searchRoutes.get("/area", searchController.loadArea);
 searchRoutes.get("/language", searchController.loadArea);
-// searchRoutes.get("/searchall", isLoggedInAPI, searchController.);
+searchRoutes.post("/search", searchController.loadSearchInput);
 
 statusRoutes.get("/download/job_status", statusController.statusCheck);
 
