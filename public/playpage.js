@@ -5,7 +5,7 @@ async function main() {
 let videoPlayer = document.querySelector(".video-player");
 let vocalBtn = document.querySelector(".vocalBtn");
 let vocal = document.querySelector(".vocal");
-vocal.volume = 0.3;
+vocal.volume = 0.2;
 let bgm = document.querySelector(".bgm");
 let controlBar = document.querySelector(".control-bar");
 let mainContainer = document.querySelector(".main-container");
@@ -27,11 +27,11 @@ async function karaoke(id) {
   if (Array.isArray(json.mp4)) {
     for (let i = 0; i < json.mp4.length; i++) {
       videoPlayer.src = json.mp4[0];
-      vocal.src = json.vocals[0];
+      vocal.src = json.vocal[0];
       bgm.src = json.accompaniment[0];
 
       playlistArr.push(json.mp4[i]);
-      vocalArr.push(json.vocals[i]);
+      vocalArr.push(json.vocal[i]);
       bgmArr.push(json.accompaniment[i]);
       console.log(playlistArr);
     }
@@ -74,9 +74,9 @@ videoPlayer.addEventListener("ended", () => {
   }
 });
 
-videoPlayer.addEventListener("error", () => {
-  console.log(`Error loading ${videoPlayer.src}.`);
-});
+// videoPlayer.addEventListener("error", () => {
+//   console.log(`Error loading ${videoPlayer.src}.`);
+// });
 
 // show control bar
 onmousemove = (event) => {
@@ -121,15 +121,19 @@ skip.addEventListener("click", () => {
   bgm.src = bgmArr[0];
 
   console.log(playlistArr);
+
+   if (playlistArr == "") {
+     location.href = "./index.html";
+   }
 });
 
 // switch vocal and bgm function
 vocalBtn.addEventListener("click", () => {
-  if (vocal.volume == 0.3) {
+  if (vocal.volume == 0.2) {
     vocal.volume = 1;
     console.log("vocal is muted =", vocal.muted);
   } else {
-    vocal.volume = 0.3;
+    vocal.volume = 0.2;
     console.log("vocal is muted =", vocal.muted);
   }
 });

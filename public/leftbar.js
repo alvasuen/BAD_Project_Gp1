@@ -1,17 +1,13 @@
 let isOpen = false;
 let myPlayLists = [];
 
-
 async function add_bar() {
   let res = await fetch("user/getUser");
   let json = await res.json();
   console.log(json);
 
   if (json.isLogin) {
-    document.querySelector(
-      ".left_con"
-    ).innerHTML =
-      `<div class="karaoke-img">
+    document.querySelector(".left_con").innerHTML = `<div class="karaoke-img">
     <img class="logo" src="logo3.PNG" />
     <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>
     <!-- <img src=""> -->
@@ -37,49 +33,54 @@ async function add_bar() {
 </div>
 
 <div class="page ytdl">
+<<<<<<< HEAD
     <div class="sum-icon"><ion-icon name="heart-circle"></ion-icon></div>
     <div class="ytdlSpan"><span>Youtube to Karaoke</span></div>
+=======
+<div class="sum-icon"><ion-icon name="heart-circle"></ion-icon></div>	
+<div class="ytdlSpan"><span>Youtube to Karaoke</span></div>
+>>>>>>> origin
 </div>
 `;
 
-    document.querySelector("#toggleBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      isOpen = !isOpen;
-      if (!isOpen) {
-        document.querySelector(".myPlayListBox").classList.add("hide");
-        return;
-      }
-      document.querySelector(".myPlayListBox").classList.remove("hide");
+    document
+      .querySelector("#toggleBtn")
+      .addEventListener("click", async (e) => {
+        e.preventDefault();
+        isOpen = !isOpen;
+        if (!isOpen) {
+          document.querySelector(".myPlayListBox").classList.add("hide");
+          return;
+        }
+        document.querySelector(".myPlayListBox").classList.remove("hide");
 
-      if (myPlayLists.length === 0) {
-        const res = await fetch("http://localhost:8000/playlists/user", {
-          method: "GET",
-        });
-        const json = await res.json();
-        // console.log(json)
-        myPlayLists = json;
-      }
-      document.querySelector(".myPlayListBox").innerHTML = myPlayLists
-        .map(
-          (obj) => `
+        if (myPlayLists.length === 0) {
+          const res = await fetch("http://localhost:8000/playlists/user", {
+            method: "GET",
+          });
+          const json = await res.json();
+          // console.log(json)
+          myPlayLists = json;
+        }
+        document.querySelector(".myPlayListBox").innerHTML = myPlayLists
+          .map(
+            (obj) => `
       <li class="playlist" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
     `
-        )
-        .join("");
+          )
+          .join("");
 
-      let myPlayListLi = document.querySelectorAll(".playlist");
-      for (let li of myPlayListLi) {
-        li.addEventListener("click", async (e) => {
-          e.preventDefault();
-          let playlistId = e.target.dataset.id;
-          // window.location.href = `/playlist.html?playlistId=${playlistId}`;
-
-          await getPlaylist(playlistId);
-          document.querySelector(".right_con.home").classList.remove("show");
-          document.querySelector(".right_con.playlist").classList.add("show");
-        });
-      }
-    });
+        let myPlayListLi = document.querySelectorAll(".playlist");
+        for (let li of myPlayListLi) {
+          li.addEventListener("click", async (e) => {
+            e.preventDefault();
+            let playlistId = e.target.dataset.id;
+            await getPlaylist(playlistId);
+            document.querySelector(".right_con.home").classList.remove("show");
+            document.querySelector(".right_con.playlist").classList.add("show");
+          });
+        }
+      });
 
     /* Home Page */
     document.querySelector(".karaoke-img").addEventListener("click", (e) => {
@@ -93,20 +94,19 @@ async function add_bar() {
       window.location.href = "/search.html";
     });
 
-    document.querySelector(".download-status").addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location.href = "/status.html";
-    });
+    document
+      .querySelector(".download-status")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = "/status.html";
+      });
 
     document.querySelector(".ytdl").addEventListener("click", (e) => {
       e.preventDefault();
       window.location.href = "/videoLink.html";
     });
-
   } else {
-    document.querySelector(
-      ".left_con"
-    ).innerHTML = `
+    document.querySelector(".left_con").innerHTML = `
     <div class="karaoke-img">
     <img class="logo" src="logo3.PNG" />
     <a class="web-name" href="./index.html" style="color: white; color: inherit; cursor: pointer; text-decoration: inherit;">karaoke</a>

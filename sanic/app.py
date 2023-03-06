@@ -417,6 +417,21 @@ async def background_runner(request, job_id):
         cur.execute("UPDATE download_status SET status = %s, message = %s WHERE status_id = %s;", (7, "done!", status_id))
         conn.commit()
 
+        job_status[job_id] = 11
+        os.remove(f'../media_hub/combined/{ytId}.mp4')
+        os.remove(f'../media_hub/spleeter/{ytId}/{ytId}_accompaniment.wav')
+        os.remove(f'../media_hub/spleeter/{ytId}/{ytId}_vocals.wav')
+        os.remove(f'../media_hub/video/{ytId}.mp4')
+        os.remove(f'../media_hub/audio/{ytId}.mp3')
+        os.remove(f'../media_hub/SrtFiles/{ytId}.ass')
+        os.remove(f'../media_hub/SrtFiles/{ytId}_word.srt')
+        os.remove(f'../media_hub/SrtFiles/{ytId}_sentence.srt')
+        from pathlib import Path
+        q = Path (f'../media_hub/SrtFiles/{ytId}')
+        q.rmdir()
+
+        print("all completed!")
+
         return json({"success": "true"})
 
     except Exception as e:

@@ -144,6 +144,11 @@ window.onload = async () => {
       status_msg.style.color = "red";
     }
 
+
+    window.setTimeout( function() {
+      window.location.reload();
+    }, 30000);
+
     // let addBtns = document.querySelectorAll(".add");
     // // addBtns.forEach((addBtn) => {
     //   addBtns[i].addEventListener("click", async (event) => {
