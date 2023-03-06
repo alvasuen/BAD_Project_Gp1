@@ -27,11 +27,11 @@ async function karaoke(id) {
   if (Array.isArray(json.mp4)) {
     for (let i = 0; i < json.mp4.length; i++) {
       videoPlayer.src = json.mp4[0];
-      vocal.src = json.vocals[0];
+      vocal.src = json.vocal[0];
       bgm.src = json.accompaniment[0];
 
       playlistArr.push(json.mp4[i]);
-      vocalArr.push(json.vocals[i]);
+      vocalArr.push(json.vocal[i]);
       bgmArr.push(json.accompaniment[i]);
       console.log(playlistArr);
     }
@@ -74,9 +74,9 @@ videoPlayer.addEventListener("ended", () => {
   }
 });
 
-videoPlayer.addEventListener("error", () => {
-  console.log(`Error loading ${videoPlayer.src}.`);
-});
+// videoPlayer.addEventListener("error", () => {
+//   console.log(`Error loading ${videoPlayer.src}.`);
+// });
 
 // show control bar
 onmousemove = (event) => {
@@ -121,6 +121,10 @@ skip.addEventListener("click", () => {
   bgm.src = bgmArr[0];
 
   console.log(playlistArr);
+
+   if (playlistArr == "") {
+     location.href = "./index.html";
+   }
 });
 
 // switch vocal and bgm function
