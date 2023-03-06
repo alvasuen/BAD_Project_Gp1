@@ -24,6 +24,26 @@ export async function seed(knex: Knex): Promise<void> {
       username: "userrobot",
       password: await hashPassword("123456"),
     },
+    {
+      email: "alva@gmail.com",
+      username: "alvasuen",
+      password: await hashPassword("123456"),
+    },
+    {
+      email: "cynthia@gmail.com",
+      username: "cynthialo",
+      password: await hashPassword("123456"),
+    },
+    {
+      email: "gayray@gmail.com",
+      username: "gayrayyau",
+      password: await hashPassword("123456"),
+    },
+    {
+      email: "tony@gmail.com",
+      username: "tonywong",
+      password: await hashPassword("123456"),
+    },
   ]);
 
    await knex("categories").insert([{ area: "TaiWan" }, { area: "UK" }]);
