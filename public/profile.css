@@ -151,26 +151,24 @@ body::-webkit-scrollbar-thumb {
   margin-right: 20px;
 }
 
-.song-box {
+.song-box{
   cursor: pointer;
 }
 
-.readmore {
-  text-transform: uppercase;
-  font-size: 10px;
-  color: #14c6c6;
-  margin-top: 10px;
-  margin-left: 90%;
-}
-
-.readmore:hover {
-  cursor: pointer;
-  color: #16dfdf;
-}
-
-.readmore:active {
-  cursor: pointer;
-  color: #14c6c6;
+.readmore {	
+  text-transform: uppercase;	
+  font-size: 10px;	
+  color: #14c6c6;	
+  margin-top: 10px;	
+  margin-left: 90%;	
+}	
+.readmore:hover {	
+  cursor: pointer;	
+  color: #16dfdf;	
+}	
+.readmore:active {	
+  cursor: pointer;	
+  color: #14c6c6;	
 }
 
 .createPlaylistContainer {
@@ -184,20 +182,18 @@ body::-webkit-scrollbar-thumb {
   border-radius: 15px;
 }
 
-.sliderContainer {
-  display: flex;
-  height: fit-content;
-  position: relative;
-  overflow: hidden;
-  margin: 30px;
-}
-
-.sliderContainer>* {
-  user-select: none;
-}
-
-img {
-  pointer-events: none;
+.sliderContainer {	
+  display: flex;	
+  height: fit-content;	
+  position: relative;	
+  overflow: hidden;	
+  margin: 30px;	
+}	
+.sliderContainer>* {	
+  user-select: none;	
+}	
+img {	
+  pointer-events: none;	
 }
 
 /*

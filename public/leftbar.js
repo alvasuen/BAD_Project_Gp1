@@ -33,13 +33,8 @@ async function add_bar() {
 </div>
 
 <div class="page ytdl">
-<<<<<<< HEAD
-    <div class="sum-icon"><ion-icon name="heart-circle"></ion-icon></div>
-    <div class="ytdlSpan"><span>Youtube to Karaoke</span></div>
-=======
 <div class="sum-icon"><ion-icon name="heart-circle"></ion-icon></div>	
 <div class="ytdlSpan"><span>Youtube to Karaoke</span></div>
->>>>>>> origin
 </div>
 `;
 
@@ -55,7 +50,7 @@ async function add_bar() {
         document.querySelector(".myPlayListBox").classList.remove("hide");
 
         if (myPlayLists.length === 0) {
-          const res = await fetch("http://localhost:8000/playlists/user", {
+          const res = await fetch("/playlists/user", {
             method: "GET",
           });
           const json = await res.json();
