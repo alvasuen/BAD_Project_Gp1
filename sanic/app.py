@@ -319,7 +319,7 @@ async def background_runner(request, job_id):
 
         job_status[job_id] = 2
         # Step2: vocal and accompaniment separation
-        subprocess.call(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)])
+        subprocess.call(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', '../media_hub/spleeter', '../media_hub/audio/{}.mp3'.format(ytId)],shell=True)
         print("separation done!")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (2, status_id))
@@ -387,10 +387,10 @@ async def background_runner(request, job_id):
         job_status[job_id] = 8
         #merge videos and ass subtitles
         if (data["language"] == "English"):
-            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'])
+            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'ass='+'../media_hub/SrtFiles/'+ ytId +'.ass', f'../media_hub/combined/{ytId}.mp4'], shell=True)
             print("Merge video with subtitles")
         elif (data["language"] == "Mandarin"):
-            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'subtitles='+'../media_hub/SrtFiles/'+ ytId +'_sentence.srt', f'../media_hub/combined/{ytId}.mp4'])
+            subprocess.call(['ffmpeg', '-i', f'../media_hub/video/{ytId}.mp4', '-vf', 'subtitles='+'../media_hub/SrtFiles/'+ ytId +'_sentence.srt', f'../media_hub/combined/{ytId}.mp4'], shell=True)
             print("Merge video with subtitles")
 
         cur.execute("UPDATE download_status SET status = %s WHERE status_id = %s;", (6, status_id))
