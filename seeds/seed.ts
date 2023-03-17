@@ -185,7 +185,7 @@ export async function seed(knex: Knex): Promise<void> {
       {
         songs_name: "Adele - Easy On Me (Official Video)",
         artists_id: Adele.artists_id,
-        image: "https://i.ytimg.com/vi/U3ASj1LA6_sY/sddefault.jpg",
+        image: "https://i.ytimg.com/vi/U3ASj1L6_sY/sddefault.jpg",
         yt_id: "U3ASj1L6_sY",
       },
       {
@@ -204,13 +204,13 @@ export async function seed(knex: Knex): Promise<void> {
         songs_name:
           "田馥甄演唱会一曲《魔鬼中的天使》，令人心神寧静，實在太好聽了",
         artists_id: Hebe.artists_id,
-        image: "https://i.ytimg.com/vi/tBg4NvJZBI/sddefault.jpg",
-        yt_id: "tBg4NvJZBI",
+        image: "https://i.ytimg.com/vi/_tBg4NvJZBI/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFTyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBq8CEhh4N3lWIWr6hWibDO34W1iw",
+        yt_id: "_tBg4NvJZBI",
       },
       {
         songs_name: "李代沫 - 我的歌聲裏 MV",
         artists_id: lee.artists_id,
-        image: "https://i.ytimg.com/vi/5d3VB4_Gjpk/sddefault.jpg",
+        image: "https://i.ytimg.com/vi/5d3VB4_Gjpk/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB3gOAAo4CigIMCAAQARgwIGUoSjAP&rs=AOn4CLBHR5bUe5k-jJPBTG_XMQAIoLGAGg",
         yt_id: "5d3VB4_Gjpk",
       },
       {
