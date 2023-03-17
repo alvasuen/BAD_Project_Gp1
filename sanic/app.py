@@ -436,7 +436,7 @@ async def background_runner(request, job_id):
 
     except Exception as e:
         print(e)
-        return json({"success": "false"})
+        return json({"success": "false","errMess":str(e)})
 
 import time
 

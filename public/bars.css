@@ -190,6 +190,8 @@ body {
   height: 64px;
   display: flex;
   align-items: center;
+  position: absolute;
+  right:150px;
 }
 
 .username {

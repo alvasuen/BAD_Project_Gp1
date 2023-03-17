@@ -52,6 +52,7 @@ export class PlaylistsService {
   };
 
   addSongToPlayList = async (playlists_id: number, songs_id:number)=>{
+    console.log(playlists_id,songs_id,'service 55')
     await this.knex("playlists_songs")
     .insert({
       playlists_id: playlists_id,

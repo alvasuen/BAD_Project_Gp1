@@ -6,19 +6,21 @@ import whisperx
 
 device = "cpu"
 
-model = whisperx.load_model("medium.en")
+model = whisperx.load_model("medium")
 print("2")
-result = model.transcribe("SomeoneLikeYou.mp4", fp16=False, language='English' )
+result = model.transcribe("那些年.mp4", fp16=False, language='Chinese' )
 # stable_whisper.results_to_sentence_srt(result, 'audio.srt')
 print("3")
-model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
+model_a, metadata = whisperx.load_align_model(language_code="zh", device=device)
 print("4")
-result_aligned = whisperx.align(result["segments"], model_a, metadata, "SomeoneLikeYou.mp4", device)
+result_aligned = whisperx.align(result["segments"], model_a, metadata, "那些年.mp4", device)
 print("5")
 aligned_segments = result_aligned["segments"]
 print("6")
 aligned_word_segments = result_aligned["word_segments"]
 print("7")
+
+print(aligned_segments,aligned_word_segments)
 
 
 def generate_sentence_srt():
@@ -60,8 +62,8 @@ def generate_word_srt ():
     return srtFilename
 
 if __name__ == '__main__':
-    generate_sentence_srt()
+    # generate_sentence_srt()
     print('9')
-    generate_word_srt ()
+    # generate_word_srt ()
     print("10")
 

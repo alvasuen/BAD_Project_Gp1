@@ -64,7 +64,7 @@ export class YtdlController {
         );
 
         //fetch to sanic server for karaoke subtitle processing
-        fetch("http://127.0.0.1:8080/add_job", {
+        let python_res = await fetch("http://127.0.0.1:8080/add_job", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -74,9 +74,12 @@ export class YtdlController {
             language: language,
             status_id: status_id,
           }),
-        }).then(() => {
-          console.log("fetch success!");
-        });
+        })
+
+        let res_json = await python_res.json()
+        if(res_json.success=="false"){
+          throw new Error(res_json.errMess)
+        }
         let a = await this.ytdlService.newSong(
           data.videoDetails.title,
           data.videoDetails.videoId,

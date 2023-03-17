@@ -1,22 +1,37 @@
-window.onload = async () => {
-  let res = await fetch("/status/download/job_status");
-  let json = await res.json();
-  // console.log(json.result[0].songs_id);
 
-  let container = document.querySelector(".container");
-
+async function getPlaylistUser(){
   let playlist_res = await fetch("/playlists/user");
   let res_json = await playlist_res.json();
   console.log(res_json);
+  return res_json
+}
+let json = []
+window.onload = async () => {
 
-  for (j = 0; j < res_json.length; j++) {
+  let playListUsers = await getPlaylistUser()
+  
+  for (j = 0; j < playListUsers.length; j++) {
     let playlist = document.createElement("div");
-    playlist.id = `${res_json[j].playlists_id}`;
+    playlist.id = `${playListUsers[j].playlists_id}`;
     playlist.className = "playlistBtn";
-    playlist.innerHTML = `${res_json[j].playlists_name}`;
+    playlist.innerHTML = `${playListUsers[j].playlists_name}`;
     document.querySelector(".generate-post").appendChild(playlist);
   }
 
+  await getCurrentStatus()
+  await render_process_bar()
+
+};
+
+ 
+async function getCurrentStatus(){
+  let res = await fetch("/status/download/job_status");
+  let res_json = await res.json();
+  json = res_json
+}
+async function render_process_bar(){
+  
+  let container = document.querySelector(".container");
   for (let i = 0; i < json.result.length; i++) {
     let progressBarContainer = document.createElement("a");
     progressBarContainer.className = "progressBarContainer";
@@ -135,6 +150,7 @@ window.onload = async () => {
       li_5.classList.add("done");
       li_6.classList.add("done");
       li_7.classList.add("done");
+      stopScheduler()
     }
 
     if (
@@ -145,40 +161,24 @@ window.onload = async () => {
     }
 
 
-    window.setTimeout( function() {
-      window.location.reload();
-    }, 30000);
+    
 
-    // let addBtns = document.querySelectorAll(".add");
-    // // addBtns.forEach((addBtn) => {
-    //   addBtns[i].addEventListener("click", async (event) => {
-    //     event.preventDefault();
-    //     let generatePostContainer = document.querySelector(".generate-post-container")
-    //     console.log(2434);
-    //      generatePostContainer.classList.remove("hidden");
-
-    //       let playlistBtns = document.querySelectorAll(".playlistBtn");
-    //       playlistBtns.forEach((btn) => {
-    //         btn.addEventListener("click", async (event) => {
-              
-    //           console.log(123);
-    //           document
-    //           .querySelector(".generate-post-container")
-    //           .classList.add("hidden");
-    //           location.href ="./status.html"
-    //           // console.log("playlist"+ btn.id);
-    //           // console.log("addBtn" + addBtn.id);
-    //           await fetch("/playlists/songs", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({
-    //               playlists_id: btn.id,
-    //               songs_id:  addBtns[i].id,
-    //             }),
-    //           });
-    //         });
-    //       // });
-    //   });
-    // });
+    
   }
-};
+}
+
+
+
+const myInterval = setInterval(scheduler, 30000);
+
+
+
+function stopScheduler() {
+  clearInterval(myInterval);
+}
+
+
+async function scheduler(){
+  await getCurrentStatus()
+  await render_process_bar()
+}

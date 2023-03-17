@@ -12,6 +12,7 @@ window.onload = async (e) => {
 
   loadSinger();
   loadLanguage();
+  loadSearch()
 };
 
 const resultS = document.querySelector(".result-songs");
@@ -92,6 +93,7 @@ async function showPlaylistContent() {
 }
 
 function addPlaylistFunc(songId) {
+  
   let playlistBtns = document.querySelectorAll(".playlistItems");
   for (let playlistBtn of playlistBtns) {
     playlistBtn.addEventListener("click", async function () {
@@ -235,7 +237,7 @@ function loadSinger() {
       let arrToSet = new Set(singerIds);
       let singerIdArr = [...arrToSet];
 
-      for (let id = 1; id <= singerIdArr.length; id++) {
+      for (let id = 0; id < singerIdArr.length; id++) {
         let typeBox = document.createElement("div");
         typeBox.classList.add("typeBox");
         let typeContent = "";
@@ -244,7 +246,7 @@ function loadSinger() {
 
         for (let num = 0; num < json.songsArr.length; num++) {
           //Each song will have these elements
-          if (json.songsArr[num].artists_id === id) {
+          if (json.songsArr[num].artists_id === singerIdArr[id]) {
             //Type Name
             typeContent = document.createTextNode(
               json.songsArr[num].artist_name
@@ -278,15 +280,15 @@ function loadSinger() {
             playBtn.classList.add("fa-circle-play");
             playBtn.classList.add("btn-play");
             playBtn.classList.add("hidden");
-            playBtn.setAttribute("id", `p-${json.songsArr[num].songs_id}`);
-
+            // playBtn.setAttribute("id", `p-${json.songsArr[num].songs_id}`);
+            playBtn.id=`p-${json.songsArr[num].songs_id}`
             let addBtn = document.createElement("i");
             addBtn.classList.add("fa-solid");
             addBtn.classList.add("fa-plus");
             addBtn.classList.add("add");
             addBtn.classList.add("hidden");
-            addBtn.setAttribute("id", `a-${json.songsArr[num].songs_id}`);
-
+            // addBtn.setAttribute("id", `a-${json.songsArr[num].songs_id}`);
+            addBtn.id = `a-${json.songsArr[num].songs_id}`;
             songBox.appendChild(shadowContainer);
             shadowContainer.appendChild(shadow);
             shadow.appendChild(imgCon);
@@ -352,7 +354,7 @@ function loadLanguage() {
       let arrToSet = new Set(cateIds);
       let singerIdArr = [...arrToSet];
 
-      for (let id = 1; id <= singerIdArr.length; id++) {
+      for (let id = 0; id <singerIdArr.length; id++) {
         let typeBox = document.createElement("div");
         typeBox.classList.add("typeBox");
         let typeContent = "";
@@ -361,7 +363,7 @@ function loadLanguage() {
 
         for (let num = 0; num < json.songsArr.length; num++) {
           //Each song will have these elements
-          if (json.songsArr[num].categories_id === id) {
+          if (json.songsArr[num].categories_id === singerIdArr[id]) {
             //Type Name
             let areaName = json.songsArr[num].categories_id;
             if (areaName === 1) {
@@ -443,199 +445,12 @@ function loadLanguage() {
   });
 }
 
-// //Language ENG
-// function loadEngSongs() {
-//   const en = document.querySelector(".en");
-//   en.addEventListener("click", async () => {
-//     if (!shows) {
-//       shows = true;
-//       // singers.style.backgroundColor = "#c26b5e";
-//       en.style.backgroundColor = "#d07703";
-
-//       let res = await fetch("/language");
-//       let json = await res.json();
-//       console.log("LAN: ", json);
-//       console.log("json.songsArr.length", json.songsArr.length);
-
-//       if (!json.success) {
-//         alert("Can't find any song");
-//         return;
-//       }
-
-//       const getSongs = classifySongs(json);
-
-//       console.log(getSongs);
-//       let eng = getSongs.engSongs;
-
-//       //TODO Gen songs
-//       let typeBox = document.createElement("div");
-//       typeBox.classList.add("typeBox");
-//       let typeName = document.createElement("div");
-//       typeName.classList.add("type-name");
-
-//       typeName.innerHTML = "english songs";
-//       let songBox = document.createElement("div");
-//       songBox.classList.add("songBox");
-
-//       for (let index = 0; index < eng.length; index++) {
-//         let shadowContainer = document.createElement("div");
-//         shadowContainer.classList.add("shadow-container");
-
-//         let shadow = document.createElement("div");
-//         shadow.classList.add("shadow");
-
-//         let imgCon = document.createElement("div");
-//         imgCon.classList.add("IMG-container");
-
-//         let imgInnerCon = document.createElement("div");
-//         imgInnerCon.classList.add("img-container");
-
-//         let img = document.createElement("img");
-//         img.classList.add("song-cover");
-//         img.src = `${eng[index].image}`;
-
-//         let song_name = document.createElement("div");
-//         song_name.classList.add("song-name");
-//         let nameContent = document.createTextNode(eng[index].name);
-//         song_name.appendChild(nameContent);
-
-//         let playBtn = document.createElement("i");
-//         playBtn.classList.add("fa-solid");
-//         playBtn.classList.add("fa-circle-play");
-//         playBtn.classList.add("btn-play");
-//         playBtn.classList.add("hidden");
-
-//         let addBtn = document.createElement("i");
-//         addBtn.classList.add("fa-solid");
-//         addBtn.classList.add("fa-plus");
-//         addBtn.classList.add("add");
-//         addBtn.classList.add("hidden");
-
-//         songBox.appendChild(shadowContainer);
-//         shadowContainer.appendChild(shadow);
-//         shadow.appendChild(imgCon);
-//         imgCon.appendChild(imgInnerCon);
-//         imgInnerCon.appendChild(img);
-
-//         shadow.appendChild(song_name);
-//         shadow.appendChild(playBtn);
-//         shadow.appendChild(addBtn);
-//       }
-
-//       typeBox.appendChild(typeName);
-//       typeBox.appendChild(songBox);
-//       resultS.appendChild(typeBox);
-//       // showPlayBtn();
-//       for (let index = 0; index < eng.length; index++) {
-//         showPlayBtn(json.songsArr[index].songs_id, login);
-//       }
-//     } else if (shows) {
-//       shows = false;
-//       let resultSongs = document.querySelector(".result-songs");
-//       resultSongs.innerHTML = "";
-//       en.style.backgroundColor = "#efc354";
-//     }
-//   });
-// }
-
-// //Language ZH
-// function loadZhSongs() {
-//   const zhc = document.querySelector(".zh");
-//   zhc.addEventListener("click", async () => {
-//     if (!shows) {
-//       shows = true;
-//       // singers.style.backgroundColor = "#c26b5e";
-//       zhc.style.backgroundColor = "#05270b";
-
-//       let res = await fetch("/language");
-//       let json = await res.json();
-//       console.log("LAN: ", json);
-//       console.log("json.songsArr.length", json.songsArr.length);
-
-//       if (!json.success) {
-//         alert("Can't find any song");
-//         return;
-//       }
-
-//       const getSongs = classifySongs(json);
-
-//       console.log(getSongs);
-//       let zh = getSongs.zhSongs;
-
-//       //Gen songs
-//       let typeBox = document.createElement("div");
-//       typeBox.classList.add("typeBox");
-//       let typeName = document.createElement("div");
-//       typeName.classList.add("type-name");
-
-//       typeName.innerHTML = "chinese songs";
-//       let songBox = document.createElement("div");
-//       songBox.classList.add("songBox");
-
-//       for (let index = 0; index < zh.length; index++) {
-//         let shadowContainer = document.createElement("div");
-//         shadowContainer.classList.add("shadow-container");
-
-//         let shadow = document.createElement("div");
-//         shadow.classList.add("shadow");
-
-//         let imgCon = document.createElement("div");
-//         imgCon.classList.add("IMG-container");
-
-//         let imgInnerCon = document.createElement("div");
-//         imgInnerCon.classList.add("img-container");
-
-//         let img = document.createElement("img");
-//         img.classList.add("song-cover");
-//         img.src = `${zh[index].image}`;
-
-//         let song_name = document.createElement("div");
-//         song_name.classList.add("song-name");
-//         let nameContent = document.createTextNode(zh[index].name);
-//         song_name.appendChild(nameContent);
-
-//         let playBtn = document.createElement("i");
-//         playBtn.classList.add("fa-solid");
-//         playBtn.classList.add("fa-circle-play");
-//         playBtn.classList.add("btn-play");
-//         playBtn.classList.add("hidden");
-
-//         let addBtn = document.createElement("i");
-//         addBtn.classList.add("fa-solid");
-//         addBtn.classList.add("fa-plus");
-//         addBtn.classList.add("add");
-//         addBtn.classList.add("hidden");
-
-//         songBox.appendChild(shadowContainer);
-//         shadowContainer.appendChild(shadow);
-//         shadow.appendChild(imgCon);
-//         imgCon.appendChild(imgInnerCon);
-//         imgInnerCon.appendChild(img);
-
-//         shadow.appendChild(song_name);
-//         shadow.appendChild(playBtn);
-//         shadow.appendChild(addBtn);
-//       }
-
-//       typeBox.appendChild(typeName);
-//       typeBox.appendChild(songBox);
-//       resultS.appendChild(typeBox);
-//       // showPlayBtn();
-//       for (let index = 0; index < zh.length; index++) {
-//         showPlayBtn(json.songsArr[index].songs_id, login);
-//       }
-//     } else if (shows) {
-//       shows = false;
-//       let resultSongs = document.querySelector(".result-songs");
-//       resultSongs.innerHTML = "";
-//       zhc.style.backgroundColor = "#08a024";
-//     }
-//   });
-// }
 
 //User Input Search
 const searchContent = document.querySelector("#search");
 const searchBtn = document.querySelector("#searchSubmit");
+
+function loadSearch(){
 searchBtn.addEventListener("click", async (event) => {
   event.preventDefault();
   resultSongs.innerHTML = "";
@@ -716,14 +531,15 @@ searchBtn.addEventListener("click", async (event) => {
     playBtn.classList.add("fa-circle-play");
     playBtn.classList.add("btn-play");
     playBtn.classList.add("hidden");
-    playBtn.classList.add(`id-${json.genAll[id].songs_id}`);
-
+    // playBtn.classList.add(`id-${json.genAll[id].songs_id}`);
+    playBtn.id=`p-${json.genAll[id].songs_id}`;
     let addBtn = document.createElement("i");
     addBtn.classList.add("fa-solid");
     addBtn.classList.add("fa-plus");
     addBtn.classList.add("add");
     addBtn.classList.add("hidden");
-    addBtn.classList.add(`id-${json.genAll[id].songs_id}`);
+    // addBtn.classList.add(`id-${json.genAll[id].songs_id}`);
+    addBtn.id=`a-${json.genAll[id].songs_id}`;
 
     document.querySelector(".result-songs").appendChild(typeBox);
     // typeBox.appendChild(typeName);
@@ -745,3 +561,5 @@ searchBtn.addEventListener("click", async (event) => {
   playSongs();
   addSongs();
 });
+
+}

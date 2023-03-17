@@ -13,7 +13,9 @@ async function main() {
   // hidePlayButton();
   getPlaylist();
 }
-
+function handleGoToPlayer(id){
+  window.location.href = "playpage.html?id=" + id
+}
 async function getPlaylist(id) {
   const res = await fetch(`./playlists/all/${id}`, {
     method: "GET",
@@ -25,9 +27,11 @@ async function getPlaylist(id) {
     // console.log(json.result, "23");
     const playlistsContainer = document.querySelector(".playlist-body");
     playlistsContainer.innerHTML = "";
+    
     for (let song in json.result.songs) {
       // console.log(playlist);
       let songId = parseInt(song) + 1;
+      let dbSongId = json.result.songs[song].songs_id
       playlistsContainer.innerHTML += /* html */ `
     <div class="playlist-c">
     <div class="playlist-id" >${songId}</div>
@@ -36,7 +40,7 @@ async function getPlaylist(id) {
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
     <div class="playlist-showPlay-container">
-    <a class="playlist-showPlay" href="./playpage.html?id=${json.result.songs[song].songs_id}"><i class="fa-solid fa-play"></i></a>
+    <a class="playlist-showPlay" onclick="handleGoToPlayer(${dbSongId})"><i class="fa-solid fa-play"></i></a>
     </div>
     <!-- <div class="remove-song"><i class="fa-solid fa-trash"></i></div> -->
     </div>
