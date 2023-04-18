@@ -1,5 +1,6 @@
 let isOpen = false;
 let myPlayLists = [];
+let currentPlaylistId = 1;
 
 async function add_bar() {
   let res = await fetch("user/getUser");
@@ -60,7 +61,7 @@ async function add_bar() {
         document.querySelector(".myPlayListBox").innerHTML = myPlayLists
           .map(
             (obj) => `
-      <li class="playlist" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
+      <li class="playlist" id="${obj.playlists_id}" data-id="${obj.playlists_id}">${obj.playlists_name}</li>
     `
           )
           .join("");
@@ -73,6 +74,8 @@ async function add_bar() {
             await getPlaylist(playlistId);
             document.querySelector(".right_con.home").classList.remove("show");
             document.querySelector(".right_con.playlist").classList.add("show");
+            currentPlaylistId = playlistId;
+            //await main();
           });
         }
       });

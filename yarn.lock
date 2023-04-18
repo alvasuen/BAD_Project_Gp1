@@ -1726,11 +1726,6 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
-"fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
-
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -2904,10 +2899,10 @@
     "fluent-ffmpeg" "^2.1.2"
     "ytdl-core" "^4.5.0"
 
-"ytdl-core@^4.11.2", "ytdl-core@^4.5.0":
-  "integrity" "sha512-D939t9b4ZzP3v0zDvehR2q+KgG97UTgrTKju3pOPGQcXtl4W6W5z0EpznzcJFu+OOpl7S7Ge8hv8zU65QnxYug=="
-  "resolved" "https://registry.npmjs.org/ytdl-core/-/ytdl-core-4.11.2.tgz"
-  "version" "4.11.2"
+"ytdl-core@^4.11.4", "ytdl-core@^4.5.0":
+  "integrity" "sha512-tsVvqt++B5LSTMnCKQb4H/PFBewKj7gGPJ6KIM5gOFGMKNZj4qglGAl4QGFG8cNPP6wY54P80FDID5eN2di0GQ=="
+  "resolved" "https://registry.npmjs.org/ytdl-core/-/ytdl-core-4.11.4.tgz"
+  "version" "4.11.4"
   dependencies:
     "m3u8stream" "^0.8.6"
     "miniget" "^4.2.2"
