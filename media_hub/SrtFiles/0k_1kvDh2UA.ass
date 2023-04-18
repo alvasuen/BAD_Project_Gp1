@@ -1,0 +1,53 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 384
+PlayResY: 288
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,18,&Hffffff,&Hff66ff,&H0,&H0,0,0,0,0,100,100,0,0,1,1,0,2,10,10,10,0
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,00:00:01.32,00:00:05.54,Default,,0000,0000,0000,karaoke,{\kf62}How {\kf72}long {\kf122}before {\kf74}I {\kf48}get {\kf44}in? 
+Dialogue: 0,00:00:21.02,00:00:23.69,Default,,0000,0000,0000,karaoke,{\kf52}Before {\kf22}it {\kf64}starts, {\kf61}before {\kf18}I {\kf50}begin 
+Dialogue: 0,00:00:25.18,00:00:27.87,Default,,0000,0000,0000,karaoke,{\kf38}How {\kf74}long {\kf57}before {\kf22}you {\kf78}decide 
+Dialogue: 0,00:00:28.34,00:00:31.11,Default,,0000,0000,0000,karaoke,{\kf14}But {\kf58}before {\kf26}I {\kf52}know {\kf43}what {\kf16}it {\kf46}feels {\kf22}like 
+Dialogue: 0,00:00:32.92,00:00:35.53,Default,,0000,0000,0000,karaoke,{\kf86}Where {\kf43}to, {\kf46}where {\kf22}do {\kf22}I {\kf42}go? 
+Dialogue: 0,00:00:36.16,00:00:38.97,Default,,0000,0000,0000,karaoke,{\kf12}If {\kf26}you {\kf42}never {\kf92}tried {\kf17}then {\kf26}you'll {\kf46}never {\kf20}know 
+Dialogue: 0,00:00:40.76,00:00:43.61,Default,,0000,0000,0000,karaoke,{\kf48}How {\kf72}long {\kf27}do {\kf20}I {\kf26}have {\kf14}to {\kf78}climb 
+Dialogue: 0,00:00:44.24,00:00:47.61,Default,,0000,0000,0000,karaoke,{\kf16}Up {\kf24}on {\kf14}the {\kf90}side {\kf6}of {\kf33}this {\kf58}mountain {\kf16}of {\kf80}mine 
+Dialogue: 0,00:01:04.96,00:01:06.91,Default,,0000,0000,0000,karaoke,{\kf34}Look {\kf31}up, {\kf18}I {\kf28}look {\kf8}up {\kf14}at {\kf62}night 
+Dialogue: 0,00:01:07.60,00:01:10.81,Default,,0000,0000,0000,karaoke,{\kf46}Planets {\kf22}are {\kf81}moving {\kf14}at {\kf12}the {\kf46}speed {\kf14}of {\kf86}light 
+Dialogue: 0,00:01:11.92,00:01:18.35,Default,,0000,0000,0000,karaoke,{\kf102}Climb {\kf42}up, {\kf24}up {\kf22}in {\kf24}the {\kf78}trees {\kf45}Every {\kf36}chance {\kf20}that {\kf22}you {\kf78}get {\kf20}is {\kf20}a {\kf56}chance {\kf18}you {\kf36}seize 
+Dialogue: 0,00:01:20.26,00:01:26.87,Default,,0000,0000,0000,karaoke,{\kf68}How {\kf24}long {\kf12}am {\kf14}I {\kf40}gonna {\kf129}stand {\kf76}When {\kf24}my {\kf38}head's {\kf56}stuck {\kf28}under {\kf36}the {\kf116}sand 
+Dialogue: 0,00:01:27.70,00:01:33.93,Default,,0000,0000,0000,karaoke,{\kf12}I'll {\kf78}stop {\kf62}before {\kf26}I {\kf22}can {\kf74}stop {\kf46}Or {\kf57}before {\kf18}I {\kf72}see {\kf32}things {\kf22}the {\kf34}right {\kf16}way {\kf52}up 
+Dialogue: 0,00:01:37.16,00:01:40.51,Default,,0000,0000,0000,karaoke,{\kf26}All {\kf24}that {\kf83}noise {\kf90}and {\kf74}all {\kf16}that {\kf22}sound 
+Dialogue: 0,00:01:44.86,00:01:48.27,Default,,0000,0000,0000,karaoke,{\kf32}All {\kf56}those {\kf81}places {\kf24}I {\kf126}got {\kf22}found 
+Dialogue: 0,00:01:50.06,00:01:53.89,Default,,0000,0000,0000,karaoke,{\kf170}Birds {\kf49}go {\kf38}flying {\kf8}at {\kf54}the {\kf38}speed {\kf10}of {\kf16}sound 
+Dialogue: 0,00:01:54.30,00:01:58.00,Default,,0000,0000,0000,karaoke,{\kf16}Until {\kf20}I {\kf80}show {\kf22}you {\kf61}how {\kf102}it {\kf56}all {\kf13}began 
+Dialogue: 0,00:01:59.00,00:02:01.67,Default,,0000,0000,0000,karaoke,{\kf56}Birds {\kf111}can {\kf28}fly {\kf26}from {\kf12}the {\kf34}underground 
+Dialogue: 0,00:02:02.10,00:02:05.55,Default,,0000,0000,0000,karaoke,{\kf92}If {\kf50}you {\kf36}could {\kf53}see {\kf22}it {\kf26}then {\kf24}you'd {\kf42}understand 
+Dialogue: 0,00:02:16.16,00:02:19.00,Default,,0000,0000,0000,karaoke,{\kf54}Ideas {\kf74}that {\kf59}you'll {\kf44}never {\kf53}find 
+Dialogue: 0,00:02:19.86,00:02:22.67,Default,,0000,0000,0000,karaoke,{\kf8}All {\kf28}the {\kf105}inventors {\kf38}can {\kf46}never {\kf56}design 
+Dialogue: 0,00:02:24.38,00:02:26.77,Default,,0000,0000,0000,karaoke,{\kf73}The {\kf44}buildings {\kf20}that {\kf28}you {\kf38}put {\kf36}up 
+Dialogue: 0,00:02:27.78,00:02:30.87,Default,,0000,0000,0000,karaoke,{\kf24}What {\kf64}you {\kf35}build {\kf74}and {\kf22}shine {\kf22}are {\kf26}all {\kf32}made {\kf10}up 
+Dialogue: 0,00:02:32.00,00:02:34.29,Default,,0000,0000,0000,karaoke,{\kf14}A {\kf97}sign {\kf30}that {\kf18}I {\kf46}couldn't {\kf24}read 
+Dialogue: 0,00:02:35.94,00:02:38.19,Default,,0000,0000,0000,karaoke,{\kf10}Or {\kf28}a {\kf60}light {\kf37}that {\kf20}I {\kf42}couldn't {\kf28}see 
+Dialogue: 0,00:02:39.68,00:02:41.95,Default,,0000,0000,0000,karaoke,{\kf40}Some {\kf69}things {\kf38}you {\kf22}have {\kf24}to {\kf34}believe 
+Dialogue: 0,00:02:43.12,00:02:46.19,Default,,0000,0000,0000,karaoke,{\kf26}But {\kf20}others {\kf24}are {\kf109}puzzles, {\kf60}puzzle {\kf28}and {\kf40}room 
+Dialogue: 0,00:02:49.40,00:02:52.69,Default,,0000,0000,0000,karaoke,{\kf26}All {\kf28}that {\kf91}noise {\kf76}and {\kf56}all {\kf30}that {\kf22}sound 
+Dialogue: 0,00:02:53.04,00:02:53.76,Default,,0000,0000,0000,karaoke,{\kf10}All {\kf16}those {\kf18}places {\kf6}I {\kf12}got {\kf10}from 
+Dialogue: 0,00:03:01.00,00:03:06.61,Default,,0000,0000,0000,karaoke,{\kf68}Birds {\kf16}got {\kf30}flying {\kf178}at {\kf145}the {\kf54}speed {\kf26}of {\kf44}sound 
+Dialogue: 0,00:03:07.24,00:03:09.69,Default,,0000,0000,0000,karaoke,{\kf16}To {\kf28}show {\kf26}you {\kf36}how {\kf16}it {\kf67}all {\kf56}began 
+Dialogue: 0,00:03:11.06,00:03:14.33,Default,,0000,0000,0000,karaoke,{\kf74}Birds {\kf42}came {\kf58}flying {\kf29}from {\kf44}behind {\kf42}the {\kf38}ground 
+Dialogue: 0,00:03:15.10,00:03:17.63,Default,,0000,0000,0000,karaoke,{\kf30}If {\kf18}you {\kf46}could {\kf26}see {\kf16}it {\kf19}then {\kf48}you'd {\kf50}understand 
+Dialogue: 0,00:03:18.58,00:03:22.93,Default,,0000,0000,0000,karaoke,{\kf14}Oh, {\kf12}when {\kf26}you {\kf46}see {\kf30}it {\kf34}then {\kf99}you'll {\kf174}understand 
+Dialogue: 0,00:03:34.28,00:03:37.00,Default,,0000,0000,0000,karaoke,{\kf14}All {\kf73}those {\kf66}signs, {\kf34}tell {\kf26}me {\kf22}what {\kf10}they {\kf27}meant 
+Dialogue: 0,00:03:37.74,00:03:39.93,Default,,0000,0000,0000,karaoke,{\kf22}Some {\kf34}things {\kf35}you {\kf82}can't {\kf46}invent 
+Dialogue: 0,00:03:41.58,00:03:44.95,Default,,0000,0000,0000,karaoke,{\kf20}Some {\kf38}get {\kf91}made {\kf20}and {\kf32}some {\kf56}get {\kf80}sent 
+Dialogue: 0,00:03:45.04,00:03:47.98,Default,,0000,0000,0000,karaoke,{\kf28}Ooh, {\kf22}the {\kf70}birds {\kf26}go {\kf42}flying {\kf10}at {\kf24}the {\kf20}speed {\kf16}of {\kf36}sound 
+Dialogue: 0,00:03:52.14,00:03:54.75,Default,,0000,0000,0000,karaoke,{\kf18}To {\kf30}show {\kf24}you {\kf75}how {\kf56}it {\kf18}all {\kf40}began 
+Dialogue: 0,00:03:56.40,00:03:58.69,Default,,0000,0000,0000,karaoke,{\kf20}Birds {\kf95}keep {\kf66}flying {\kf10}from {\kf10}the {\kf28}underground 
+Dialogue: 0,00:03:59.10,00:04:02.81,Default,,0000,0000,0000,karaoke,{\kf56}If {\kf16}you {\kf26}can {\kf34}see {\kf18}it {\kf22}then {\kf93}you'll {\kf106}understand 
+Dialogue: 0,00:04:03.42,00:04:05.68,Default,,0000,0000,0000,karaoke,{\kf16}Oh, {\kf18}when {\kf20}we {\kf36}see {\kf18}it {\kf30}then {\kf22}you'll {\kf66}understand 

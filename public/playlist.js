@@ -5,9 +5,6 @@
 //     await getPlaylist(id);
 //     document.querySelector('.myPlayListBox').classList.remove('hide');
 // };
-
-const { log } = require("console");
-
 async function main() {
   // console.log('test');
   // reg_logout_event();
@@ -24,6 +21,7 @@ function handleSingleSong(id){
 
 async function getPlaylist() {
   const res = await fetch(`/playlists/all/${currentPlaylistId}`, {
+
     method: "GET",
   });
   const json = await res.json();
@@ -32,9 +30,11 @@ async function getPlaylist() {
     // loadSongs(json.result);
     // console.log(json.result, "23");
     const playlistsContainer = document.querySelector(".playlist-body");
-    playlistsContainer.innerHTML = '<a href="http://hk.yahoo.com">test</a>';
+
+
+    playlistsContainer.innerHTML = "";
     for (let song in json.result.songs) {
-      console.log(json.result.songs[song].songs_id);
+      // console.log(playlist);
       let songId = parseInt(song) + 1;
       playlistsContainer.innerHTML += /* html */ `
     <div class="playlist-c">
@@ -44,7 +44,10 @@ async function getPlaylist() {
     </div>
     <div class="playlist-title">${json.result.songs[song].songs_name}</div>
     <div class="playlist-showPlay-container">
+
     <a class="playlist-showPlay" onclick="handleSingleSong(${json.result.songs[song].songs_id})"><i class="fa-solid fa-play"></i></a>
+
+   
     </div>
     <!-- <div class="remove-song"><i class="fa-solid fa-trash"></i></div> -->
     </div>

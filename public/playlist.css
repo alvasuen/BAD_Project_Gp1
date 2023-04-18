@@ -3,7 +3,7 @@ body {
 }
 
 .playlist-page-container {
-  width: fit-content;
+  width: calc(100vw-240px);
 }
 
 .playlist-body {
@@ -199,7 +199,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: transparent;
 }
-
 
 ::-webkit-scrollbar-track:vertical {
   background-color: black;
