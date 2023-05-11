@@ -9,10 +9,11 @@ import { sign } from "crypto";
 import { Request, Response } from "express";
 import { errorHandler } from "../../error";
 import { VideoService } from "../service/videoService";
-//S3"
-const MRAP = "karaoke-gcat";
-let keyId = "AKIAVFNJBF6YRDGBDJYL";
-let accessKey = "F1qzQ+ZH9NzWf8+gMh4aPAah9lMvUBl5uqyGrlt9";
+import {env} from "../../env"
+//S3
+const MRAP = env.MRAP;
+let keyId = env.keyId;
+let accessKey = env.accessKey;
 const client = new S3Client({
   credentials: {
     accessKeyId: keyId as string,
