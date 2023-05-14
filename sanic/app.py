@@ -9,6 +9,7 @@ import ffmpeg
 import asyncio
 import psycopg2
 import boto3
+import env 
 
 #CONNETCT TO DB
 conn = psycopg2.connect(dbname = "karaoke", user="karaoke", password="karaoke", host="localhost")
@@ -17,7 +18,7 @@ cur = conn.cursor()
 #CONNECT TO S3
 BUCKET_NAME = "karaoke-gcat"
 AWS_REGION_NAME = "ap-southeast-1"
-AWS_ACCESS_KEY= "AKIAVFNJBF6YRDGBDJYL"
+AWS_ACCESS_KEY= env.accessKey
 ASW_SECRET_KEY= "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"
 client_s3 = boto3.client("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
 resource_s3 = boto3.resource("s3", aws_access_key_id= AWS_ACCESS_KEY,aws_secret_access_key=ASW_SECRET_KEY, region_name=AWS_REGION_NAME)
